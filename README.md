@@ -23,6 +23,7 @@ Stack Over Flow Clone Coding
 ### **Frontend** :relaxed:
 <br />
 
+**REACT / STYLED-COMPONENT / AXIOS**<br />
 
 ### **Backend** :smirk:
 
