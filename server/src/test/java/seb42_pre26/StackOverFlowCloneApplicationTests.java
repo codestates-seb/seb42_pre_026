@@ -1,10 +1,10 @@
-package seb42.pre6.stack.over.flow.clone;
+package seb42_pre26;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class StackOverFlowCloneApplicationTests {
 
 	@Test
 	void contextLoads() {

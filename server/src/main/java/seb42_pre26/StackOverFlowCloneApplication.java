@@ -1,13 +1,13 @@
-package seb42.pre6.stack.over.flow.clone;
+package seb42_pre26;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class StackOverFlowCloneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(StackOverFlowCloneApplication.class, args);
 	}
 
 }
