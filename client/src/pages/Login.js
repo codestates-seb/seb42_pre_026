@@ -115,6 +115,7 @@ const SubmitButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   &:hover {
     background: rgba(10, 149, 255, 0.6);
     color: white;
