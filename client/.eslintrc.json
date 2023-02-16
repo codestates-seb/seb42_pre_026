@@ -20,8 +20,5 @@
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
   }
 }
