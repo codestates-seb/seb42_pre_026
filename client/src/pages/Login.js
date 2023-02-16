@@ -228,7 +228,7 @@ function Login() {
             <LoginInput
               name="password"
               type="password"
-              valiu={password}
+              value={password}
               onChange={handlePassword}
             />
             {/* 유효성 검사 조건 추후에 변경예정 */}
