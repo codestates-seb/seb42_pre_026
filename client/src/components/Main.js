@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import Aside from './Aside';
+import QuestionsList from './QuestionsList';
 
 const MainArea = styled.div`
   display: flex;
   padding: 24px;
   max-width: 1000px;
   flex: 1 0 auto;
-  border: 1px solid red;
+  border-left: 0.5px solid #e4e4e5;
 `;
 
 const MainBar = styled.div`
@@ -96,6 +97,10 @@ const OpenFilter = styled.button`
   }
 `;
 
+const QuestionsContainer = styled.ul`
+  list-style: none;
+`;
+
 function Main() {
   return (
     <MainArea>
@@ -104,6 +109,7 @@ function Main() {
           <div className="mainBarHeaderTitle">All Questions</div>
           <button className="askQuestion">Ask Question</button>
         </MainBarHeader>
+
         <MainBarFilter>
           <div className="questionsCount">23,513,854 questions</div>
           <SelectFilter>
@@ -115,6 +121,10 @@ function Main() {
           </SelectFilter>
           <OpenFilter>Filter</OpenFilter>
         </MainBarFilter>
+
+        <QuestionsContainer>
+          <QuestionsList />
+        </QuestionsContainer>
       </MainBar>
       <Aside />
     </MainArea>
