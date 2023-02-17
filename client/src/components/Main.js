@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 import Aside from './Aside';
 import QuestionsList from './QuestionsList';
+import dummyData from '../dummyData';
 
 const MainArea = styled.div`
-  display: flex;
   padding: 24px;
+  display: flex;
   max-width: 1000px;
   flex: 1 0 auto;
-  border-left: 0.5px solid #e4e4e5;
+  border-left: 1px solid #e4e4e5;
 `;
 
 const MainBar = styled.div`
-  /* border: 1px solid red; */
   flex: 10;
-  height: 1000px;
 `;
 
 const MainBarHeader = styled.div`
@@ -99,6 +98,8 @@ const OpenFilter = styled.button`
 
 const QuestionsContainer = styled.ul`
   list-style: none;
+  margin-left: -24px;
+  border-top: 1px solid #e4e4e5;
 `;
 
 function Main() {
@@ -111,7 +112,7 @@ function Main() {
         </MainBarHeader>
 
         <MainBarFilter>
-          <div className="questionsCount">23,513,854 questions</div>
+          <div className="questionsCount">23,516,682 questions</div>
           <SelectFilter>
             <div className="newest">Newest</div>
             <div className="active">Active</div>
@@ -123,7 +124,9 @@ function Main() {
         </MainBarFilter>
 
         <QuestionsContainer>
-          <QuestionsList />
+          {dummyData.map((value) => {
+            return <QuestionsList list={value} key={value.id} />;
+          })}
         </QuestionsContainer>
       </MainBar>
       <Aside />
