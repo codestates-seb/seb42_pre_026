@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { FcGoogle } from 'react-icons/fc';
-import { GrGithub, GrFacebook } from 'react-icons/gr';
+import LoginForm from '../components/LoginForm';
+import SnsButtons from '../components/SnsButtons';
 
 const DeleteHeader = styled.header`
   background-color: cornflowerblue;
@@ -27,163 +26,7 @@ const LogoContainer = styled.div`
   width: 255px;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  button {
-    width: 280px;
-    height: 40px;
-    border-radius: 5px;
-    margin: 4px 0;
-    padding: 10px;
-    border: none;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text {
-      padding-left: 5px;
-    }
-  }
-  .btn_google {
-    border: 1px solid #ececec;
-    background-color: white;
-    &:hover {
-      background-color: #ececec;
-    }
-  }
-  .btn_github {
-    background-color: #25292e;
-    color: white;
-    &:hover {
-      background-color: black;
-    }
-  }
-  .btn_facebook {
-    background-color: #4867aa;
-    color: white;
-    &:hover {
-      background-color: #304986;
-    }
-  }
-`;
-
-const FormContainer = styled.form`
-  width: 255px;
-  height: 100%;
-  margin-top: 20px;
-  border: 1px solid rgb(214, 217, 220);
-  border-radius: 5px;
-  padding: 12px;
-  background: white;
-  box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
-`;
-
-const LoginForm = styled.div`
-  width: 230px;
-  display: column;
-`;
-
-const LoginInput = styled.input`
-  width: 230px;
-  height: 20px;
-  border: 1px solid rgb(214, 217, 220);
-  border-radius: 5px;
-  padding: 7.9px 9.1px;
-  margin: 6px 0 6px 0;
-  &:focus {
-    outline-style: none;
-    border: 1px solid #0a95ff;
-    transition: 0.2s;
-  }
-`;
-
-const LoginLabel = styled.label`
-  display: block;
-  margin: 1px;
-  font-weight: 600;
-`;
-
-const SubmitButton = styled.button`
-  width: 250px;
-  height: 37.78px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  background-color: #0a95ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  &:hover {
-    background: rgba(10, 149, 255, 0.6);
-    color: white;
-    transition: 0.2s;
-  }
-`;
-
-const Check = styled.div`
-  font-size: 12px;
-  color: red;
-`;
-
-const PasswordContainer = styled.div`
-  width: 245px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-`;
-
-const SpanStyle = styled.span`
-  display: block;
-  font-size: 12px;
-  color: #0a95ff;
-  padding-left: 5px;
-  &:hover {
-    cursor: pointer;
-    color: rgba(10, 149, 255, 0.6);
-  }
-`;
-
-const HelpContainer = styled.div`
-  font-size: 14px;
-  width: 100%;
-  padding-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-`;
-
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    const regex =
-      // eslint-disable-next-line
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(email)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-    }
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    const regex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
-    if (regex.test(password)) {
-      setPasswordValid(true);
-    } else {
-      setPasswordValid(false);
-    }
-  };
-
   return (
     <>
       <DeleteHeader>헤더</DeleteHeader>
@@ -197,49 +40,8 @@ function Login() {
             />
           </svg>
         </LogoContainer>
-        {/* SNS Buttons */}
-        <ButtonContainer>
-          <button className="btn_google">
-            <FcGoogle size={18} />
-            <text>Log in with Google</text>
-          </button>
-          <button className="btn_github">
-            <GrGithub size={18} />
-            <text>Log in with GitHub</text>
-          </button>
-          <button className="btn_facebook">
-            <GrFacebook size={18} />
-            <text>Log in with Facebook</text>
-          </button>
-        </ButtonContainer>
-        {/* login form */}
-        <FormContainer>
-          <LoginForm>
-            <LoginLabel htmlFor="email">e-mail</LoginLabel>
-            <LoginInput type="text" name="email" value={email} onChange={handleEmail} />
-            {/* 유효성 검사 조건 추후에 변경예정 */}
-            {!emailValid && email.length > 5 && (
-              <Check>The email is not a valid email address.</Check>
-            )}
-            <PasswordContainer>
-              <LoginLabel htmlFor="password">password</LoginLabel>
-              <SpanStyle>Forgot password?</SpanStyle>
-            </PasswordContainer>
-            <LoginInput
-              name="password"
-              type="password"
-              value={password}
-              onChange={handlePassword}
-            />
-            {/* 유효성 검사 조건 추후에 변경예정 */}
-            {!passwordValid && password.length > 1 && <Check>Password cannot be empty.</Check>}
-            <SubmitButton>Log in</SubmitButton>
-          </LoginForm>
-        </FormContainer>
-        <HelpContainer>
-          Don’t have an account?
-          <SpanStyle>Sign up</SpanStyle>
-        </HelpContainer>
+        <SnsButtons />
+        <LoginForm />
       </Container>
     </>
   );
