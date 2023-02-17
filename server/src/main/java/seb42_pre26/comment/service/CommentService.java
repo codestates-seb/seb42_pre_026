@@ -1,6 +1,7 @@
 package seb42_pre26.comment.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.exception.BusinessException;
 import seb42_pre26.comment.exception.ExceptionCode;
@@ -10,6 +11,7 @@ import seb42_pre26.post.entity.Post;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
@@ -24,6 +26,7 @@ public class CommentService {
     }
 
 
+    @Transactional(readOnly = true)
     public Comment findComment(long commentId) {
         return verifyComment(commentId);
     }
@@ -46,10 +49,13 @@ public class CommentService {
     public List<Comment> readComments(Post post) {
         return commentRepository.findAllByPostComments(post);
     }
+
+    @Transactional(readOnly = true)
     private Comment verifyComment(long commentId){
         Optional<Comment> optionalComment = commentRepository.findById(commentId);
         return optionalComment.orElseThrow(() -> new BusinessException(ExceptionCode.COMMENT_NOT_FOUND));
     }
+
     private void findExistComment(long commentId) {
         Optional<Comment> optionalComment = commentRepository.findById(commentId);
         if(optionalComment.isPresent()) {
