@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import TextEditor from './TextEditor';
 
 const FormContainer = styled.form`
-  width: 100%;
+  width: 89%;
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -21,6 +22,13 @@ const TextContainer = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+  // TextEditor 길이조절
+  .ck-editor__top {
+    padding-top: 10px;
+  }
+  .ck-editor__editable_inline {
+    min-height: 200px;
+  }
 `;
 
 const TitleInput = styled.input`
@@ -51,25 +59,10 @@ const TitleSpan = styled.div`
   padding: 2px 0;
 `;
 
-const Content = styled.textarea`
-  width: 100%;
-  height: 190px;
-  border: 1px solid #a7abb3;
-  border-radius: 5px;
-  padding: 7.9px 9.1px;
-  margin: 6px 0 10px 0;
-  &:focus {
-    outline-style: none;
-    border: 1px solid #0a95ff;
-    transition: 0.2s;
-  }
-`;
-
 const SubmitButton = styled.button`
-  width: 15%;
+  width: 150px;
   height: 37.78px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-top: 20px;
   background-color: #0a95ff;
   color: white;
   border: none;
@@ -106,7 +99,7 @@ function NewForm() {
   const [content, setContent] = useState();
 
   const handleTitle = (e) => setTitle(e.target.value);
-  const handleContent = (e) => setContent(e.target.value);
+  console.log(content);
   return (
     <FormContainer>
       <TextContainer>
@@ -125,7 +118,7 @@ function NewForm() {
         <TitleSpan>
           Introduce the problem and expand on what you put in the title. Minimum 20 characters.
         </TitleSpan>
-        <Content type="text" name="content" value={content} onChange={handleContent} />
+        <TextEditor type="text" name="content" setContent={setContent} />
         <SubmitButton>Post your question</SubmitButton>
       </TextContainer>
       <ButtonContainer>
