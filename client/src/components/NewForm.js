@@ -43,6 +43,7 @@ const TitleInput = styled.input`
 const TitleLabel = styled.div`
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 const TitleSpan = styled.div`
