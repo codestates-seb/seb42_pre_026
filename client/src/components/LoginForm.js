@@ -8,9 +8,12 @@ const FormContainer = styled.form`
   margin-top: 20px;
   border: 1px solid rgb(214, 217, 220);
   border-radius: 5px;
-  padding: 18px 12px 12px 18px;
+  padding: 15px;
   background: white;
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const InputContainer = styled.div`
