@@ -53,19 +53,19 @@ function SignupInfo() {
         <h1>Join the Stack Overflow community</h1>
         <IconWrapper>
           <RiQuestionnaireFill className="icons" />
-          <text>Get unstuck — ask a question</text>
+          Get unstuck — ask a question
         </IconWrapper>
         <IconWrapper>
           <MdThumbsUpDown className="icons" />
-          <text>Unlock new privileges like voting and commenting</text>
+          Unlock new privileges like voting and commenting
         </IconWrapper>
         <IconWrapper>
           <ImPriceTags className="icons" />
-          <text>Save your favorite tags, filters, and jobs</text>
+          Save your favorite tags, filters, and jobs
         </IconWrapper>
         <IconWrapper>
           <FaTrophy className="icons" />
-          <text>Earn reputation and badges</text>
+          Earn reputation and badges
         </IconWrapper>
         <div className="little">Collaborate and share knowledge with a private group for FREE.</div>
         <div className="blue">Get Stack Overflow for Teams free for up to 50 users.</div>

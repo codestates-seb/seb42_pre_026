@@ -95,8 +95,8 @@ const ButtonContainer = styled.div`
 
 function NewForm() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   const handleTitle = (e) => setTitle(e.target.value);
   console.log(content);
