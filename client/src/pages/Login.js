@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
 import SnsButtons from '../components/SnsButtons';
 
-//aaa
 const DeleteHeader = styled.header`
   background-color: cornflowerblue;
   color: white;
