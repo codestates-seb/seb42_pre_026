@@ -21,7 +21,6 @@ const DeleteFooter = styled.footer`
 `;
 
 const Container = styled.div`
-  width: 100%;
   padding: 24px;
   display: flex;
   flex-direction: column;

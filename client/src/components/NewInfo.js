@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const InfoContainer = styled.div`
   display: flex;
-  width: 90%;
+  width: 80%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -10,8 +10,8 @@ const InfoContainer = styled.div`
 `;
 
 const InfoH1 = styled.h1`
-  height: 90px;
   width: 100%;
+  height: 90px;
   font-size: 28px;
   display: flex;
   text-align: left;
