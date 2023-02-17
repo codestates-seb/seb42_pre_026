@@ -16,6 +16,10 @@ const Container = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const LogoContainer = styled.div`
@@ -40,7 +44,7 @@ function Login() {
             />
           </svg>
         </LogoContainer>
-        <SnsButtons />
+        <SnsButtons text={'Log in'} />
         <LoginForm />
       </Container>
     </>

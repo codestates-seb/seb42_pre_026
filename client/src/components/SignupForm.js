@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Signupform = styled.form`
-  width: 255px;
+  width: 100%;
   height: 100%;
   margin-top: 20px;
   border: 1px solid rgb(214, 217, 220);
@@ -19,8 +19,8 @@ const FormContainer = styled.div`
 `;
 
 const SignupInput = styled.input`
-  width: 230px;
-  height: 20px;
+  width: 100%;
+  height: 30px;
   border: 1px solid rgb(214, 217, 220);
   border-radius: 5px;
   padding: 7.9px 9.1px;
@@ -39,7 +39,7 @@ const SignupLabel = styled.label`
 `;
 
 const SubmitButton = styled.button`
-  width: 250px;
+  width: 100%;
   height: 37.78px;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -61,7 +61,7 @@ const Check = styled.div`
 `;
 
 const PasswordContainer = styled.div`
-  width: 245px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -143,7 +143,7 @@ function SignupForm() {
       </Signupform>
       <HelpContainer>
         Already have an account?
-        <SpanStyle onClick={() => navigate('/')}>Log in</SpanStyle>
+        <SpanStyle onClick={() => navigate('/login')}>Log in</SpanStyle>
       </HelpContainer>
     </>
   );

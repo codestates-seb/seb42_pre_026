@@ -34,7 +34,7 @@ function Signup() {
       <Container>
         <SignupInfo />
         <FormContainer>
-          <SnsButtons />
+          <SnsButtons text={'Sign up'} />
           <SignupForm />
         </FormContainer>
       </Container>

@@ -7,60 +7,46 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  button {
-    width: 280px;
-    height: 40px;
-    border-radius: 5px;
-    margin: 4px 0;
-    padding: 10px;
-    border: none;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text {
-      padding-left: 5px;
-    }
+`;
+
+const SnsButton = styled.button`
+  width: 280px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 4px 0;
+  padding: 10px;
+  border: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.bgColor || 'white'};
+  color: ${(props) => props.color || 'white'};
+  border: ${(props) => props.border || 'none'};
+  &:hover {
+    background-color: ${(props) => props.hover || 'black'};
   }
-  .btn_google {
-    border: 1px solid #ececec;
-    background-color: white;
-    &:hover {
-      background-color: #ececec;
-    }
-  }
-  .btn_github {
-    background-color: #2b2f33;
-    color: white;
-    &:hover {
-      background-color: black;
-    }
-  }
-  .btn_facebook {
-    background-color: #4867aa;
-    color: white;
-    &:hover {
-      background-color: #304986;
-    }
+  .icons {
+    padding-right: 5px;
   }
 `;
 
-function SnsButtons() {
+function SnsButtons({ text }) {
   return (
     <>
       <ButtonContainer>
-        <button className="btn_google">
-          <FcGoogle size={18} />
-          <text>Log in with Google</text>
-        </button>
-        <button className="btn_github">
-          <GrGithub size={18} />
-          <text>Log in with GitHub</text>
-        </button>
-        <button className="btn_facebook">
-          <GrFacebook size={18} />
-          <text>Log in with Facebook</text>
-        </button>
+        <SnsButton color={'black'} border={'2px solid #ececec'} hover={'#ececec'}>
+          <FcGoogle className="icons" size={22} />
+          {text} with Google
+        </SnsButton>
+        <SnsButton bgColor={'#2b2f33'}>
+          <GrGithub className="icons" size={22} />
+          {text} with GitHub
+        </SnsButton>
+        <SnsButton bgColor={'#4867aa'} hover={'#304986'}>
+          <GrFacebook className="icons" size={22} />
+          {text} with Facebook
+        </SnsButton>
       </ButtonContainer>
     </>
   );
