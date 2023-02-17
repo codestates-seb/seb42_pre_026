@@ -1,6 +1,7 @@
 package seb42_pre26.comment.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.exception.BusinessException;
@@ -31,6 +32,7 @@ public class CommentService {
         return verifyComment(commentId);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Comment updateComment(Comment comment) {
         Comment findComment = verifyComment(comment.getCommentId());
         findComment.setContent(comment.getContent());
