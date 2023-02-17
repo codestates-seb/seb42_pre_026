@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Aside from './Aside';
 import QuestionsList from './QuestionsList';
 import dummyData from '../dummyData';
+import { Link } from 'react-router-dom'
 
 const MainArea = styled.div`
   padding: 24px;
@@ -26,8 +27,9 @@ const MainBarHeader = styled.div`
     margin-bottom: 12px;
     font-weight: 400;
   }
+`;
 
-  > .askQuestion {
+const CreateButton = styled.button`
     width: 90px;
     height: 33px;
     font-size: 12px;
@@ -39,7 +41,6 @@ const MainBarHeader = styled.div`
     &:hover {
       background-color: hsl(206, 100%, 40%);
     }
-  }
 `;
 
 const MainBarFilter = styled.div`
@@ -102,17 +103,19 @@ const QuestionsContainer = styled.ul`
   border-top: 1px solid #e4e4e5;
 `;
 
+
+
 function Main() {
   return (
     <MainArea>
       <MainBar>
         <MainBarHeader>
           <div className="mainBarHeaderTitle">All Questions</div>
-          <button className="askQuestion">Ask Question</button>
+          <Link to="/new"><CreateButton className="askQuestion">Ask Question</CreateButton></Link>
         </MainBarHeader>
 
         <MainBarFilter>
-          <div className="questionsCount">23,516,682 questions</div>
+          <div className="questionsCount">{dummyData.length.toLocaleString()} questions</div>
           <SelectFilter>
             <div className="newest">Newest</div>
             <div className="active">Active</div>

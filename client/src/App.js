@@ -1,6 +1,7 @@
 import Questions from './pages/Questions';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import New from './pages/New';
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Questions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/new" element={<New />} />
         </Routes>
       </div>
     </BrowserRouter>
