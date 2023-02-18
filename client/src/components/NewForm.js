@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TextEditor from './TextEditor';
+import axios from 'axios';
+import Parser from 'html-react-parser';
 
 const FormContainer = styled.form`
-  width: 89%;
+  width: 80%;
   height: 100%;
   background-color: transparent;
   display: flex;
@@ -28,6 +30,8 @@ const TextContainer = styled.div`
   }
   .ck-editor__editable_inline {
     min-height: 200px;
+    padding: 0px 18px;
+    font-size: 14px;
   }
 `;
 
@@ -94,22 +98,84 @@ const ButtonContainer = styled.div`
 `;
 
 function NewForm() {
+  const titleRef = useRef();
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState({
+    title: '',
+    content: '',
+  });
 
-  const handleTitle = (e) => setTitle(e.target.value);
-  console.log(content);
+  //* api 주소 받아서 변경 후 주석 해제
+  // const [viewContent, setViewContent] = useState([]);
+
+  //* api 주소 받아서 변경 후 주석 해제
+  //* 받아온 데이터를 빈 배열 state인 viewContent에 담아줌
+  // useEffect(() => {
+  //   axios.get('/api/get').then((response) => {
+  //     setViewContent(response.data);
+  //   });
+  // }, [viewContent]);
+
+  //* Parser 예시
+  // {viewContent.map(element =>
+  //   <div>
+  //     <h2>{element.title}</h2>
+  //     <div>
+  //       {Parser(element.content)}
+  //     </div>
+  //   </div>
+  // )}
+
+  //! content : <p>로 감싸져서 들어오니 html-react-parser 설치 -> import 후 map으로 뿌려야함
+  //! npm install html-react-parser --save
+  //! import Parser from 'html-react-parser';
+  const handleContent = (e) => {
+    const { name, value } = e.target;
+    setContent({
+      ...content,
+      [name]: value,
+    });
+  };
+
+  //* api 주소 받아서 변경할 것
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const titleLength = content.title.length;
+    const blankContent = Parser(content.content).length;
+    if (titleLength < 1) {
+      titleRef.current.focus();
+      return;
+    }
+    if (blankContent === 0) {
+      return;
+    }
+    if (blankContent !== 0) {
+      const contentLength = Parser(content.content).props.children.length;
+      if (contentLength < 20) {
+        return;
+      }
+    }
+    axios
+      .post('/api/post', {
+        title: content.title,
+        content: content.content,
+      })
+      .then((response) => {
+        console.log(response);
+        alert('등록 완료!');
+      });
+  };
+
   return (
     <FormContainer>
       <TextContainer>
         <TitleLabel htmlFor="title">Title</TitleLabel>
         <TitleSpan>Be specific and imagine you’re asking a question to another person.</TitleSpan>
         <TitleInput
+          ref={titleRef}
           type="text"
           name="title"
-          value={title}
-          onChange={handleTitle}
+          onChange={handleContent}
           placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
         />
       </TextContainer>
@@ -118,8 +184,8 @@ function NewForm() {
         <TitleSpan>
           Introduce the problem and expand on what you put in the title. Minimum 20 characters.
         </TitleSpan>
-        <TextEditor type="text" name="content" setContent={setContent} />
-        <SubmitButton>Post your question</SubmitButton>
+        <TextEditor type="text" name="content" setContent={setContent} content={content} />
+        <SubmitButton onClick={handleSubmit}>Post your question</SubmitButton>
       </TextContainer>
       <ButtonContainer>
         <DiscardButton onClick={() => navigate('/')}>Discard draft</DiscardButton>

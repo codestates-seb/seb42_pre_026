@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Signupform = styled.form`
   width: 100%;
@@ -94,32 +95,82 @@ const HelpContainer = styled.div`
 
 function SignupForm() {
   const navigate = useNavigate();
+
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-  const handleName = (e) => setName(e.target.value);
-  const handleEmail = (e) => {
+
+  const [emailMessage, setEmailMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+
+  const handleName = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const handleEmail = useCallback((e) => {
     setEmail(e.target.value);
-    // 이메일 형식인지 확인
+    //* 이메일 형식인지 확인
     const regex = /^[0-9a-zA-Z]+@[0-9a-zA-Z]+\.[0-9a-zA-Z]/;
-    if (regex.test(email)) {
+    if (!regex.test(e.target.value)) {
+      setEmailMessage('The email is not a valid email address.');
       setEmailValid(true);
     } else {
+      setEmailMessage('');
       setEmailValid(false);
     }
-  };
+  }, []);
 
-  const handlePassword = (e) => {
+  const handlePassword = useCallback((e) => {
     setPassword(e.target.value);
-    // 최소 8자리 이상이면서 숫자, 특수문자가 각각 1개 이상
+    //* 최소 8자리 이상이면서 숫자, 특수문자가 각각 1개 이상
     const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
-    if (regex.test(password)) {
+    if (!regex.test(e.target.value)) {
+      setPasswordMessage('The password is not a valid password.');
       setPasswordValid(true);
     } else {
+      setPasswordMessage('');
       setPasswordValid(false);
     }
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name.length < 1) {
+      nameRef.current.focus();
+      return;
+    }
+    if (email.length < 1 || emailValid) {
+      emailRef.current.focus();
+      return;
+    }
+    if (password.length < 1 || passwordValid) {
+      passwordRef.current.focus();
+      return;
+    }
+    //* api 주소 받아서 변경할 것
+    axios
+      .post('/api/post', {
+        name,
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        alert('회원가입 성공!');
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+        navigate(`/signup`);
+      });
   };
 
   return (
@@ -127,21 +178,28 @@ function SignupForm() {
       <Signupform>
         <FormContainer>
           <SignupLabel htmlFor="name">Display name</SignupLabel>
-          <SignupInput type="text" name="name" value={name} onChange={handleName} />
+          <SignupInput ref={nameRef} type="text" name="name" value={name} onChange={handleName} />
           <SignupLabel htmlFor="email">Email</SignupLabel>
-          <SignupInput type="text" name="email" value={email} onChange={handleEmail} />
-          {!emailValid && email.length > 1 && (
-            <Check>The email is not a valid email address.</Check>
-          )}
+          <SignupInput
+            ref={emailRef}
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+          />
+          {email.length > 0 && <Check>{emailMessage}</Check>}
           <PasswordContainer>
             <SignupLabel htmlFor="password">password</SignupLabel>
-            <SpanStyle>Forgot password?</SpanStyle>
           </PasswordContainer>
-          <SignupInput name="password" type="password" value={password} onChange={handlePassword} />
-          {!passwordValid && password.length > 1 && (
-            <Check>The password is not a valid password.</Check>
-          )}
-          <SubmitButton>Sign up</SubmitButton>
+          <SignupInput
+            ref={passwordRef}
+            name="password"
+            type="password"
+            value={password}
+            onChange={handlePassword}
+          />
+          {password.length > 0 && <Check>{passwordMessage}</Check>}
+          <SubmitButton onClick={handleSubmit}>Sign up</SubmitButton>
         </FormContainer>
       </Signupform>
       <HelpContainer>
