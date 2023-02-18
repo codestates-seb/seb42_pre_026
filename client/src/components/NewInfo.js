@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const InfoContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: 72%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
