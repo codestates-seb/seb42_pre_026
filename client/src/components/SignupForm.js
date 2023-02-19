@@ -47,15 +47,15 @@ const SubmitButton = styled.button`
   height: 37.78px;
   margin-top: 12px;
   margin-bottom: 12px;
-  background-color: #0a95ff;
+  background-color: ${(props) => (props.disabled ? '#badcff' : '#0a95ff')};
   color: white;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: rgba(10, 149, 255, 0.6);
-    color: white;
+    background: ${(props) => (props.disabled ? '#badcff' : 'rgba(10, 149, 255, 0.6)')};
     transition: 0.2s;
+    cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   }
 `;
 
@@ -142,15 +142,11 @@ function SignupForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.length < 1) {
-      nameRef.current.focus();
-      return;
-    }
-    if (email.length < 1 || emailValid) {
+    if (emailValid) {
       emailRef.current.focus();
       return;
     }
-    if (password.length < 1 || passwordValid) {
+    if (passwordValid) {
       passwordRef.current.focus();
       return;
     }
@@ -199,7 +195,11 @@ function SignupForm() {
             onChange={handlePassword}
           />
           {password.length > 0 && <Check>{passwordMessage}</Check>}
-          <SubmitButton onClick={handleSubmit}>Sign up</SubmitButton>
+          <SubmitButton
+            onClick={handleSubmit}
+            disabled={!(name.length && email.length && password.length)}>
+            Sign up
+          </SubmitButton>
         </FormContainer>
       </Signupform>
       <HelpContainer>
