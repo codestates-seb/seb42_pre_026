@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import seb42_pre26.comment.entity.Comment;
-import seb42_pre26.comment.exception.BusinessException;
-import seb42_pre26.comment.exception.ExceptionCode;
+import seb42_pre26.exception.BusinessException;
+import seb42_pre26.exception.ExceptionCode;
 import seb42_pre26.comment.repository.CommentRepository;
 import seb42_pre26.post.entity.Post;
 

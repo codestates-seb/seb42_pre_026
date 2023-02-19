@@ -23,6 +23,7 @@ const DeleteFooter = styled.footer`
 const Container = styled.div`
   padding: 24px;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;

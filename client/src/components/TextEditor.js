@@ -1,7 +1,8 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 /* eslint-disable */
-const TextEditor = ({ setContent }) => {
+const TextEditor = ({ content, setContent }) => {
   return (
     <CKEditor
       editor={ClassicEditor}
@@ -9,7 +10,10 @@ const TextEditor = ({ setContent }) => {
       onReady={(editor) => {}}
       onChange={(event, editor) => {
         const data = editor.getData();
-        setContent(data);
+        setContent({
+          ...content,
+          content: data,
+        });
       }}
       onBlur={(event, editor) => {}}
       onFocus={(event, editor) => {}}

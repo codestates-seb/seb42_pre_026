@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const FormContainer = styled.form`
   width: 100%;
@@ -53,7 +54,6 @@ const SubmitButton = styled.button`
   font-weight: bold;
   &:hover {
     background: rgba(10, 149, 255, 0.6);
-    color: white;
     transition: 0.2s;
   }
 `;
@@ -88,14 +88,51 @@ const HelpContainer = styled.div`
 
 function LoginForm() {
   const navigate = useNavigate();
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const handlePassword = (e) => {
+  const handleEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const handlePassword = useCallback((e) => {
     setPassword(e.target.value);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (email.length < 1) {
+      emailRef.current.focus();
+      return;
+    }
+    if (password.length < 1) {
+      passwordRef.current.focus();
+      return;
+    }
+    //* api 주소 받아서 변경할 것
+    axios
+      .post('/api/post', {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        alert('로그인 성공!');
+        //* data 받아서 localstorage 유저 저장
+      })
+      .then(() => {
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+        navigate(`/login`);
+      });
   };
 
   return (
@@ -103,13 +140,25 @@ function LoginForm() {
       <FormContainer>
         <InputContainer>
           <LoginLabel htmlFor="email">Email</LoginLabel>
-          <LoginInput type="text" name="email" value={email} onChange={handleEmail} />
+          <LoginInput
+            ref={emailRef}
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+          />
           <PasswordContainer>
             <LoginLabel htmlFor="password">password</LoginLabel>
             <SpanStyle>Forgot password?</SpanStyle>
           </PasswordContainer>
-          <LoginInput name="password" type="password" value={password} onChange={handlePassword} />
-          <SubmitButton>Log in</SubmitButton>
+          <LoginInput
+            ref={passwordRef}
+            name="password"
+            type="password"
+            value={password}
+            onChange={handlePassword}
+          />
+          <SubmitButton onClick={handleSubmit}>Log in</SubmitButton>
         </InputContainer>
       </FormContainer>
       <HelpContainer>
