@@ -8,6 +8,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 45px;
+  background-color: white;
 `;
 
 function Questions() {
