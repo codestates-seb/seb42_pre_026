@@ -54,7 +54,6 @@ const SubmitButton = styled.button`
   font-weight: bold;
   &:hover {
     background: rgba(10, 149, 255, 0.6);
-    color: white;
     transition: 0.2s;
   }
 `;
