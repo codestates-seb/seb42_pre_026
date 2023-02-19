@@ -1,9 +1,7 @@
-package seb42_pre26.comment.exception;
+package seb42_pre26.exception;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class BusinessException extends RuntimeException{
     @Getter

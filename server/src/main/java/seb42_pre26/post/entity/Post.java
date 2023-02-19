@@ -21,13 +21,15 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
-    private String title;
-    private String content;
 
     @Column(nullable = false)
+    private String title;
+
+    @Column(columnDefinition = "text", nullable = false)
+    private String content;
+
     private LocalDateTime created = LocalDateTime.now();
 
-    @Column(nullable = false, name = "MODIFIED")
     private LocalDateTime modified = LocalDateTime.now();
 
     @ManyToOne
