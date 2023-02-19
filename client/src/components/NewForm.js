@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TextEditor from './TextEditor';
@@ -67,15 +67,15 @@ const SubmitButton = styled.button`
   width: 150px;
   height: 37.78px;
   margin-top: 20px;
-  background-color: #0a95ff;
+  background-color: ${(props) => (props.disabled ? '#badcff' : '#0a95ff')};
   color: white;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: rgba(10, 149, 255, 0.6);
-    color: white;
+    background: ${(props) => (props.disabled ? '#badcff' : 'rgba(10, 149, 255, 0.6)')};
     transition: 0.2s;
+    cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   }
 `;
 
@@ -104,6 +104,8 @@ function NewForm() {
     title: '',
     content: '',
   });
+  const titleLength = content.title.length;
+  const blankContent = Parser(content.content).length !== 0;
 
   //* api 주소 받아서 변경 후 주석 해제
   // const [viewContent, setViewContent] = useState([]);
@@ -129,27 +131,17 @@ function NewForm() {
   //! content : <p>로 감싸져서 들어오니 html-react-parser 설치 -> import 후 map으로 뿌려야함
   //! npm install html-react-parser --save
   //! import Parser from 'html-react-parser';
-  const handleContent = (e) => {
+  const handleContent = useCallback((e) => {
     const { name, value } = e.target;
     setContent({
       ...content,
       [name]: value,
     });
-  };
-
+  }, []);
   //* api 주소 받아서 변경할 것
   const handleSubmit = (e) => {
     e.preventDefault();
-    const titleLength = content.title.length;
-    const blankContent = Parser(content.content).length;
-    if (titleLength < 1) {
-      titleRef.current.focus();
-      return;
-    }
-    if (blankContent === 0) {
-      return;
-    }
-    if (blankContent !== 0) {
+    if (blankContent) {
       const contentLength = Parser(content.content).props.children.length;
       if (contentLength < 20) {
         return;
@@ -185,7 +177,9 @@ function NewForm() {
           Introduce the problem and expand on what you put in the title. Minimum 20 characters.
         </TitleSpan>
         <TextEditor type="text" name="content" setContent={setContent} content={content} />
-        <SubmitButton onClick={handleSubmit}>Post your question</SubmitButton>
+        <SubmitButton onClick={handleSubmit} disabled={!(titleLength && blankContent)}>
+          Post your question
+        </SubmitButton>
       </TextContainer>
       <ButtonContainer>
         <DiscardButton onClick={() => navigate('/')}>Discard draft</DiscardButton>
