@@ -144,9 +144,9 @@ function NewForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (blankContent) {
-      toast.warning('Too short! Minimum 20 characters.');
       const contentLength = Parser(content.content).props.children.length;
       if (contentLength < 20) {
+        toast.warning('Too short! Minimum 20 characters.');
         return;
       }
     }
