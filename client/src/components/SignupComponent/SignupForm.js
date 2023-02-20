@@ -54,7 +54,7 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: ${(props) => (props.disabled ? '#badcff' : 'rgba(10, 149, 255, 0.6)')};
+    background: ${(props) => (props.disabled ? '#badcff' : 'hsl(206, 100%, 40%)')};
     transition: 0.2s;
     cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   }

@@ -54,7 +54,7 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: rgba(10, 149, 255, 0.6);
+    background: hsl(206, 100%, 40%);
     transition: 0.2s;
   }
 `;
