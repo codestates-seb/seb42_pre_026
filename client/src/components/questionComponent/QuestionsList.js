@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Parser from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
 
 const ListContainer = styled.li`
   display: flex;
@@ -8,6 +9,7 @@ const ListContainer = styled.li`
   border-bottom: 1px solid #e4e4e5;
   /* background-color: lightblue; */
   padding-left: 32px;
+  cursor: pointer;
 `;
 
 const ListInfo = styled.div`
@@ -91,6 +93,12 @@ const UserCardInfo = styled.div`
 `;
 
 function QuestionsList({ list }) {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/question/${list.id}`);
+  };
+
   return (
     <ListContainer>
       <ListInfo>
@@ -98,7 +106,7 @@ function QuestionsList({ list }) {
         <div className="answers">{list.answers} answers</div>
         <div className="views">{list.views} views</div>
       </ListInfo>
-      <ListContent>
+      <ListContent onClick={onClick}>
         <div className="contentTitle">{list.title}</div>
         <div className="content">{Parser(list.content)}</div>
         <TagWrapper>
