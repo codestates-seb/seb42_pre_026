@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
-import Main from '../components/Main';
+import Main from '../components/questionComponent/Main';
 import Footer from '../components/Footer';
 
 const Container = styled.div`

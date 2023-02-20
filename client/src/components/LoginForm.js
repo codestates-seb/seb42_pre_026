@@ -116,7 +116,7 @@ function LoginForm() {
     }
     //* api 주소 받아서 변경할 것
     axios
-      .post('/api/post', {
+      .post('http://localhost:4000/login', {
         email,
         password,
       })

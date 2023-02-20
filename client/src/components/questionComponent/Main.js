@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import Aside from './Aside';
+import Aside from '../Aside';
 import QuestionsList from './QuestionsList';
-import dummyData from '../dummyData';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Pagination, PaginationItem } from '@mui/material';
+import axios from 'axios';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -146,14 +146,28 @@ const PerPage = styled.div`
 `;
 
 function Main() {
+  const [questionData, setQuestionData] = useState([]);
   // 페이지 당 표시할 데이터 개수 상태
   const [limit, setLimit] = useState(15);
-  const limitList = [15, 30, 50];
   // 현재 페이지 번호
   const [page, setPage] = useState(1);
+
+  const limitList = [15, 30, 50];
   // 각 페이지에서 첫 데이터의 위치(index) 계산
   const offset = (page - 1) * limit;
-  const numAllPages = Math.ceil(dummyData.length / limit);
+  const numAllPages = Math.ceil(questionData.length / limit);
+
+  const getQuestionData = async () => {
+    const res = await axios.get('http://localhost:3001/questions');
+    setQuestionData(res.data);
+  };
+
+  useEffect(() => {
+    getQuestionData();
+  }, []);
+
+  // 질문글이 상단에 추가되도록 하기 위한 임시 변수(실서버 연결 시 사용 안 할 예정)
+  const reverseQuestionData = questionData.slice().reverse();
 
   return (
     <MainArea>
@@ -166,7 +180,9 @@ function Main() {
         </MainBarHeader>
 
         <MainBarFilter>
-          <div className="questionsCount">{dummyData.length.toLocaleString()} questions</div>
+          <div className="questionsCount">
+            {reverseQuestionData.length.toLocaleString()} questions
+          </div>
           <SelectFilter>
             <div className="newest">Newest</div>
             <div className="active">Active</div>
@@ -178,8 +194,8 @@ function Main() {
         </MainBarFilter>
 
         <QuestionsContainer>
-          {dummyData.slice(offset, offset + limit).map((value) => {
-            return <QuestionsList list={value} key={value.id} setPage={setPage} />;
+          {reverseQuestionData.slice(offset, offset + limit).map((value, index) => {
+            return <QuestionsList list={value} key={index} setPage={setPage} />;
           })}
         </QuestionsContainer>
         <PagenationWrapper>

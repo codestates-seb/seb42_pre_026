@@ -148,7 +148,7 @@ function NewForm() {
       }
     }
     axios
-      .post('/api/post', {
+      .post('http://localhost:3001/questions', {
         title: content.title,
         content: content.content,
       })

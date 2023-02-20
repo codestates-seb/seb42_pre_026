@@ -40,9 +40,7 @@ const IconWrapper = styled.div`
   .icons {
     color: #0995ff;
     font-size: 24px;
-  }
-  text {
-    padding-left: 15px;
+    margin-right: 10px;
   }
 `;
 
