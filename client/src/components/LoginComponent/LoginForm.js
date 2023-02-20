@@ -2,6 +2,7 @@ import { useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const FormContainer = styled.form`
   width: 100%;
@@ -116,22 +117,19 @@ function LoginForm() {
     }
     //* api 주소 받아서 변경할 것
     axios
-      .post('http://localhost:4000/login', {
+      .post('http://localhost:3001/login', {
         email,
         password,
       })
-      .then((response) => {
-        console.log(response);
-        alert('로그인 성공!');
+      .then(() => {
+        toast.success('Login Success!');
         //* data 받아서 localstorage 유저 저장
       })
       .then(() => {
         navigate('/');
       })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-        navigate(`/login`);
+      .catch(() => {
+        toast.error('Login Failed!');
       });
   };
 

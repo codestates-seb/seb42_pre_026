@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Parser from 'html-react-parser';
 
 const ListContainer = styled.li`
   display: flex;
@@ -99,7 +100,7 @@ function QuestionsList({ list }) {
       </ListInfo>
       <ListContent>
         <div className="contentTitle">{list.title}</div>
-        <div className="content">{list.content}</div>
+        <div className="content">{Parser(list.content)}</div>
         <TagWrapper>
           <Tag>
             <li>tag1</li>

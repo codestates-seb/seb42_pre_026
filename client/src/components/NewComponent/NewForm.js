@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TextEditor from './TextEditor';
 import axios from 'axios';
 import Parser from 'html-react-parser';
+import { toast } from 'react-toastify';
 
 const FormContainer = styled.form`
   width: 80%;
@@ -138,10 +139,12 @@ function NewForm() {
       [name]: value,
     });
   }, []);
+
   //* api 주소 받아서 변경할 것
   const handleSubmit = (e) => {
     e.preventDefault();
     if (blankContent) {
+      toast.warning('Too short! Minimum 20 characters.');
       const contentLength = Parser(content.content).props.children.length;
       if (contentLength < 20) {
         return;
@@ -152,9 +155,14 @@ function NewForm() {
         title: content.title,
         content: content.content,
       })
-      .then((response) => {
-        console.log(response);
-        alert('등록 완료!');
+      .then(() => {
+        toast.success('Post Success!');
+      })
+      .then(() => {
+        navigate('/');
+      })
+      .catch(() => {
+        toast.error('Post Failed!');
       });
   };
 
