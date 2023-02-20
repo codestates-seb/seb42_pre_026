@@ -148,7 +148,7 @@ function NewForm() {
       }
     }
     axios
-      .post('/api/post', {
+      .post('http://localhost:4000/new', {
         title: content.title,
         content: content.content,
       })
