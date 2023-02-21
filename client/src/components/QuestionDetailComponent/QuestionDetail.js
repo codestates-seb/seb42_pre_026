@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Aside from '../Aside';
 import Answer from './Answer';
 import NewAnswer from './NewAnswer';
-// import Parser from 'html-react-parser';
+import Parser from 'html-react-parser';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -78,7 +78,7 @@ const ContentContainer = styled.div`
 const PostContainer = styled.div`
   width: 100%;
   padding-right: 18px;
-  p {
+  div {
     font-size: 16px;
     margin-bottom: 16.5px;
     word-break: break-word;
@@ -109,6 +109,7 @@ const UserInfo = styled.div`
     font-size: 14px;
     font-weight: 500;
     color: hsl(206, 100%, 52%);
+    margin-bottom: 0;
   }
 `;
 
@@ -147,18 +148,30 @@ const DeleteButton = styled.button`
   }
 `;
 
+const CommentTitle = styled.h2`
+  font-size: 20px;
+  flex: 1 auto;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 16px 0;
+  font-weight: 500;
+  max-width: 600px;
+  word-break: break-word;
+  line-height: 1.35;
+`;
+
 function QuestionDetail() {
   const { id } = useParams();
+  const [data, setData] = useState({ content: '' });
 
-  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const res = await axios.get(`http://localhost:3001/questions/${id}`);
+    setData(res.data);
+  };
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/questions/${id}`).then((response) => {
-      setData(response.data);
-    });
+    fetchData();
   }, []);
-
-  console.log(data);
 
   return (
     <MainArea>
@@ -185,7 +198,7 @@ function QuestionDetail() {
         </MainBarInfo>
         <ContentContainer>
           <PostContainer>
-            <p>{data.content}</p>
+            <div>{Parser(data.content)}</div>
             <UserInfoContainer>
               <ButtonContainer>
                 <EditButton>Edit</EditButton>
@@ -199,7 +212,11 @@ function QuestionDetail() {
                 <div className="userId">{data.username}</div>
               </UserInfo>
             </UserInfoContainer>
-            <Answer />
+            <CommentTitle>{data.comments ? data.comments.length : 0} Answer</CommentTitle>
+            {data.comments &&
+              data.comments.map((comment) => {
+                return <Answer comment={comment} key={comment.id} />;
+              })}
             <NewAnswer />
           </PostContainer>
           <Aside />
