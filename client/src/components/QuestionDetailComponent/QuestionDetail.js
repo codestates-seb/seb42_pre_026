@@ -170,6 +170,7 @@ function QuestionDetail() {
   };
 
   useEffect(() => {
+    if (window) window.scrollTo(0, 0);
     fetchData();
   }, []);
 
