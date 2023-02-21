@@ -32,10 +32,10 @@ public class Post {
 
     private LocalDateTime modified = LocalDateTime.now();
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 }

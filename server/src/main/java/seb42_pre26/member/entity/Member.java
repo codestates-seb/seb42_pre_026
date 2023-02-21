@@ -19,26 +19,28 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
-    @Column(nullable = false, unique = true)
+
+    @Column(nullable = false, updatable = false,  unique = true)
     private String email;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String phone;
+
     @Column(nullable = false)
     private String password;
-    private String gender;
-    private int age;
 
-    @OneToMany(mappedBy = "member")
-    private List<Comment> comments = new ArrayList<>();
+    @Column(nullable = false)
+    private String name;
 
-    @OneToMany(mappedBy = "member")
-    private List<Post> posts = new ArrayList<>();
+    @Column(nullable = false)
+    private String phone;
 
     @Column(nullable = false)
     private LocalDateTime created = LocalDateTime.now();
 
     @Column(nullable = true, name = "MODIFIED")
     private LocalDateTime modified = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
 }
