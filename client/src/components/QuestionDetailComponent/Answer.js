@@ -3,17 +3,6 @@ import styled from 'styled-components';
 const AnswerContainer = styled.div`
   padding-top: 10px;
   border-bottom: 1px solid #e4e4e5;
-  h2 {
-    font-size: 20px;
-    flex: 1 auto;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    padding: 16px 0;
-    font-weight: 500;
-    max-width: 600px;
-    word-break: break-word;
-    line-height: 1.35;
-  }
 `;
 
 const PostContainer = styled.div`
@@ -49,6 +38,7 @@ const UserInfo = styled.div`
     font-size: 14px;
     font-weight: 500;
     color: hsl(206, 100%, 52%);
+    margin-bottom: 0px;
   }
 `;
 
@@ -87,20 +77,11 @@ const DeleteButton = styled.button`
   }
 `;
 
-function Answer() {
+function Answer({ comment }) {
   return (
     <AnswerContainer>
-      <h2>1 Answer</h2>
       <PostContainer>
-        <p>
-          The bounty expires in 2 hours. Answers to this question are eligible for a +50 reputation
-          bounty. Hermawan Wiwid is looking for an answer from a reputable source. I want to predict
-          spatio-temporal data and I found STNN (Spatio Temporal Neural Network) research with the
-          github repository here (https://github.com/edouardelasalles/stnn), at the end of the repo
-          description, it is explained regarding the dataset but I have difficulty understanding how
-          a data spatial with its attributes transformed into only 1 dimension and then crossed with
-          the time dimension into only 2 dimensions?
-        </p>
+        <p>{comment.comment}</p>
         <UserInfoContainer>
           <ButtonContainer>
             <EditButton>Edit</EditButton>
@@ -111,7 +92,7 @@ function Answer() {
               <span>answered </span>
               <span>2 days ago</span>
             </div>
-            <div className="userId">Jamie</div>
+            <div className="userId">{comment.username}</div>
           </UserInfo>
         </UserInfoContainer>
       </PostContainer>
