@@ -4,6 +4,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const NewAnswerContainer = styled.div`
   .ck-editor__top {
@@ -45,12 +46,13 @@ const SubmitButton = styled.button`
 
 /* eslint-disable */
 function NewAnswer() {
+  const { id } = useParams();
   const [comment, setComment] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/questions', {
+      .post(`http://localhost:3001/questions/${id}`, {
         comment,
       })
       .then(() => {
@@ -63,13 +65,14 @@ function NewAnswer() {
         toast.error('Post Failed!');
       });
   };
+
   return (
     <NewAnswerContainer>
       <NewAnswerTitle>Your Answer</NewAnswerTitle>
       <CKEditor
         editor={ClassicEditor}
         data=""
-        onReady={(editor) => {}}
+        onReady={(editor) => { }}
         onChange={(event, editor) => {
           const data = editor.getData();
           setComment({
@@ -77,8 +80,8 @@ function NewAnswer() {
             comment: data,
           });
         }}
-        onBlur={(event, editor) => {}}
-        onFocus={(event, editor) => {}}
+        onBlur={(event, editor) => { }}
+        onFocus={(event, editor) => { }}
       />
       <SubmitButton onClick={handleSubmit}>Post your answer</SubmitButton>
     </NewAnswerContainer>
