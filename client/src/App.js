@@ -1,4 +1,4 @@
-import Questions from './pages/Questions';
+import Main from './pages/Main';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import New from './pages/New';
@@ -25,7 +25,7 @@ function App() {
       <div className="App">
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<Questions />} />
+          <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/new" element={<New />} />
