@@ -45,19 +45,20 @@ const SubmitButton = styled.button`
 
 /* eslint-disable */
 function NewAnswer() {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState({ comment: '' });
+  const blankComment = comment.comment.length !== 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/questions', {
+      .post(`http://localhost:3001/questions`, {
         comment,
       })
       .then(() => {
         toast.success('Post Success!');
       })
       .then(() => {
-        navigate('/question');
+        navigate(`/question/${id}`);
       })
       .catch(() => {
         toast.error('Post Failed!');
@@ -80,7 +81,9 @@ function NewAnswer() {
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
       />
-      <SubmitButton onClick={handleSubmit}>Post your answer</SubmitButton>
+      <SubmitButton onClick={handleSubmit} disabled={!blankComment}>
+        Post your answer
+      </SubmitButton>
     </NewAnswerContainer>
   );
 }
