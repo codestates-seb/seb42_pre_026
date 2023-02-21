@@ -1150,7 +1150,20 @@
     {
       "title": "parser 테스트",
       "content": "<p>parser 테스트parser 테스트parser 테스트parser 테스트</p>",
-      "id": 9
+      "id": 9,
+      "username": "kimk",
+      "comments": [
+        {
+          "id": 1,
+          "username": "kimcoding",
+          "comment": "답변입니다1"
+        },
+        {
+          "id": 2,
+          "username": "parkpark",
+          "comment": "답변입니다22222"
+        }
+      ]
     }
   ]
 }
