@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import NewInfo from '../components/NewInfo';
-import NewForm from '../components/NewForm';
+import NewInfo from '../components/NewComponent/NewInfo';
+import NewForm from '../components/NewComponent/NewForm';
 
 const DeleteHeader = styled.header`
   background-color: cornflowerblue;

@@ -2,6 +2,7 @@ import { useCallback, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Signupform = styled.form`
   width: 100%;
@@ -53,7 +54,7 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: ${(props) => (props.disabled ? '#badcff' : 'rgba(10, 149, 255, 0.6)')};
+    background: ${(props) => (props.disabled ? '#badcff' : 'hsl(206, 100%, 40%)')};
     transition: 0.2s;
     cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   }
@@ -152,20 +153,19 @@ function SignupForm() {
     }
     //* api 주소 받아서 변경할 것
     axios
-      .post('/api/post', {
+      .post('http://localhost:3001/signup', {
         name,
         email,
         password,
       })
-      .then((response) => {
-        console.log(response);
-        alert('회원가입 성공!');
+      .then(() => {
+        toast.success('Sign up Success!');
+      })
+      .then(() => {
         navigate('/login');
       })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-        navigate(`/signup`);
+      .catch(() => {
+        toast.error('Sign up Failed!');
       });
   };
 

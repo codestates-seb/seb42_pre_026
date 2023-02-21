@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seb42_pre26.exception.BusinessException;
 import seb42_pre26.exception.ExceptionCode;
-import seb42_pre26.member.entity.Member;
 import seb42_pre26.post.entity.Post;
 import seb42_pre26.post.repository.PostRepository;
 

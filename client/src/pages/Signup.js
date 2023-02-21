@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import SnsButtons from '../components/SnsButtons';
-import SignupInfo from '../components/SignupInfo';
-import SignupForm from '../components/SignupForm';
+import SnsButtons from '../components/LoginComponent/SnsButtons';
+import SignupInfo from '../components/SignupComponent/SignupInfo';
+import SignupForm from '../components/SignupComponent/SignupForm';
 
 const DeleteHeader = styled.header`
   background-color: cornflowerblue;
