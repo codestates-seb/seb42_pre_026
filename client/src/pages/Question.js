@@ -1,27 +1,28 @@
 import styled from 'styled-components';
+import QuestionDetail from '../components/QuestionDetailComponent/QuestionDetail';
 import Header from '../components/Header';
-import Nav from '../components/Nav';
-import QuestionsMain from '../components/QuestionsComponent/QuestionsMain';
 import Footer from '../components/Footer';
+import Nav from '../components/Nav';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 45px;
   background-color: white;
+  width: 100%;
 `;
 
-function Main() {
+function Question() {
   return (
-    <div>
+    <>
       <Header />
       <Container>
         <Nav />
-        <QuestionsMain />
+        <QuestionDetail />
       </Container>
-      <Footer />
-    </div>
+      <Footer />;
+    </>
   );
 }
 
-export default Main;
+export default Question;
