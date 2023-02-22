@@ -33,6 +33,7 @@ const MainBarHeader = styled.div`
     max-width: 600px;
     word-break: break-word;
     line-height: 1.35;
+    padding-left: 10px;
   }
 `;
 
@@ -57,6 +58,7 @@ const MainBarInfo = styled.div`
   padding-bottom: 8px;
   display: flex;
   flex-direction: row;
+  padding-left: 10px;
 `;
 
 const SpanContainer = styled.div`
@@ -79,11 +81,11 @@ const ContentContainer = styled.div`
 const PostContainer = styled.div`
   width: 100%;
   padding-right: 18px;
-  div {
+  .content {
     font-size: 16px;
-    margin-bottom: 16.5px;
     word-break: break-word;
     line-height: 1.35;
+    padding-left: 10px;
   }
 `;
 
@@ -118,6 +120,7 @@ const ButtonContainer = styled.div`
   width: 400;
   display: flex;
   align-items: flex-end;
+  padding-bottom: 10px;
 `;
 
 const EditButton = styled.button`
@@ -150,8 +153,7 @@ const CommentTitle = styled.h2`
   font-size: 20px;
   flex: 1 auto;
   margin-right: 8px;
-  margin-bottom: 8px;
-  padding: 16px 0;
+  padding-top: 15px;
   font-weight: 500;
   max-width: 600px;
   word-break: break-word;
@@ -202,7 +204,7 @@ function QuestionDetail() {
         </MainBarInfo>
         <ContentContainer>
           <PostContainer>
-            <div>{Parser(data.content)}</div>
+            <div className="content">{Parser(data.content)}</div>
             <UserInfoContainer>
               <ButtonContainer>
                 <EditButton>Edit</EditButton>
@@ -216,7 +218,13 @@ function QuestionDetail() {
                 <div className="userId">{data.username}</div>
               </UserInfo>
             </UserInfoContainer>
-            <CommentTitle>{comments ? comments.length : 0} Answer</CommentTitle>
+            <CommentTitle>
+              {comments.length === 1
+                ? '1 Answer'
+                : comments.length > 1
+                ? `${comments.length} Answers`
+                : null}
+            </CommentTitle>
             {blankComment &&
               comments.map((comment) => {
                 return <Answer comment={comment} key={comment.id} />;
