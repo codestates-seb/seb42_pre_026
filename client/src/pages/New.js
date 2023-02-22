@@ -1,15 +1,7 @@
 import styled from 'styled-components';
 import NewInfo from '../components/NewComponent/NewInfo';
 import NewForm from '../components/NewComponent/NewForm';
-
-const DeleteHeader = styled.header`
-  background-color: cornflowerblue;
-  color: white;
-  width: 100%;
-  height: 48px;
-  font-size: 22px;
-  text-align: center;
-`;
+import Header from '../components/Header';
 
 const DeleteFooter = styled.footer`
   background-color: cornflowerblue;
@@ -33,7 +25,7 @@ const Container = styled.div`
 function New() {
   return (
     <>
-      <DeleteHeader>헤더</DeleteHeader>
+      <Header />
       <Container>
         <NewInfo />
         <NewForm />
