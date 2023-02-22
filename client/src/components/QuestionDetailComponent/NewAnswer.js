@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -46,21 +47,22 @@ const SubmitButton = styled.button`
 /* eslint-disable */
 function NewAnswer() {
   const [comment, setComment] = useState({ comment: '' });
-  const blankComment = comment.comment.length !== 0;
+  const blankComment = comment.length;
+  const { id } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/questions`, {
+      .post('http://localhost:3001/comments', {
+        postid: id,
         comment,
       })
       .then(() => {
-        toast.success('Post Success!');
+        location.reload();
+        window.scrollTo(0, 0);
       })
-      .then(() => {
-        navigate(`/question/${id}`);
-      })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         toast.error('Post Failed!');
       });
   };
@@ -73,15 +75,14 @@ function NewAnswer() {
         onReady={(editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
-          setComment({
-            ...comment,
-            comment: data,
-          });
+          setComment(data);
         }}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
       />
-      <SubmitButton onClick={handleSubmit} disabled={!blankComment}>
+      <SubmitButton
+        onClick={handleSubmit}
+        disabled={!(blankComment !== 0 && blankComment !== undefined)}>
         Post your answer
       </SubmitButton>
     </NewAnswerContainer>
