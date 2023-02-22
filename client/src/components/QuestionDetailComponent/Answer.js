@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Parser from 'html-react-parser';
+import axios from 'axios';
+import { useConfirm } from 'material-ui-confirm';
 
 const AnswerContainer = styled.div`
   padding-top: 10px;
@@ -76,6 +78,19 @@ const DeleteButton = styled.button`
 `;
 
 function Answer({ comment }) {
+  const confirm = useConfirm();
+
+  const onDelete = () => {
+    confirm({ description: 'This will permanently delete answer.' })
+      .then(() => {
+        axios.delete(`http://localhost:3001/comments/${comment.id}`).then(() => {
+          location.reload();
+          window.scrollTo(0, 0);
+        });
+      })
+      .catch(() => {});
+  };
+
   return (
     <AnswerContainer>
       <PostContainer>
@@ -83,7 +98,7 @@ function Answer({ comment }) {
         <UserInfoContainer>
           <ButtonContainer>
             <EditButton>Edit</EditButton>
-            <DeleteButton>Delete</DeleteButton>
+            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
           </ButtonContainer>
           <UserInfo>
             <div className="userInfoTime">
