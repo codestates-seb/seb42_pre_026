@@ -3,6 +3,8 @@ package seb42_pre26.member.entity;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import seb42_pre26.comment.entity.Comment;
+import seb42_pre26.member.Role;
+import seb42_pre26.member.SocialType;
 import seb42_pre26.post.entity.Post;
 
 import javax.persistence.*;
@@ -45,45 +47,35 @@ public class Member {
     private LocalDateTime modified = LocalDateTime.now();
 
 
-// security
+    // security
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    private Role.SocialType socialType; // kakao, naver, google
+    private SocialType socialType;
 
-    private String socialId;  //로그인한 소셜 타입의 식별자 값(일반 로그인인 경우 null)
+    private String socialId;
 
-    private String refreshToken; // 리프레쉬 토큰
+    private String refreshToken;
 
-//    맴버 권한 설정 메소드
+
     public void authorizeMember() {
         this.role = Role.MEMBER;
     }
 
-//    비밀번호 암호화 메서드
+
     public void passwordEncode(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
+    }
+
+    public void updateName(String updateName) {this.name = updateName; }
+    public void updateAge(int updateAge) {this.age = updateAge; }
+    public void updatePassword(String updatePassword, PasswordEncoder passwordEncoder){
+        this.password = passwordEncoder.encode(updatePassword);
     }
 
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
     }
-
-
-
-}
-//??? 위치가 여기 맞나?
-@Getter
-@RequiredArgsConstructor
-public enum Role {
-    GUEST("ROLE_GUEST"), MEMBER("ROLE_MEMBER");
-
-    private final String key;
-
-    public enum SocialType {
-        KAKAO, NAVER, GOOGLE
-    }
-
 }
 

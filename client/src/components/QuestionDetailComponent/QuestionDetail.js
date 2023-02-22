@@ -5,7 +5,7 @@ import Aside from '../Aside';
 import Answer from './Answer';
 import NewAnswer from './NewAnswer';
 import Parser from 'html-react-parser';
-import { toast } from 'react-toastify';
+import { useConfirm } from 'material-ui-confirm';
 import useFetch from '../../hooks/useFetch';
 
 const MainArea = styled.div`
@@ -161,25 +161,20 @@ const CommentTitle = styled.h2`
 function QuestionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const confirm = useConfirm();
 
   const data = useFetch(`http://localhost:3001/questions/${id}`);
   const comments = useFetch(`http://localhost:3001/comments?postid=${id}`);
   const blankComment = comments.content !== '';
 
   const onDelete = () => {
-    if (confirm('Are you sure delete?')) {
-      axios
-        .delete(`http://localhost:3001/questions/${id}`)
-        .then(() => {
-          toast.success('Delete Success!');
-        })
-        .then(() => {
+    confirm({ description: 'This will permanently delete question.' })
+      .then(() => {
+        axios.delete(`http://localhost:3001/questions/${id}`).then(() => {
           navigate('/');
-        })
-        .catch(() => {
-          toast.error('Delete Failed!');
         });
-    }
+      })
+      .catch(() => {});
   };
 
   return (

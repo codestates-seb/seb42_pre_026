@@ -2,10 +2,7 @@ package seb42_pre26.member.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import seb42_pre26.member.dto.MemberSignUpDto;
 import seb42_pre26.member.service.MemberService;
 

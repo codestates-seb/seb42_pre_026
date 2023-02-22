@@ -199,8 +199,8 @@ function QuestionsMain() {
         </MainBarFilter>
 
         <QuestionsContainer>
-          {reverseQuestionData.slice(offset, offset + limit).map((value, index) => {
-            return <QuestionsList list={value} key={index} setPage={setPage} />;
+          {reverseQuestionData.slice(offset, offset + limit).map((value) => {
+            return <QuestionsList list={value} key={value.id} setPage={setPage} />;
           })}
         </QuestionsContainer>
         <PagenationWrapper>
