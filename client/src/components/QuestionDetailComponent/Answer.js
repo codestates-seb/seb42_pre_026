@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Parser from 'html-react-parser';
 
 const AnswerContainer = styled.div`
   padding-top: 10px;
@@ -8,7 +9,7 @@ const AnswerContainer = styled.div`
 const PostContainer = styled.div`
   width: 100%;
   padding-right: 18px;
-  p {
+  div {
     font-size: 16px;
     margin-bottom: 16.5px;
     word-break: break-word;
@@ -49,30 +50,27 @@ const ButtonContainer = styled.div`
 `;
 
 const EditButton = styled.button`
-  width: 70px;
-  height: 37.78px;
-  margin-right: 5px;
-  background-color: #0a95ff;
-  color: white;
+  width: 50px;
+  height: 20px;
+  background-color: transparent;
+  color: #0a95ff;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: hsl(206, 100%, 40%);
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
 
 const DeleteButton = styled.button`
-  width: 80px;
-  height: 37.78px;
-  background-color: #e2464b;
-  color: white;
+  width: 70px;
+  height: 20px;
+  background-color: transparent;
+  color: #ff8a3d;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: #ab252a;
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
@@ -81,7 +79,7 @@ function Answer({ comment }) {
   return (
     <AnswerContainer>
       <PostContainer>
-        <p>{comment.comment}</p>
+        <div>{Parser(comment.comment)}</div>
         <UserInfoContainer>
           <ButtonContainer>
             <EditButton>Edit</EditButton>

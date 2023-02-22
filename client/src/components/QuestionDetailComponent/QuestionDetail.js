@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Aside from '../Aside';
 import Answer from './Answer';
 import NewAnswer from './NewAnswer';
 import Parser from 'html-react-parser';
+import { toast } from 'react-toastify';
+import useFetch from '../../hooks/useFetch';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -120,30 +121,27 @@ const ButtonContainer = styled.div`
 `;
 
 const EditButton = styled.button`
-  width: 70px;
-  height: 37.78px;
-  margin-right: 5px;
-  background-color: #0a95ff;
-  color: white;
+  width: 50px;
+  height: 20px;
+  background-color: transparent;
+  color: #0a95ff;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: hsl(206, 100%, 40%);
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
 
 const DeleteButton = styled.button`
-  width: 80px;
-  height: 37.78px;
-  background-color: #e2464b;
-  color: white;
+  width: 70px;
+  height: 20px;
+  background-color: transparent;
+  color: #ff8a3d;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: #ab252a;
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
@@ -162,16 +160,27 @@ const CommentTitle = styled.h2`
 
 function QuestionDetail() {
   const { id } = useParams();
-  const [data, setData] = useState({ content: '' });
+  const navigate = useNavigate();
 
-  const fetchData = async () => {
-    const res = await axios.get(`http://localhost:3001/questions/${id}`);
-    setData(res.data);
+  const data = useFetch(`http://localhost:3001/questions/${id}`);
+  const comments = useFetch(`http://localhost:3001/comments?postid=${id}`);
+  const blankComment = comments.content !== '';
+
+  const onDelete = () => {
+    if (confirm('Are you sure delete?')) {
+      axios
+        .delete(`http://localhost:3001/questions/${id}`)
+        .then(() => {
+          toast.success('Delete Success!');
+        })
+        .then(() => {
+          navigate('/');
+        })
+        .catch(() => {
+          toast.error('Delete Failed!');
+        });
+    }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <MainArea>
@@ -202,7 +211,7 @@ function QuestionDetail() {
             <UserInfoContainer>
               <ButtonContainer>
                 <EditButton>Edit</EditButton>
-                <DeleteButton>Delete</DeleteButton>
+                <DeleteButton onClick={onDelete}>Delete</DeleteButton>
               </ButtonContainer>
               <UserInfo>
                 <div className="userInfoTime">
@@ -212,9 +221,9 @@ function QuestionDetail() {
                 <div className="userId">{data.username}</div>
               </UserInfo>
             </UserInfoContainer>
-            <CommentTitle>{data.comments ? data.comments.length : 0} Answer</CommentTitle>
-            {data.comments &&
-              data.comments.map((comment) => {
+            <CommentTitle>{comments ? comments.length : 0} Answer</CommentTitle>
+            {blankComment &&
+              comments.map((comment) => {
                 return <Answer comment={comment} key={comment.id} />;
               })}
             <NewAnswer />

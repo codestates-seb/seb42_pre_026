@@ -108,30 +108,6 @@ function NewForm() {
   const titleLength = content.title.length;
   const blankContent = Parser(content.content).length !== 0;
 
-  //* api 주소 받아서 변경 후 주석 해제
-  // const [viewContent, setViewContent] = useState([]);
-
-  //* api 주소 받아서 변경 후 주석 해제
-  //* 받아온 데이터를 빈 배열 state인 viewContent에 담아줌
-  // useEffect(() => {
-  //   axios.get('/api/get').then((response) => {
-  //     setViewContent(response.data);
-  //   });
-  // }, [viewContent]);
-
-  //* Parser 예시
-  // {viewContent.map(element =>
-  //   <div>
-  //     <h2>{element.title}</h2>
-  //     <div>
-  //       {Parser(element.content)}
-  //     </div>
-  //   </div>
-  // )}
-
-  //! content : <p>로 감싸져서 들어오니 html-react-parser 설치 -> import 후 map으로 뿌려야함
-  //! npm install html-react-parser --save
-  //! import Parser from 'html-react-parser';
   const handleContent = useCallback((e) => {
     const { name, value } = e.target;
     setContent({
