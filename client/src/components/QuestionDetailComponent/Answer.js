@@ -6,14 +6,10 @@ import { useConfirm } from 'material-ui-confirm';
 const AnswerContainer = styled.div`
   padding-top: 10px;
   border-bottom: 1px solid #e4e4e5;
-`;
-
-const PostContainer = styled.div`
-  width: 100%;
-  padding-right: 18px;
-  div {
+  .comment {
+    padding-top: 10px;
+    padding-left: 10px;
     font-size: 16px;
-    margin-bottom: 16.5px;
     word-break: break-word;
     line-height: 1.35;
   }
@@ -23,7 +19,7 @@ const UserInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 16px 0;
+  margin-bottom: 10px;
   padding-top: 10px;
 `;
 
@@ -32,6 +28,7 @@ const UserInfo = styled.div`
   border-radius: 3px;
   max-width: 200px;
   text-align: left;
+  align-items: flex-end;
   > .userInfoTime {
     margin: 1px 0 4px 0;
     font-size: 12px;
@@ -49,6 +46,7 @@ const ButtonContainer = styled.div`
   width: 400;
   display: flex;
   align-items: flex-end;
+  padding-bottom: 10px;
 `;
 
 const EditButton = styled.button`
@@ -88,27 +86,27 @@ function Answer({ comment }) {
           window.scrollTo(0, 0);
         });
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <AnswerContainer>
-      <PostContainer>
-        <div>{Parser(comment.comment)}</div>
-        <UserInfoContainer>
-          <ButtonContainer>
-            <EditButton>Edit</EditButton>
-            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
-          </ButtonContainer>
-          <UserInfo>
-            <div className="userInfoTime">
-              <span>answered </span>
-              <span>2 days ago</span>
-            </div>
-            <div className="userId">{comment.username}</div>
-          </UserInfo>
-        </UserInfoContainer>
-      </PostContainer>
+      <div className="comment">{Parser(comment.comment)}</div>
+      <UserInfoContainer>
+        <ButtonContainer>
+          <EditButton>Edit</EditButton>
+          <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+        </ButtonContainer>
+        <UserInfo>
+          <div className="userInfoTime">
+            <span>answered </span>
+            <span>2 days ago</span>
+          </div>
+          <div className="userId">{comment.username}</div>
+        </UserInfo>
+      </UserInfoContainer>
     </AnswerContainer>
   );
 }
