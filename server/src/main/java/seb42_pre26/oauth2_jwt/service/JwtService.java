@@ -1,12 +1,12 @@
-package seb42_pre26.oauth2_jwt.jwt;
+package seb42_pre26.oauth2_jwt.service;
 
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import seb42_pre26.member.repository.MemberRepository;
@@ -23,16 +23,16 @@ import java.util.Optional;
 @Slf4j
 public class JwtService {
 
-    @Value("${jwt.secretkey}")
+    @org.springframework.beans.factory.annotation.Value("${jwt.secretKey}")
     private String secretKey;
 
-    @Value("${jwt.access.expiration}")
+    @org.springframework.beans.factory.annotation.Value("${jwt.access.expiration}")
     private Long accessTokenExpirationPeriod;
 
-    @Value("${jwt.refresh.expiration}")
+    @org.springframework.beans.factory.annotation.Value("${jwt.refresh.expiration}")
     private Long refreshTokenExpirationPeriod;
 
-    @Value("${jwt.access.header}")
+    @org.springframework.beans.factory.annotation.Value("${jwt.access.header}")
     private String accessHeader;
 
     @Value("${jwt.refresh.header}")
