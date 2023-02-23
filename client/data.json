@@ -4,24 +4,24 @@
   "questions": [
     {
       "id": 1,
-      "username": "kimk",
+      "member_id": "kimk",
       "views": 2,
       "created": "2023-02-23 21:30",
       "modified": "2023-02-23 21:30",
-      "title": "테스트1",
-      "content": "I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that?",
+      "title": "테스트1 수정",
+      "content": "<p>I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that? 수정</p>",
       "comments": [
         {
           "id": 1,
           "postid": 1,
-          "username": "kimk",
+          "member_id": "kimk",
           "comment": "질문 1의 코멘트 1"
         }
       ]
     },
     {
       "id": 2,
-      "username": "kimk",
+      "member_id": "kimk",
       "views": 1,
       "created": "2023-02-23 21:30",
       "title": "테스트2",
@@ -29,23 +29,23 @@
     },
     {
       "id": 3,
-      "username": "kimk",
+      "member_id": "kimk",
       "views": 0,
       "created": "2023-02-23 21:30",
       "modified": "2023-02-23 21:30",
-      "title": "parser 테스트",
-      "content": "<p>parser 테스트parser 테스트parser 테스트parser 테스트</p>",
+      "title": "parser 테스트 수정",
+      "content": "parser 테스트parser 테스트parser 테스트parser 테스트 수정",
       "comments": [
         {
           "id": 3,
           "postid": 3,
-          "username": "kimk",
+          "member_id": "kimk",
           "comment": "<p>질문 3의 코멘트 1 다시 수정 테스트</p>"
         },
         {
           "id": 4,
           "postid": 3,
-          "username": "kimk",
+          "member_id": "kimk",
           "comment": "질문 3의 코멘트 2"
         }
       ]
@@ -55,21 +55,21 @@
     {
       "id": 1,
       "postid": 1,
-      "username": "kimk",
+      "member_id": "kimk",
       "comment": "질문 1의 코멘트 1",
       "created": "2023-02-23 21:30"
     },
     {
       "id": 3,
       "postid": 3,
-      "username": "kimk",
-      "comment": "<p>질문 3의 코멘트 1 다시 수정 테스트</p>",
+      "member_id": "kimk",
+      "comment": "<p>질문 3의 코멘트 1 다시 수정 테스트!!</p>",
       "created": "2023-02-23 21:30"
     },
     {
       "id": 4,
       "postid": 3,
-      "username": "kimk",
+      "member_id": "kimk",
       "comment": "질문 3의 코멘트 2",
       "created": "2023-02-23 21:30"
     }
