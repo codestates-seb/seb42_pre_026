@@ -7,13 +7,11 @@ const ListContainer = styled.li`
   min-height: 100px;
   padding: 12px;
   border-bottom: 1px solid #e4e4e5;
-  /* background-color: lightblue; */
   padding-left: 32px;
   cursor: pointer;
 `;
 
 const ListInfo = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   width: 96px;
@@ -36,8 +34,6 @@ const ListInfo = styled.div`
 const ListContent = styled.div`
   flex-grow: 1;
   margin-top: 5px;
-
-  /* border: 1px solid black; */
 
   > .contentTitle {
     max-width: 600px;
