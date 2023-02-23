@@ -55,6 +55,7 @@ function NewAnswer() {
     axios
       .post('http://localhost:3001/comments', {
         postid: id,
+        username: 'kimcoding',
         comment,
       })
       .then(() => {
