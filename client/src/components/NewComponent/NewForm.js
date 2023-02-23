@@ -130,6 +130,7 @@ function NewForm() {
       .post('http://localhost:3001/questions', {
         title: content.title,
         content: content.content,
+        username: 'kimcoding',
       })
       .then(() => {
         toast.success('Post Success!');
