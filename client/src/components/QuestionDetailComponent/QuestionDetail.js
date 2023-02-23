@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -7,6 +8,7 @@ import NewAnswer from './NewAnswer';
 import Parser from 'html-react-parser';
 import { useConfirm } from 'material-ui-confirm';
 import useFetch from '../../hooks/useFetch';
+import ContentEditModal from '../../util/ContentEditModal';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -85,7 +87,6 @@ const ContentContainer = styled.div`
 `;
 
 const PostContainer = styled.div`
-  /* width: 100%; */
   padding-right: 18px;
   padding-top: 10px;
   .content {
@@ -176,6 +177,9 @@ function QuestionDetail() {
   const data = useFetch(`http://localhost:3001/questions/${id}`);
   const comments = useFetch(`http://localhost:3001/comments?postid=${id}`);
   const blankComment = comments.content !== '';
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete question.' })
@@ -185,6 +189,24 @@ function QuestionDetail() {
         });
       })
       .catch(() => {});
+  };
+
+  // 모달 open
+  const openEditModalHandler = () => {
+    setEditModalOpen(true);
+    setNewTitle(data.title);
+    const isContent = Parser(data.content).length !== undefined;
+    if (isContent) {
+      setNewContent(data.content);
+    } else {
+      const parserContent = Parser(data.content).props.children;
+      setNewContent(parserContent);
+    }
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
   };
 
   return (
@@ -215,7 +237,17 @@ function QuestionDetail() {
             <div className="content">{Parser(data.content)}</div>
             <UserInfoContainer>
               <ButtonContainer>
-                <EditButton>Edit</EditButton>
+                <EditButton onClick={openEditModalHandler}>Edit</EditButton>
+                {editModalOpen ? (
+                  <ContentEditModal
+                    newTitle={newTitle}
+                    setNewTitle={setNewTitle}
+                    newContent={newContent}
+                    setNewContent={setNewContent}
+                    contentId={data.id}
+                    setEditModalOpen={setEditModalOpen}
+                  />
+                ) : null}
                 <DeleteButton onClick={onDelete}>Delete</DeleteButton>
               </ButtonContainer>
               <UserInfo>
@@ -223,7 +255,7 @@ function QuestionDetail() {
                   <span>asked </span>
                   <span>{data.created}</span>
                 </div>
-                <div className="userId">{data.username}</div>
+                <div className="userId">{data.member_id}</div>
               </UserInfo>
             </UserInfoContainer>
             <CommentTitle>
