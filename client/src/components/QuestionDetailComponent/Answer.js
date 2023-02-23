@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Parser from 'html-react-parser';
 import axios from 'axios';
 import { useConfirm } from 'material-ui-confirm';
+import CommentEditModal from '../../util/CommentEditModal';
 
 const AnswerContainer = styled.div`
   padding-top: 15px;
@@ -76,6 +78,8 @@ const DeleteButton = styled.button`
 
 function Answer({ comment }) {
   const confirm = useConfirm();
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [newComment, setNewComment] = useState('');
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete answer.' })
@@ -90,18 +94,43 @@ function Answer({ comment }) {
       });
   };
 
+  // 모달 open
+  const openEditModalHandler = () => {
+    setEditModalOpen(true);
+    const isComment = Parser(comment.comment).length !== undefined;
+    if (isComment) {
+      setNewComment(comment.comment);
+    } else {
+      const parserComment = Parser(comment.comment).props.children;
+      setNewComment(parserComment);
+    }
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
+  };
+
   return (
     <AnswerContainer>
       <div className="comment">{Parser(comment.comment)}</div>
       <UserInfoContainer>
         <ButtonContainer>
-          <EditButton>Edit</EditButton>
+          <EditButton onClick={openEditModalHandler}>Edit</EditButton>
+          {editModalOpen ? (
+            <CommentEditModal
+              newComment={newComment}
+              setNewComment={setNewComment}
+              commentId={comment.id}
+              setEditModalOpen={setEditModalOpen}
+            />
+          ) : null}
           <DeleteButton onClick={onDelete}>Delete</DeleteButton>
         </ButtonContainer>
         <UserInfo>
           <div className="userInfoTime">
             <span>answered </span>
-            <span>2 days ago</span>
+            <span>{comment.created}</span>
           </div>
           <div className="userId">{comment.username}</div>
         </UserInfo>
