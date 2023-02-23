@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FaGlobeAmericas, FaInfoCircle } from 'react-icons/fa';
 
 const NavArea = styled.div`
-  min-width: 165px;
+  width: 190px;
   height: 350px;
   position: sticky;
   top: 60px;
