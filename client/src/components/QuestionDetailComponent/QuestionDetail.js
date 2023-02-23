@@ -15,17 +15,15 @@ const MainArea = styled.div`
   display: flex;
   flex-direction: column;
   border-left: 1px solid #e4e4e5;
-  max-width: 1100px;
-  width: 100%;
+  width: 1100px;
 `;
 
 const MainBar = styled.div`
-  flex: 10;
+  flex: 1;
   width: 100%;
 `;
 
 const MainBarHeader = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
@@ -89,6 +87,7 @@ const ContentContainer = styled.div`
 const PostContainer = styled.div`
   padding-right: 18px;
   padding-top: 10px;
+  width: 100%;
   .content {
     font-size: 16px;
     word-break: break-word;
