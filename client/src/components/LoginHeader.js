@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Logo from '../util/Logo';
 import SearchIcon from '../util/SearchIcon';
-import user from '../util/user.png';
+import profile from '../util/profile.png';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -29,7 +29,7 @@ const NavContainer = styled.nav`
   padding-right: 10px;
   align-items: center;
   vertical-align: baseline;
-  padding: 0 80px;
+  padding: 0 85px;
   @media screen and (max-width: 1200px) {
     padding: 0;
   }
@@ -38,10 +38,15 @@ const NavContainer = styled.nav`
 const LogoBox = styled.div`
   display: flex;
   background-color: transparent;
-  width: 166px;
-  height: 100%;
+  width: 172px;
+  height: 50px;
   line-height: 17px;
   padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: hsl(210, 8%, 90%);
+  }
 `;
 
 const Ol = styled.ol`
@@ -51,6 +56,9 @@ const Ol = styled.ol`
   list-style: none;
   margin: 0;
   padding: 2px 0;
+  @media screen and (max-width: 640px) {
+    display: none;
+  }
 `;
 
 const Li = styled.li`
@@ -191,7 +199,7 @@ function Header() {
             <ol>
               <li>
                 <ProfileBox>
-                  <img src={user} alt="img" />
+                  <img src={profile} alt="img" />
                   <span>1</span>
                 </ProfileBox>
               </li>

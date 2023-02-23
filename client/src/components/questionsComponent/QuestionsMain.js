@@ -9,8 +9,6 @@ import axios from 'axios';
 const MainArea = styled.div`
   padding: 24px;
   display: flex;
-  max-width: 1000px;
-  flex: 1 0 auto;
   border-left: 1px solid #e4e4e5;
 `;
 
@@ -21,25 +19,29 @@ const MainBar = styled.div`
 const MainBarHeader = styled.div`
   margin-bottom: 12px;
   display: flex;
+  padding-top: 10px;
 
   > .mainBarHeaderTitle {
-    font-size: 24px;
+    font-size: 28px;
     flex: 1 auto;
-    margin-right: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     font-weight: 400;
+    word-break: break-word;
+    line-height: 1.35;
   }
 `;
 
 const CreateButton = styled.button`
-  width: 90px;
-  height: 33px;
-  font-size: 12px;
+  width: 100px;
+  height: 34px;
+  font-size: 13px;
+  padding: 10px;
   margin-bottom: 12px;
-  border-radius: 0.15rem;
+  border-radius: 3px;
   color: white;
   background-color: hsl(206, 100%, 52%);
   border: none;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
   &:hover {
     background-color: hsl(206, 100%, 40%);
   }
@@ -54,6 +56,8 @@ const MainBarFilter = styled.div`
   > .questionsCount {
     flex: 1 0 auto;
     margin-right: 12px;
+    font-size: 18px;
+    font-weight: 400;
   }
 `;
 

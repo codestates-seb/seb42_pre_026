@@ -21,9 +21,9 @@ const NewAnswerTitle = styled.h2`
   font-size: 20px;
   flex: 1 auto;
   margin-bottom: 19px;
+  padding-left: 3px;
   padding-top: 20px;
   font-weight: 500;
-  max-width: 600px;
   word-break: break-word;
   line-height: 1.3;
 `;
@@ -72,13 +72,13 @@ function NewAnswer() {
       <CKEditor
         editor={ClassicEditor}
         data=""
-        onReady={(editor) => { }}
+        onReady={(editor) => {}}
         onChange={(event, editor) => {
           const data = editor.getData();
           setComment(data);
         }}
-        onBlur={(event, editor) => { }}
-        onFocus={(event, editor) => { }}
+        onBlur={(event, editor) => {}}
+        onFocus={(event, editor) => {}}
       />
       <SubmitButton
         onClick={handleSubmit}

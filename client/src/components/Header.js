@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Logo from '../util/Logo';
 import SearchIcon from '../util/SearchIcon';
-import { FiMenu } from 'react-icons/fi';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -29,32 +28,24 @@ const NavContainer = styled.nav`
   padding-right: 10px;
   align-items: center;
   vertical-align: baseline;
-  padding: 0 80px;
+  padding: 0 85px;
   @media screen and (max-width: 1200px) {
     padding: 0;
-  }
-  .menu {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    &:hover {
-      background-color: hsl(210, 8%, 90%);
-    }
   }
 `;
 
 const LogoBox = styled.div`
   display: flex;
   background-color: transparent;
-  width: 166px;
-  height: 100%;
+  width: 172px;
+  height: 50px;
   line-height: 17px;
   padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: hsl(210, 8%, 90%);
+  }
 `;
 
 const Ol = styled.ol`
@@ -64,6 +55,9 @@ const Ol = styled.ol`
   list-style: none;
   margin: 0;
   padding: 2px 0;
+  @media screen and (max-width: 730px) {
+    display: none;
+  }
 `;
 
 const Li = styled.li`
@@ -159,7 +153,6 @@ const ButtonStyle = styled.button`
   border: 1px solid ${({ borderColor }) => borderColor || 'transparent'};
   border-radius: 3px;
   background-color: ${({ backgroundColor }) => backgroundColor || 'hsl(206,100%,52%)'};
-  outline: none;
   font-size: 13px;
   font-weight: normal;
   line-height: calc((13 + 2) / 13);
@@ -177,9 +170,6 @@ function Header() {
     <>
       <HeaderContainer>
         <NavContainer>
-          <div className="menu">
-            <FiMenu size={20} />
-          </div>
           <LogoBox>
             <Link to="/">
               <Logo />

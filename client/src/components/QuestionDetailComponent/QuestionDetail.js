@@ -11,25 +11,29 @@ import useFetch from '../../hooks/useFetch';
 const MainArea = styled.div`
   padding: 24px;
   display: flex;
-  flex: 1 0 auto;
   flex-direction: column;
   border-left: 1px solid #e4e4e5;
-  max-width: 1000px;
+  max-width: 1100px;
 `;
 
 const MainBar = styled.div`
   flex: 10;
+  width: 100%;
 `;
 
 const MainBarHeader = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 18px;
+  padding-bottom: 5px;
   > .mainBarHeaderTitle {
     font-size: 30px;
     flex: 1 auto;
     margin-right: 8px;
     margin-bottom: 8px;
-    font-weight: 500;
+    font-weight: 400;
     max-width: 600px;
     word-break: break-word;
     line-height: 1.35;
@@ -38,15 +42,16 @@ const MainBarHeader = styled.div`
 `;
 
 const CreateButton = styled.button`
-  width: 90px;
-  height: 33px;
-  font-size: 12px;
+  width: 100px;
+  height: 34px;
+  font-size: 13px;
   margin-bottom: 12px;
-  margin-left: 12px;
-  border-radius: 0.15rem;
+  padding: 10px;
+  border-radius: 3px;
   color: white;
   background-color: hsl(206, 100%, 52%);
   border: none;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
   &:hover {
     background-color: hsl(206, 100%, 40%);
   }
@@ -79,8 +84,9 @@ const ContentContainer = styled.div`
 `;
 
 const PostContainer = styled.div`
-  width: 100%;
+  /* width: 100%; */
   padding-right: 18px;
+  padding-top: 10px;
   .content {
     font-size: 16px;
     word-break: break-word;
@@ -154,6 +160,7 @@ const CommentTitle = styled.h2`
   flex: 1 auto;
   margin-right: 8px;
   padding-top: 15px;
+  padding-left: 3px;
   font-weight: 500;
   max-width: 600px;
   word-break: break-word;
