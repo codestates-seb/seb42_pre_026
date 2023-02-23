@@ -130,7 +130,7 @@ function QuestionsList({ list }) {
           <Writer>
             <div className="polite">★</div>
             <UserCardInfo>
-              <div className="userCardLink">{list.username}</div>
+              <div className="userCardLink">{list.member_id}</div>
               <div className="userCardAwards">26</div>
             </UserCardInfo>
             <div className="userCardTime">{list.created}</div>
