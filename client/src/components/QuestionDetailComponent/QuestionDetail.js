@@ -14,6 +14,7 @@ const MainArea = styled.div`
   flex-direction: column;
   border-left: 1px solid #e4e4e5;
   max-width: 1100px;
+  width: 100%;
 `;
 
 const MainBar = styled.div`
@@ -198,11 +199,11 @@ function QuestionDetail() {
         <MainBarInfo>
           <SpanContainer>
             <span className="infoTitle">Asked</span>
-            <span>21 days ago</span>
+            <span>{data.created}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Modified</span>
-            <span>today</span>
+            <span>{data.modified ? data.modified : '-'}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Viewed</span>
@@ -220,7 +221,7 @@ function QuestionDetail() {
               <UserInfo>
                 <div className="userInfoTime">
                   <span>asked </span>
-                  <span>Feb 10 at 20:37</span>
+                  <span>{data.created}</span>
                 </div>
                 <div className="userId">{data.username}</div>
               </UserInfo>

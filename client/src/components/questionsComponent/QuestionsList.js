@@ -107,26 +107,33 @@ function QuestionsList({ list }) {
   return (
     <ListContainer>
       <ListInfo>
-        <div className="votes">0 votes</div>
-        <div className="answers">0 answers</div>
-        <div className="views">0 views</div>
+        <div className="votes">0 vote</div>
+        <div className="answers">
+          {list.comments === undefined
+            ? '0 answer'
+            : list.comments.length === 1
+            ? `${list.comments.length} answer`
+            : `${list.comments.length} answers`}
+        </div>
+        <div className="views">
+          {parseInt(list.views) <= 1 ? `${list.views} view` : `${list.views} views`}
+        </div>
       </ListInfo>
       <ListContent onClick={onClick}>
         <div className="contentTitle">{list.title}</div>
         <div className="content">{Parser(list.content)}</div>
         <TagWrapper>
           <Tag>
-            <li>tag1</li>
-            <li>tag2</li>
-            <li>tag3</li>
+            <li>javascript</li>
+            <li>java</li>
           </Tag>
           <Writer>
             <div className="polite">★</div>
             <UserCardInfo>
               <div className="userCardLink">{list.username}</div>
-              <div className="userCardAwards">{list.awards}</div>
+              <div className="userCardAwards">26</div>
             </UserCardInfo>
-            <div className="userCardTime">asked 1 min ago</div>
+            <div className="userCardTime">{list.created}</div>
           </Writer>
         </TagWrapper>
       </ListContent>

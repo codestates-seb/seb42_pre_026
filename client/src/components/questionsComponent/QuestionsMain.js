@@ -190,7 +190,9 @@ function QuestionsMain() {
 
         <MainBarFilter>
           <div className="questionsCount">
-            {reverseQuestionData.length.toLocaleString()} questions
+            {reverseQuestionData.length <= 1
+              ? `${reverseQuestionData.length} question`
+              : `${reverseQuestionData.length} questions`}
           </div>
           <SelectFilter>
             <div className="newest">Newest</div>
