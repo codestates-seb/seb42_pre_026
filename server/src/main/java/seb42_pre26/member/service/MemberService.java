@@ -2,12 +2,11 @@ package seb42_pre26.member.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seb42_pre26.member.dto.MemberSignUpDto;
 import seb42_pre26.member.entity.Member;
-import seb42_pre26.member.Role;
 import seb42_pre26.member.repository.MemberRepository;
 
 @Service
@@ -16,7 +15,7 @@ import seb42_pre26.member.repository.MemberRepository;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
+    // private final PasswordEncoder passwordEncoder;
 
     public void signUp(MemberSignUpDto memberSignUpDto) throws Exception {
         if (memberRepository.findByEmail(memberSignUpDto.getEmail()).isPresent()) {
@@ -27,8 +26,8 @@ public class MemberService {
             throw new Exception("이미 존재하는 이름입니다.");
         }
 
-        Member member = Member.builder()
-                .email(memberSignUpDto.getEmail())
+        /*User member = Member.builder()
+                .email.(memberSignUpDto.getEmail())
                 .password(memberSignUpDto.getPassword())
                 .name(memberSignUpDto.getName())
                 .age(memberSignUpDto.getAge())
@@ -38,8 +37,9 @@ public class MemberService {
                 .build();
 
         member.passwordEncode(passwordEncoder);
-        memberRepository.save(member);
+        memberRepository.save(member);*/
 
     }
+
 
 }

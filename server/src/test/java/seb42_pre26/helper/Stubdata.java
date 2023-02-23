@@ -14,7 +14,7 @@ public class Stubdata {
 
     static {
         stubRequestBody = new HashMap<>();
-        stubRequestBody.put(HttpMethod.PUT, new PostCommentDto(1,"안녕하세요 이건 테스트 더미 데이터 입니다!!", 1, LocalDateTime.now(),null));
+        stubRequestBody.put(HttpMethod.PUT, new PostCommentDto(1,1,"안녕하세요 이건 테스트 더미 데이터 입니다!!", 1, LocalDateTime.now(),null ));
         stubRequestBody.put(HttpMethod.PATCH, new PatchCommentDto(1,"안녕하세요 이건 수정하는 더미 데이터입니다아아아아악~!!!!", -1));
 
     }

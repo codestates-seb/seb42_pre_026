@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostCommentDto {
     private long commentId;
+    private long questionId;
     @NotNull
     private String content;
     private int likeCount;

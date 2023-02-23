@@ -1,4 +1,4 @@
-package seb42_pre26.post.entity;
+package seb42_pre26.question.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,7 @@ import seb42_pre26.member.entity.Member;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table
-public class Post {
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long postId;
+    private long questionId;
 
     @Column(nullable = false)
     private String title;
@@ -28,14 +29,17 @@ public class Post {
     @Column(columnDefinition = "text", nullable = false)
     private String content;
 
-    private LocalDateTime created = LocalDateTime.now();
+    @Column(nullable = false)
+    private int viewCount;
 
-    private LocalDateTime modified = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+
+    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
     @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 }

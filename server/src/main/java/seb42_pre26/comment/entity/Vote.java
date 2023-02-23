@@ -3,7 +3,7 @@ package seb42_pre26.comment.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import seb42_pre26.post.entity.Post;
+import seb42_pre26.question.entity.Question;
 import seb42_pre26.member.entity.Member;
 
 
@@ -25,7 +25,7 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "POST_ID")
-    private Post post;
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name = "COMMENT_ID")

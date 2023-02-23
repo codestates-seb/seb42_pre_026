@@ -9,7 +9,7 @@ import seb42_pre26.comment.dto.PostCommentDto;
 import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.mapper.CommentMapper;
 import seb42_pre26.comment.service.CommentService;
-import seb42_pre26.post.entity.Post;
+import seb42_pre26.question.entity.Question;
 
 import java.util.List;
 
@@ -34,6 +34,10 @@ public class CommentController {
 
         //3. mapper 이용하기
         Comment comment = mapper.postCommentDtoToComment(postCommentDto);
+        //TEST
+        Question tmp = new Question();
+        tmp.setQuestionId(postCommentDto.getQuestionId());
+        comment.setQuestion(tmp);
         Comment response = commentService.createComment(comment);
 
         //4. ResponseEntity로 return 하기
@@ -67,15 +71,15 @@ public class CommentController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping
-    public ResponseEntity readComments(Post post) {
+    /*@GetMapping
+    public ResponseEntity readComments(Question question) {
 
-        List<Comment> list = commentService.readComments(post);
+        List<Comment> list = commentService.readComments(question);
         List<CommentResponseDto> response = mapper.commentsToCommentResponseDtos(list);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
-
+*/
     /*필터 기능 추후에 구현*/
 //    @GetMapping
 //    public ResponseEntity getCommentsBySort() {
