@@ -195,13 +195,7 @@ function QuestionDetail() {
   const openEditModalHandler = () => {
     setEditModalOpen(true);
     setNewTitle(data.title);
-    const isContent = Parser(data.content).length !== undefined;
-    if (isContent) {
-      setNewContent(data.content);
-    } else {
-      const parserContent = Parser(data.content).props.children;
-      setNewContent(parserContent);
-    }
+    setNewContent(data.content);
     document.body.style.cssText = `
     position: fixed;
     top: -${window.scrollY}px;

@@ -97,13 +97,7 @@ function Answer({ comment }) {
   // 모달 open
   const openEditModalHandler = () => {
     setEditModalOpen(true);
-    const isComment = Parser(comment.comment).length !== undefined;
-    if (isComment) {
-      setNewComment(comment.comment);
-    } else {
-      const parserComment = Parser(comment.comment).props.children;
-      setNewComment(parserComment);
-    }
+    setNewComment(comment.comment);
     document.body.style.cssText = `
     position: fixed;
     top: -${window.scrollY}px;
