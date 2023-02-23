@@ -132,7 +132,7 @@ function Answer({ comment }) {
             <span>answered </span>
             <span>{comment.created}</span>
           </div>
-          <div className="userId">{comment.username}</div>
+          <div className="userId">{comment.member_id}</div>
         </UserInfo>
       </UserInfoContainer>
     </AnswerContainer>
