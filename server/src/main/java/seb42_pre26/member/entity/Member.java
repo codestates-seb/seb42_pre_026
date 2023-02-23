@@ -59,8 +59,10 @@ public class Member {
     private String refreshToken;
 
 
-    public void authorizeMember() {
-        this.role = Role.MEMBER;
+    public void authorizeUser() {
+        Member member = new Member();
+        member.authorizeUser();
+        this.role = Role.USER;
     }
 
 
