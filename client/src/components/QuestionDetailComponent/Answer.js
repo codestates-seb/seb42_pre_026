@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useConfirm } from 'material-ui-confirm';
 
 const AnswerContainer = styled.div`
-  padding-top: 10px;
+  padding-top: 15px;
   border-bottom: 1px solid #e4e4e5;
   .comment {
     padding-top: 10px;
@@ -26,7 +26,6 @@ const UserInfoContainer = styled.div`
 const UserInfo = styled.div`
   padding: 12px;
   border-radius: 3px;
-  max-width: 200px;
   text-align: left;
   align-items: flex-end;
   > .userInfoTime {

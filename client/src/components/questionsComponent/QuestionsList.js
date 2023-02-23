@@ -16,11 +16,13 @@ const ListInfo = styled.div`
   /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
-  text-align: right;
   width: 96px;
+  margin-top: 6px;
   margin-right: 16px;
   margin-bottom: 4px;
-  font-size: 12px;
+  font-size: 13px;
+  justify-content: center;
+  text-align: right;
 
   > div {
     margin-bottom: 7px;
@@ -33,6 +35,8 @@ const ListInfo = styled.div`
 
 const ListContent = styled.div`
   flex-grow: 1;
+  margin-top: 5px;
+
   /* border: 1px solid black; */
 
   > .contentTitle {
@@ -41,13 +45,13 @@ const ListContent = styled.div`
     margin-bottom: 0.3846rem;
     padding-right: 24px;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 17px;
   }
 
   > .content {
     color: #3b3f44;
     margin-bottom: 8px;
-    font-size: 11.5px;
+    font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 600px;
@@ -55,6 +59,7 @@ const ListContent = styled.div`
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    line-height: 1.35;
   }
 `;
 
@@ -83,7 +88,7 @@ const Tag = styled.ul`
 
 const Writer = styled.div`
   display: flex;
-  font-size: 11px;
+  font-size: 13px;
   gap: 3px;
 `;
 

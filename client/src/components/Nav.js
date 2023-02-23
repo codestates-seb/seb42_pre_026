@@ -2,19 +2,19 @@ import styled from 'styled-components';
 import { FaGlobeAmericas, FaInfoCircle } from 'react-icons/fa';
 
 const NavArea = styled.div`
-  width: 150px;
+  min-width: 165px;
   height: 350px;
   position: sticky;
-  top: 45px;
-  font-size: 12px;
+  top: 60px;
+  font-size: 14px;
 
-  /* 너비가 640px 보다 좁은 경우 Nav를 숨김 처리 */
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 800px) {
     display: none;
   }
 `;
 
 const LeftSideBar = styled.div`
+  width: 100%;
   margin: 30px 0 8px 0;
 `;
 
@@ -23,15 +23,18 @@ const MainNavTitle = styled.ul`
   color: #62676b;
 
   > .home {
+    font-size: 13px;
     font-weight: 500;
     padding-left: 10px;
+    padding-bottom: 10px;
     &:hover {
       color: black;
     }
   }
 
   > .teams {
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 400;
     margin-top: 15px;
     padding-left: 10px;
 
@@ -57,19 +60,21 @@ const SubNavTitle = styled.ul`
   margin-top: 16px;
 
   > .public {
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 400;
     padding-left: 10px;
-    margin-bottom: 4px;
+    margin-bottom: 7px;
   }
 
   > .collectives {
-    font-size: 10px;
-    margin-top: 16px;
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 20px;
     padding-left: 10px;
 
     > .infoicon {
       vertical-align: middle;
-      margin-left: 51px;
+      margin-left: 48px;
     }
   }
 
@@ -81,6 +86,8 @@ const SubNavTitle = styled.ul`
     height: 30px;
     line-height: 30px;
     border-right: 3px solid #f48123;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
 
     > .globeicon {
       vertical-align: middle;
@@ -96,6 +103,7 @@ const SubNavTitle = styled.ul`
     padding-left: 25px;
     height: 30px;
     line-height: 30px;
+    margin-bottom: 3px;
     &:hover {
       color: black;
     }
