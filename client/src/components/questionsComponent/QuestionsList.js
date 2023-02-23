@@ -102,9 +102,9 @@ function QuestionsList({ list }) {
   return (
     <ListContainer>
       <ListInfo>
-        <div className="votes">{list.votes} votes</div>
-        <div className="answers">{list.answers} answers</div>
-        <div className="views">{list.views} views</div>
+        <div className="votes">0 votes</div>
+        <div className="answers">0 answers</div>
+        <div className="views">0 views</div>
       </ListInfo>
       <ListContent onClick={onClick}>
         <div className="contentTitle">{list.title}</div>

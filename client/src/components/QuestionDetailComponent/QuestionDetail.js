@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Aside from '../Aside';
 import Answer from './Answer';
 import NewAnswer from './NewAnswer';
-// import Parser from 'html-react-parser';
+import Parser from 'html-react-parser';
+import { useConfirm } from 'material-ui-confirm';
+import useFetch from '../../hooks/useFetch';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -32,6 +33,7 @@ const MainBarHeader = styled.div`
     max-width: 600px;
     word-break: break-word;
     line-height: 1.35;
+    padding-left: 10px;
   }
 `;
 
@@ -56,6 +58,7 @@ const MainBarInfo = styled.div`
   padding-bottom: 8px;
   display: flex;
   flex-direction: row;
+  padding-left: 10px;
 `;
 
 const SpanContainer = styled.div`
@@ -78,11 +81,11 @@ const ContentContainer = styled.div`
 const PostContainer = styled.div`
   width: 100%;
   padding-right: 18px;
-  p {
+  .content {
     font-size: 16px;
-    margin-bottom: 16.5px;
     word-break: break-word;
     line-height: 1.35;
+    padding-left: 10px;
   }
 `;
 
@@ -109,6 +112,7 @@ const UserInfo = styled.div`
     font-size: 14px;
     font-weight: 500;
     color: hsl(206, 100%, 52%);
+    margin-bottom: 0;
   }
 `;
 
@@ -116,49 +120,64 @@ const ButtonContainer = styled.div`
   width: 400;
   display: flex;
   align-items: flex-end;
+  padding-bottom: 10px;
 `;
 
 const EditButton = styled.button`
-  width: 70px;
-  height: 37.78px;
-  margin-right: 5px;
-  background-color: #0a95ff;
-  color: white;
+  width: 50px;
+  height: 20px;
+  background-color: transparent;
+  color: #0a95ff;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: hsl(206, 100%, 40%);
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
 
 const DeleteButton = styled.button`
-  width: 80px;
-  height: 37.78px;
-  background-color: #e2464b;
-  color: white;
+  width: 70px;
+  height: 20px;
+  background-color: transparent;
+  color: #ff8a3d;
   border: none;
-  border-radius: 5px;
   font-weight: bold;
   &:hover {
-    background: #ab252a;
+    opacity: 0.7;
     transition: 0.2s;
   }
 `;
 
+const CommentTitle = styled.h2`
+  font-size: 20px;
+  flex: 1 auto;
+  margin-right: 8px;
+  padding-top: 15px;
+  font-weight: 500;
+  max-width: 600px;
+  word-break: break-word;
+  line-height: 1.35;
+`;
+
 function QuestionDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const confirm = useConfirm();
 
-  const [data, setData] = useState([]);
+  const data = useFetch(`http://localhost:3001/questions/${id}`);
+  const comments = useFetch(`http://localhost:3001/comments?postid=${id}`);
+  const blankComment = comments.content !== '';
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/questions/${id}`).then((response) => {
-      setData(response.data);
-    });
-  }, []);
-
-  console.log(data);
+  const onDelete = () => {
+    confirm({ description: 'This will permanently delete question.' })
+      .then(() => {
+        axios.delete(`http://localhost:3001/questions/${id}`).then(() => {
+          navigate('/');
+        });
+      })
+      .catch(() => {});
+  };
 
   return (
     <MainArea>
@@ -185,11 +204,11 @@ function QuestionDetail() {
         </MainBarInfo>
         <ContentContainer>
           <PostContainer>
-            <p>{data.content}</p>
+            <div className="content">{Parser(data.content)}</div>
             <UserInfoContainer>
               <ButtonContainer>
                 <EditButton>Edit</EditButton>
-                <DeleteButton>Delete</DeleteButton>
+                <DeleteButton onClick={onDelete}>Delete</DeleteButton>
               </ButtonContainer>
               <UserInfo>
                 <div className="userInfoTime">
@@ -199,7 +218,17 @@ function QuestionDetail() {
                 <div className="userId">{data.username}</div>
               </UserInfo>
             </UserInfoContainer>
-            <Answer />
+            <CommentTitle>
+              {comments.length === 1
+                ? '1 Answer'
+                : comments.length > 1
+                ? `${comments.length} Answers`
+                : null}
+            </CommentTitle>
+            {blankComment &&
+              comments.map((comment) => {
+                return <Answer comment={comment} key={comment.id} />;
+              })}
             <NewAnswer />
           </PostContainer>
           <Aside />

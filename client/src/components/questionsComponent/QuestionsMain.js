@@ -108,13 +108,13 @@ const QuestionsContainer = styled.ul`
 const PagenationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 20px 0;
+  margin: 70px 0 20px 0;
 `;
 
 const PerPage = styled.div`
   > button {
     width: 27px;
-    height: 22px;
+    height: 23px;
     font-size: 12px;
     margin-left: 3px;
   }
@@ -145,7 +145,7 @@ const PerPage = styled.div`
   }
 `;
 
-function Main() {
+function QuestionsMain() {
   const [questionData, setQuestionData] = useState([]);
   // 페이지 당 표시할 데이터 개수 상태
   const [limit, setLimit] = useState(15);
@@ -165,6 +165,11 @@ function Main() {
   useEffect(() => {
     getQuestionData();
   }, []);
+
+  // 페이지네이션 페이지 이동 이벤트 핸들러
+  const handlePageChange = (e, page) => {
+    setPage(page);
+  };
 
   // 질문글이 상단에 추가되도록 하기 위한 임시 변수(실서버 연결 시 사용 안 할 예정)
   const reverseQuestionData = questionData.slice().reverse();
@@ -194,14 +199,14 @@ function Main() {
         </MainBarFilter>
 
         <QuestionsContainer>
-          {reverseQuestionData.slice(offset, offset + limit).map((value, index) => {
-            return <QuestionsList list={value} key={index} setPage={setPage} />;
+          {reverseQuestionData.slice(offset, offset + limit).map((value) => {
+            return <QuestionsList list={value} key={value.id} setPage={setPage} />;
           })}
         </QuestionsContainer>
         <PagenationWrapper>
           <Pagination
             count={numAllPages}
-            onClick={(e) => setPage(e.target.outerText)}
+            onChange={handlePageChange}
             variant="outlined"
             shape="rounded"
             boundaryCount={1}
@@ -231,4 +236,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default QuestionsMain;

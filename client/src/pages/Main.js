@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
-import Main from '../components/questionComponent/Main';
+import QuestionsMain from '../components/QuestionsComponent/QuestionsMain';
 import Footer from '../components/Footer';
 
 const Container = styled.div`
@@ -11,17 +11,17 @@ const Container = styled.div`
   background-color: white;
 `;
 
-function Questions() {
+function Main() {
   return (
     <div>
       <Header />
       <Container>
         <Nav />
-        <Main />
+        <QuestionsMain />
       </Container>
       <Footer />
     </div>
   );
 }
 
-export default Questions;
+export default Main;
