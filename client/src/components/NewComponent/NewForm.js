@@ -107,6 +107,7 @@ function NewForm() {
   });
   const titleLength = content.title.length;
   const blankContent = Parser(content.content).length !== 0;
+  const member_id = localStorage.getItem('member_id');
 
   const handleContent = useCallback((e) => {
     const { name, value } = e.target;
@@ -130,7 +131,7 @@ function NewForm() {
       .post('http://localhost:3001/questions', {
         title: content.title,
         content: content.content,
-        member_id: 'kimcoding',
+        member_id,
       })
       .then(() => {
         toast.success('Post Success!');
