@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Logo from '../util/Logo';
 import SearchIcon from '../util/SearchIcon';
 import profile from '../util/profile.png';
+// import { MdLogout } from 'react-icons/md';
+import { RiLogoutBoxRFill } from 'react-icons/ri';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -242,16 +244,7 @@ function Header() {
               </li>
               <li>
                 <div>
-                  <svg
-                    aria-hidden="true"
-                    className="svg-icon iconStackExchange"
-                    width="18"
-                    height="16"
-                    viewBox="0 0 18 16">
-                    <path
-                      fill="hsl(210,8%,35%)"
-                      d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>
-                  </svg>
+                  <RiLogoutBoxRFill size={20} color={'hsl(210,8%,35%)'} />
                 </div>
               </li>
             </ol>
