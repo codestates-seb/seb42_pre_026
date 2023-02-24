@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -49,13 +49,20 @@ function NewAnswer() {
   const [comment, setComment] = useState({ comment: '' });
   const blankComment = comment.length;
   const { id } = useParams();
+  const navigate = useNavigate();
+  const isLogin = localStorage.getItem('accessToken');
+  const member_id = localStorage.getItem('member_id');
 
   const handleSubmit = (e) => {
+    if (!isLogin) {
+      navigate('/login');
+      return;
+    }
     e.preventDefault();
     axios
       .post('http://localhost:3001/comments', {
         postid: id,
-        member_id: 'kimcoding',
+        member_id,
         comment,
       })
       .then(() => {
