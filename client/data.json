@@ -1,6 +1,4 @@
 {
-  "signup": [],
-  "login": [],
   "questions": [
     {
       "id": 1,
@@ -8,8 +6,8 @@
       "views": 2,
       "created": "2023-02-23 21:30",
       "modified": "2023-02-23 21:30",
-      "title": "테스트1 수정",
-      "content": "<p>I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that? 수정</p>",
+      "title": "테스트1",
+      "content": "I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that?",
       "comments": [
         {
           "id": 1,
@@ -24,8 +22,8 @@
       "member_id": "kimk",
       "views": 1,
       "created": "2023-02-23 21:30",
-      "title": "테스트2",
-      "content": "I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that?"
+      "title": "테스트2 수정",
+      "content": "I have 6 textboxes. How to calculate the total of value entered by users. Users need to enter quantity in each textbox and then it willcalculate with price that already display or show in label (quantity*price). The result will be showed in textbox readonly. Is it I need to use JavaScript? Can it be done by that? 수정"
     },
     {
       "id": 3,
@@ -33,8 +31,8 @@
       "views": 0,
       "created": "2023-02-23 21:30",
       "modified": "2023-02-23 21:30",
-      "title": "parser 테스트 수정",
-      "content": "parser 테스트parser 테스트parser 테스트parser 테스트 수정",
+      "title": "parser 테스트 수정 제목 수정",
+      "content": "<p>parser 테스트parser 테스트parser 테스트parser 테스트 수정 수정</p>",
       "comments": [
         {
           "id": 3,
@@ -49,30 +47,6 @@
           "comment": "질문 3의 코멘트 2"
         }
       ]
-    },
-    {
-      "title": "fwaefewfw",
-      "content": "<p>fwaefawefawefaewfewfawefew</p>",
-      "member_id": "kimcoding",
-      "id": 4
-    },
-    {
-      "title": "faef",
-      "content": "<p>fawefaewfwefefewfewfefaef</p>",
-      "member_id": "kimcoding",
-      "id": 5
-    },
-    {
-      "title": "faefaesfesfesf",
-      "content": "<p>fafesfesfeasfsefaesfesafesa</p>",
-      "member_id": "kimcoding",
-      "id": 6
-    },
-    {
-      "title": "faeasfesfaes",
-      "content": "<p>fsaefesafesafesafesf</p>",
-      "member_id": "kimcoding",
-      "id": 7
     }
   ],
   "comments": [
@@ -80,28 +54,22 @@
       "id": 1,
       "postid": 1,
       "member_id": "kimk",
-      "comment": "질문 1의 코멘트 1",
+      "comment": "질문 1의 코멘트 1 수정",
       "created": "2023-02-23 21:30"
     },
     {
       "id": 3,
       "postid": 3,
       "member_id": "kimk",
-      "comment": "<p>질문 3의 코멘트 1 다시 수정 테스트!!</p>",
+      "comment": "<p>질문 3의 코멘트 1 수정</p>",
       "created": "2023-02-23 21:30"
     },
     {
       "id": 4,
       "postid": 3,
       "member_id": "kimk",
-      "comment": "질문 3의 코멘트 2",
+      "comment": "<p>질문 3의 코멘트 2</p>",
       "created": "2023-02-23 21:30"
-    },
-    {
-      "postid": "3",
-      "member_id": "kimcoding",
-      "comment": "<p>ㄹㅁㄴㄹㅇㄴㅁㄹ</p>",
-      "id": 5
     }
   ]
 }

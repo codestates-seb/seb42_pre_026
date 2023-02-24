@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "email": "test1@naver.com",
+      "password": "$2a$10$jtRDBOqwphRlTLgOzimZWumfDgSh3f3mbPXNXtQNMsiCPBuky2AVK",
+      "name": "테스트",
+      "id": 1
+    }
+  ]
+}
