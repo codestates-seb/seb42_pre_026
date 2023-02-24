@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Parser from 'html-react-parser';
 import axios from 'axios';
 import { useConfirm } from 'material-ui-confirm';
-import CommentEditModal from '../../util/CommentEditModal';
+import CommentEditModal from './CommentEditModal';
 
 const AnswerContainer = styled.div`
   padding-top: 15px;
