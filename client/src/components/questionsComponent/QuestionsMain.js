@@ -177,13 +177,14 @@ function QuestionsMain() {
 
   // 질문글이 상단에 추가되도록 하기 위한 임시 변수(실서버 연결 시 사용 안 할 예정)
   const reverseQuestionData = questionData.slice().reverse();
+  const isLogin = localStorage.getItem('accessToken');
 
   return (
     <MainArea>
       <MainBar>
         <MainBarHeader>
           <div className="mainBarHeaderTitle">All Questions</div>
-          <Link to="/new">
+          <Link to={isLogin ? '/new' : '/login'}>
             <CreateButton className="askQuestion">Ask Question</CreateButton>
           </Link>
         </MainBarHeader>
