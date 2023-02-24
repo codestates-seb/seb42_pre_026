@@ -8,6 +8,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ConfirmProvider } from 'material-ui-confirm';
 import 'react-toastify/dist/ReactToastify.min.css';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 const GlobalStyle = createGlobalStyle`
 * {
