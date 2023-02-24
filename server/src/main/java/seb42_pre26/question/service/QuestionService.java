@@ -26,7 +26,6 @@ public class QuestionService {
 
     private QuestionRepository questionRepository;
     private MemberRepository memberRepository;
-    private CommentRepository commentRepository;
     private MemberService memberService;
 
 
@@ -38,6 +37,11 @@ public class QuestionService {
 
         return questionRepository.save(question);
     }
+
+    private Member getMemberFromId(long memberId) {
+        return memberRepository.findById(memberId).get();
+    }
+
     // READ
     public Question readQuestion(long questionId){
         Question question = existQuestion(questionId);
@@ -48,19 +52,19 @@ public class QuestionService {
 
     // UPDATE
     public Question updateQuestion(long questionId, Question question){
-        Question verificationQuestion = verifyWriter(question.getQuestionId());
+        Question verifyQuestion = verifyWriter(questionId);
 
-        verificationQuestion.setTitle(question.getTitle());
-        verificationQuestion.setContent(question.getContent());
+        verifyQuestion.setTitle(question.getTitle());
+        verifyQuestion.setContent(question.getContent());
 
-        return questionRepository.save(verificationQuestion);
+        return questionRepository.save(verifyQuestion);
     }
 
     // DELETE
     public void deleteQuestion(long questionId){
-        Question verificationQuestion = verifyWriter(questionId);
+        Question verifyQuestion = verifyWriter(questionId);
 
-        questionRepository.deleteById(verificationQuestion.getQuestionId());
+        questionRepository.deleteById(verifyQuestion.getQuestionId());
     }
 
     // PAGINATION
@@ -68,10 +72,6 @@ public class QuestionService {
         return questionRepository.findAll(
                 PageRequest.of(page, size, Sort.by("questionId").descending())
         );
-    }
-    // ID로 member 객체 찾기
-    private Member getMemberFromId(long memberId) {
-        return memberRepository.findById(memberId).get();
     }
 
     // 존재하는 게시글인지 확인하기

@@ -9,8 +9,10 @@ import seb42_pre26.comment.dto.PostCommentDto;
 import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.mapper.CommentMapper;
 import seb42_pre26.comment.service.CommentService;
+import seb42_pre26.exception.BusinessException;
 import seb42_pre26.question.entity.Question;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,50 +27,52 @@ public class CommentController {
         this.mapper = mapper;
     }
 
-    @PutMapping
-    public ResponseEntity postComment(@RequestBody PostCommentDto postCommentDto) {
-
+    @PostMapping
+    public ResponseEntity postComment(@Valid @RequestBody PostCommentDto postCommentDto) {
         //1. 서비스 사용하기
-
         //2. dto 파라미터로 받기
-
         //3. mapper 이용하기
-        Comment comment = mapper.postCommentDtoToComment(postCommentDto);
-        //TEST
-        Question tmp = new Question();
-        tmp.setQuestionId(postCommentDto.getQuestionId());
-        comment.setQuestion(tmp);
-        Comment response = commentService.createComment(comment);
-
         //4. ResponseEntity로 return 하기
 
-        return new ResponseEntity(mapper.commentToCommentResponseDto(response), HttpStatus.CREATED);
+        Comment comment = commentService.createComment(mapper.postCommentDtoToComment(postCommentDto));
+        CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
+
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{comment-id}")
-    public ResponseEntity getComment(@PathVariable("comment-id") long commentId) {
-
-        Comment comment = commentService.findComment(commentId);
-
-        return new ResponseEntity(mapper.commentToCommentResponseDto(comment), HttpStatus.OK);
+    public ResponseEntity getComment(@PathVariable("comment-id") long commentId) throws BusinessException {
+        try {
+            Comment comment = commentService.readComment(commentId);
+            CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }catch (BusinessException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PatchMapping("/{comment-id}")
     public ResponseEntity patchComment(@PathVariable("comment-id") long commentId,
-                                       @RequestBody PatchCommentDto patchCommentDto) {
+                                       @Valid @RequestBody PatchCommentDto patchCommentDto) throws BusinessException {
+        try {
+            Comment comment = commentService.updateComment(commentId, mapper.patchCommentDtoToComment(patchCommentDto));
+            CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }catch (BusinessException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
 
-        Comment comment = mapper.patchCommentDtoToComment(patchCommentDto);
-        Comment response = commentService.updateComment(comment);
-
-        return new ResponseEntity(mapper.commentToCommentResponseDto(response), HttpStatus.OK);
     }
 
     @DeleteMapping("/{comment-id}")
-    public ResponseEntity deleteComment(@PathVariable("comment-id") long commentId) {
+    public ResponseEntity deleteComment(@PathVariable("comment-id") long commentId) throws BusinessException {
+        try {
+            commentService.deleteComment(commentId);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }catch (BusinessException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
 
-        commentService.deleteComment(commentId);
-
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     /*@GetMapping

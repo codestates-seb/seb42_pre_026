@@ -1,6 +1,8 @@
 package seb42_pre26.comment.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
+import seb42_pre26.vote.Vote;
 import seb42_pre26.question.entity.Question;
 import seb42_pre26.member.entity.Member;
 
@@ -19,8 +21,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
-    @NonNull
+
+    @Column(columnDefinition = "text", nullable = false)
     private String content;
+
     private int likeCount;
 
     @Column(nullable = true)
@@ -37,7 +41,7 @@ public class Comment {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @OneToMany(mappedBy = "comment")
-    private List<Vote> votes = new ArrayList<>();
+    //@OneToMany(mappedBy = "comment")
+    //private List<Vote> votes = new ArrayList<>();
 
 }

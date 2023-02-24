@@ -11,10 +11,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
-
-
+    @Mapping(source = "questionId", target = "question.questionId")
     Comment postCommentDtoToComment(PostCommentDto postCommentDto);
     Comment patchCommentDtoToComment(PatchCommentDto patchCommentDto);
+
+    @Mapping(source = "question.questionId", target = "questionId")
     CommentResponseDto commentToCommentResponseDto(Comment comment);
     List<CommentResponseDto> commentsToCommentResponseDtos(List<Comment> comments);
 }

@@ -43,8 +43,7 @@ public class QuestionController {
             Question question = questionService.readQuestion(questionId);
             QuestionDto.Response response = questionMapper.questionToResponse(question);
             return new ResponseEntity(response, HttpStatus.OK);
-        }
-        catch (BusinessException e){
+        } catch (BusinessException e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
