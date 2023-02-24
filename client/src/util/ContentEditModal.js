@@ -182,7 +182,7 @@ const CommentEditModal = ({
         <EditModalButtonArea>
           <button
             className="editButton"
-            disabled={!(newContent.length !== 0)}
+            disabled={!(newContent.length !== 0 && newTitle.length !== 0)}
             onClick={() => {
               onClickSubmitButton(contentId);
               closeEditModalHandler();
