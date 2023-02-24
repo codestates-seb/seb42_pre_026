@@ -124,6 +124,7 @@ function LoginForm() {
       .then((res) => {
         toast.success('Login Success!');
         localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('member_id', res.data.user.name);
       })
       .then(() => {
         navigate('/');
