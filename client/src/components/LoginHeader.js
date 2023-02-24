@@ -1,10 +1,12 @@
+import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Logo from '../util/Logo';
 import SearchIcon from '../util/SearchIcon';
 import profile from '../util/profile.png';
-// import { MdLogout } from 'react-icons/md';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
+// import { toast } from 'react-toastify';
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -176,7 +178,28 @@ const ProfileBox = styled.div`
   }
 `;
 
-function Header() {
+const Logout = styled.button`
+  border-style: none;
+  background-color: transparent;
+`;
+
+function LoginHeader() {
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    // axios.get('/api/users/logout').then((res) => {
+    //   if (res.data.success) {
+    //     navigate('/');
+    //   } else {
+    //     toast.err('Logout Failed');
+    //   }
+    // });
+    localStorage.clear();
+    navigate('/');
+    location.reload();
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -244,7 +267,9 @@ function Header() {
               </li>
               <li>
                 <div>
-                  <RiLogoutBoxRFill size={20} color={'hsl(210,8%,35%)'} />
+                  <Logout onClick={onLogout}>
+                    <RiLogoutBoxRFill size={20} color={'hsl(210,8%,35%)'} />
+                  </Logout>
                 </div>
               </li>
             </ol>
@@ -255,4 +280,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default LoginHeader;
