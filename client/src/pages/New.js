@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import NewInfo from '../components/NewComponent/NewInfo';
 import NewForm from '../components/NewComponent/NewForm';
-import Header from '../components/Header';
+import LoginHeader from '../components/LoginHeader';
 import Footer from '../components/Footer';
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Container = styled.div`
 function New() {
   return (
     <>
-      <Header />
+      <LoginHeader />
       <Container>
         <NewInfo />
         <NewForm />

@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Nav from '../components/Nav';
 import QuestionsMain from '../components/QuestionsComponent/QuestionsMain';
 import Footer from '../components/Footer';
+import LoginHeader from '../components/LoginHeader';
 
 const Container = styled.div`
   display: flex;
@@ -12,9 +13,10 @@ const Container = styled.div`
 `;
 
 function Main() {
+  const isLogin = localStorage.getItem('accessToken');
   return (
     <div>
-      <Header />
+      {isLogin ? <LoginHeader /> : <Header />}
       <Container>
         <Nav />
         <QuestionsMain />
