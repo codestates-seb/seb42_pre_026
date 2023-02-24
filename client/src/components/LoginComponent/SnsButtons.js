@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
-import { GrGithub, GrFacebook } from 'react-icons/gr';
+// import { GrGithub, GrFacebook } from 'react-icons/gr';
+import { SiNaver } from 'react-icons/si';
+import { RiKakaoTalkFill } from 'react-icons/ri';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -39,13 +41,21 @@ function SnsButtons({ text }) {
           <FcGoogle className="icons" size={22} />
           {text} with Google
         </SnsButton>
-        <SnsButton bgColor={'#2b2f33'}>
+        {/* <SnsButton bgColor={'#2b2f33'}>
           <GrGithub className="icons" size={22} />
           {text} with GitHub
         </SnsButton>
         <SnsButton bgColor={'#4867aa'} hover={'#304986'}>
           <GrFacebook className="icons" size={22} />
           {text} with Facebook
+        </SnsButton> */}
+        <SnsButton color={'#3b1f06'} bgColor={'#f9e000'} hover={'#ead21e'}>
+          <RiKakaoTalkFill className="icons" size={26} />
+          {text} with Kakao
+        </SnsButton>
+        <SnsButton bgColor={'#2db400'} hover={'#28a000'}>
+          <SiNaver className="icons" size={22} />
+          {text} with Naver
         </SnsButton>
       </ButtonContainer>
     </>
