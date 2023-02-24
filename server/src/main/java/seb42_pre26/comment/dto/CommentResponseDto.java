@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommentResponseDto {
     private long commentId;
+    private long questionId;
     private String content;
     private int likeCount;
 }

@@ -1,8 +1,9 @@
-package seb42_pre26.comment.entity;
+package seb42_pre26.vote;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.question.entity.Question;
 import seb42_pre26.member.entity.Member;
 

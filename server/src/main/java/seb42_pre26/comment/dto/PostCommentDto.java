@@ -4,16 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
 public class PostCommentDto {
+
     private long commentId;
+
     private long questionId;
-    @NotNull
+
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
+
     private int likeCount;
+
     private LocalDateTime created;
+
     private LocalDateTime modified;
 }
