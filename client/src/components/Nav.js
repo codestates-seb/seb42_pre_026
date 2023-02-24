@@ -39,14 +39,14 @@ const MainNavTitle = styled.ul`
     padding-left: 10px;
 
     > .infoicon {
-      margin-left: 85px;
+      margin-left: 106px;
       vertical-align: middle;
     }
   }
 
   > .createfreedteam {
     font-weight: 500;
-    padding-left: 25px;
+    padding-left: 30px;
     height: 30px;
     line-height: 30px;
     &:hover {
@@ -74,7 +74,7 @@ const SubNavTitle = styled.ul`
 
     > .infoicon {
       vertical-align: middle;
-      margin-left: 48px;
+      margin-left: 70px;
     }
   }
 
@@ -100,7 +100,7 @@ const SubNavTitle = styled.ul`
   .companies,
   .explorecolectives {
     font-weight: 500;
-    padding-left: 25px;
+    padding-left: 30px;
     height: 30px;
     line-height: 30px;
     margin-bottom: 3px;
