@@ -49,6 +49,30 @@
           "comment": "질문 3의 코멘트 2"
         }
       ]
+    },
+    {
+      "title": "fwaefewfw",
+      "content": "<p>fwaefawefawefaewfewfawefew</p>",
+      "member_id": "kimcoding",
+      "id": 4
+    },
+    {
+      "title": "faef",
+      "content": "<p>fawefaewfwefefewfewfefaef</p>",
+      "member_id": "kimcoding",
+      "id": 5
+    },
+    {
+      "title": "faefaesfesfesf",
+      "content": "<p>fafesfesfeasfsefaesfesafesa</p>",
+      "member_id": "kimcoding",
+      "id": 6
+    },
+    {
+      "title": "faeasfesfaes",
+      "content": "<p>fsaefesafesafesafesf</p>",
+      "member_id": "kimcoding",
+      "id": 7
     }
   ],
   "comments": [
@@ -72,6 +96,12 @@
       "member_id": "kimk",
       "comment": "질문 3의 코멘트 2",
       "created": "2023-02-23 21:30"
+    },
+    {
+      "postid": "3",
+      "member_id": "kimcoding",
+      "comment": "<p>ㄹㅁㄴㄹㅇㄴㅁㄹ</p>",
+      "id": 5
     }
   ]
 }
