@@ -4,6 +4,7 @@ import Logo from '../util/Logo';
 import SearchIcon from '../util/SearchIcon';
 import profile from '../util/profile.png';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
+import { useConfirm } from 'material-ui-confirm';
 // import { toast } from 'react-toastify';
 // import axios from 'axios';
 // import { toast } from 'react-toastify';
@@ -185,6 +186,7 @@ const Logout = styled.button`
 
 function LoginHeader() {
   const navigate = useNavigate();
+  const confirm = useConfirm();
 
   const onLogout = () => {
     // axios.get('/api/users/logout').then((res) => {
@@ -194,10 +196,14 @@ function LoginHeader() {
     //     toast.err('Logout Failed');
     //   }
     // });
-    localStorage.clear();
-    navigate('/');
-    location.reload();
-    window.scrollTo(0, 0);
+    confirm({ title: 'Are you sure you want to log out?' })
+      .then(() => {
+        localStorage.clear();
+        navigate('/');
+        location.reload();
+        window.scrollTo(0, 0);
+      })
+      .catch(() => {});
   };
 
   return (

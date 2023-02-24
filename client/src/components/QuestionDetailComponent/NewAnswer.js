@@ -5,6 +5,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useConfirm } from 'material-ui-confirm';
 
 const NewAnswerContainer = styled.div`
   .ck-editor__top {
@@ -52,10 +53,15 @@ function NewAnswer() {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem('accessToken');
   const member_id = localStorage.getItem('member_id');
+  const confirm = useConfirm();
 
   const handleSubmit = (e) => {
     if (!isLogin) {
-      navigate('/login');
+      confirm({ title: 'Login required.' })
+        .then(() => {
+          navigate('/login');
+        })
+        .catch(() => {});
       return;
     }
     e.preventDefault();

@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import Aside from '../Aside';
 import QuestionsList from './QuestionsList';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Pagination, PaginationItem } from '@mui/material';
 import axios from 'axios';
+import { useConfirm } from 'material-ui-confirm';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -178,15 +179,29 @@ function QuestionsMain() {
   // 질문글이 상단에 추가되도록 하기 위한 임시 변수(실서버 연결 시 사용 안 할 예정)
   const reverseQuestionData = questionData.slice().reverse();
   const isLogin = localStorage.getItem('accessToken');
+  const navigate = useNavigate();
+  const confirm = useConfirm();
+
+  const buttonClick = () => {
+    if (isLogin) {
+      navigate('/new');
+    } else {
+      confirm({ title: 'Login required.' })
+        .then(() => {
+          navigate('/login');
+        })
+        .catch(() => {});
+    }
+  };
 
   return (
     <MainArea>
       <MainBar>
         <MainBarHeader>
           <div className="mainBarHeaderTitle">All Questions</div>
-          <Link to={isLogin ? '/new' : '/login'}>
-            <CreateButton className="askQuestion">Ask Question</CreateButton>
-          </Link>
+          <CreateButton className="askQuestion" onClick={buttonClick}>
+            Ask Question
+          </CreateButton>
         </MainBarHeader>
 
         <MainBarFilter>

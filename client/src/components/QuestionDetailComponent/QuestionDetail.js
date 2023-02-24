@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Aside from '../Aside';
@@ -8,7 +8,7 @@ import NewAnswer from './NewAnswer';
 import Parser from 'html-react-parser';
 import { useConfirm } from 'material-ui-confirm';
 import useFetch from '../../hooks/useFetch';
-import ContentEditModal from '../../util/ContentEditModal';
+import ContentEditModal from './ContentEditModal';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -206,14 +206,26 @@ function QuestionDetail() {
     width: 100%;`;
   };
 
+  const buttonClick = () => {
+    if (isLogin) {
+      navigate('/new');
+    } else {
+      confirm({ title: 'Login required.' })
+        .then(() => {
+          navigate('/login');
+        })
+        .catch(() => {});
+    }
+  };
+
   return (
     <MainArea>
       <MainBar>
         <MainBarHeader>
           <h1 className="mainBarHeaderTitle">{data.title}</h1>
-          <Link to={isLogin ? '/new' : '/login'}>
-            <CreateButton className="askQuestion">Ask Question</CreateButton>
-          </Link>
+          <CreateButton className="askQuestion" onClick={buttonClick}>
+            Ask Question
+          </CreateButton>
         </MainBarHeader>
         <MainBarInfo>
           <SpanContainer>
