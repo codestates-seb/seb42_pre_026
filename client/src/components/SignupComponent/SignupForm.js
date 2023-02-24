@@ -141,7 +141,7 @@ function SignupForm() {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (emailValid) {
       emailRef.current.focus();
@@ -152,8 +152,8 @@ function SignupForm() {
       return;
     }
     //* api 주소 받아서 변경할 것
-    axios
-      .post('http://localhost:3001/signup', {
+    await axios
+      .post('http://localhost:8000/register', {
         name,
         email,
         password,

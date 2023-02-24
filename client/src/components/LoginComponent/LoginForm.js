@@ -104,7 +104,7 @@ function LoginForm() {
     setPassword(e.target.value);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email.length < 1) {
@@ -116,14 +116,14 @@ function LoginForm() {
       return;
     }
     //* api 주소 받아서 변경할 것
-    axios
-      .post('http://localhost:3001/login', {
+    await axios
+      .post('http://localhost:8000/login', {
         email,
         password,
       })
-      .then(() => {
+      .then((res) => {
         toast.success('Login Success!');
-        //* data 받아서 localstorage 유저 저장
+        localStorage.setItem('accessToken', res.data.accessToken);
       })
       .then(() => {
         navigate('/');
