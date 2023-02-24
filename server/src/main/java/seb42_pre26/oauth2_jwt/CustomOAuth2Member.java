@@ -23,5 +23,9 @@ public class CustomOAuth2Member extends DefaultOAuth2User {
         this.email = email;
         this.role = role;
     }
+
+    public CustomOAuth2Member(Set<SimpleGrantedAuthority> singleton, Map<String, Object> attributes, String nameAttributeKey, String email, seb42_pre26.member.Role role) {
+        super(singleton, attributes, nameAttributeKey);
+    }
 }
 

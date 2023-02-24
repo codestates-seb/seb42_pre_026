@@ -5,7 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.member.Role;
 import seb42_pre26.member.SocialType;
-import seb42_pre26.post.entity.Post;
+
+import seb42_pre26.question.entity.Question;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,29 +23,52 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private long memberId;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(length = 13, nullable = false, unique = true)
     private String phone;
-    @Column(nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
     private String gender;
     private int age;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<Post> posts = new ArrayList<>();
+    private List<Question> posts = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime created = LocalDateTime.now();
 
     @Column(nullable = true, name = "MODIFIED")
     private LocalDateTime modified = LocalDateTime.now();
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 20, nullable = false)
+    private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+
+    public enum MemberStatus {
+
+        MEMBER_ACTIVE("활동중"),
+        MEMBER_SLEEP("휴면 상태"),
+        MEMBER_QUIT("탈퇴 회원");
+
+        @Getter
+        private String status;
+
+        MemberStatus(String status) {
+            this.status = status;
+        }
+
+    }
 
 
     // security
@@ -59,8 +83,10 @@ public class Member {
     private String refreshToken;
 
 
-    public void authorizeMember() {
-        this.role = Role.MEMBER;
+    public void authorizeUser() {
+        this.role = Role.USER;
+        Member member = new Member();
+        member.authorizeUser();
     }
 
 
