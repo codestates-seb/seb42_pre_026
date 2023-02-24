@@ -110,6 +110,7 @@ const UserInfo = styled.div`
   background-color: #e1ecf4;
   max-width: 200px;
   text-align: left;
+  margin-left: auto;
   > .userInfoTime {
     margin: 1px 0 4px 0;
     font-size: 12px;
@@ -180,6 +181,9 @@ function QuestionDetail() {
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
 
+  const isLogin = localStorage.getItem('accessToken');
+  const isPost = localStorage.getItem('member_id') === data.member_id;
+
   const onDelete = () => {
     confirm({ description: 'This will permanently delete question.' })
       .then(() => {
@@ -207,7 +211,7 @@ function QuestionDetail() {
       <MainBar>
         <MainBarHeader>
           <h1 className="mainBarHeaderTitle">{data.title}</h1>
-          <Link to="/new">
+          <Link to={isLogin ? '/new' : '/login'}>
             <CreateButton className="askQuestion">Ask Question</CreateButton>
           </Link>
         </MainBarHeader>
@@ -229,20 +233,23 @@ function QuestionDetail() {
           <PostContainer>
             <div className="content">{Parser(data.content)}</div>
             <UserInfoContainer>
-              <ButtonContainer>
-                <EditButton onClick={openEditModalHandler}>Edit</EditButton>
-                {editModalOpen ? (
-                  <ContentEditModal
-                    newTitle={newTitle}
-                    setNewTitle={setNewTitle}
-                    newContent={newContent}
-                    setNewContent={setNewContent}
-                    contentId={data.id}
-                    setEditModalOpen={setEditModalOpen}
-                  />
-                ) : null}
-                <DeleteButton onClick={onDelete}>Delete</DeleteButton>
-              </ButtonContainer>
+              {isPost ? (
+                <ButtonContainer>
+                  <EditButton onClick={openEditModalHandler}>Edit</EditButton>
+                  {editModalOpen ? (
+                    <ContentEditModal
+                      newTitle={newTitle}
+                      setNewTitle={setNewTitle}
+                      newContent={newContent}
+                      setNewContent={setNewContent}
+                      contentId={data.id}
+                      setEditModalOpen={setEditModalOpen}
+                    />
+                  ) : null}
+                  <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+                </ButtonContainer>
+              ) : null}
+
               <UserInfo>
                 <div className="userInfoTime">
                   <span>asked </span>

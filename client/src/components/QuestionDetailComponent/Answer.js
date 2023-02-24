@@ -30,6 +30,7 @@ const UserInfo = styled.div`
   border-radius: 3px;
   text-align: left;
   align-items: flex-end;
+  margin-left: auto;
   > .userInfoTime {
     margin: 1px 0 4px 0;
     font-size: 12px;
@@ -80,6 +81,7 @@ function Answer({ comment }) {
   const confirm = useConfirm();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newComment, setNewComment] = useState('');
+  const isPost = localStorage.getItem('member_id') === comment.member_id;
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete answer.' })
@@ -109,18 +111,21 @@ function Answer({ comment }) {
     <AnswerContainer>
       <div className="comment">{Parser(comment.comment)}</div>
       <UserInfoContainer>
-        <ButtonContainer>
-          <EditButton onClick={openEditModalHandler}>Edit</EditButton>
-          {editModalOpen ? (
-            <CommentEditModal
-              newComment={newComment}
-              setNewComment={setNewComment}
-              commentId={comment.id}
-              setEditModalOpen={setEditModalOpen}
-            />
-          ) : null}
-          <DeleteButton onClick={onDelete}>Delete</DeleteButton>
-        </ButtonContainer>
+        {isPost ? (
+          <ButtonContainer>
+            <EditButton onClick={openEditModalHandler}>Edit</EditButton>
+            {editModalOpen ? (
+              <CommentEditModal
+                newComment={newComment}
+                setNewComment={setNewComment}
+                commentId={comment.id}
+                setEditModalOpen={setEditModalOpen}
+              />
+            ) : null}
+            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+          </ButtonContainer>
+        ) : null}
+
         <UserInfo>
           <div className="userInfoTime">
             <span>answered </span>
