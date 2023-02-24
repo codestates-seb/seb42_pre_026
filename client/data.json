@@ -1,8 +1,10 @@
 {
+  "signup": [],
+  "login": [],
   "questions": [
     {
       "id": 1,
-      "member_id": "kimk",
+      "member_id": "테스트",
       "views": 2,
       "created": "2023-02-23 21:30",
       "modified": "2023-02-23 21:30",
@@ -37,7 +39,7 @@
         {
           "id": 3,
           "postid": 3,
-          "member_id": "kimk",
+          "member_id": "테스트",
           "comment": "<p>질문 3의 코멘트 1 다시 수정 테스트</p>"
         },
         {
@@ -67,9 +69,21 @@
     {
       "id": 4,
       "postid": 3,
-      "member_id": "kimk",
+      "member_id": "테스트",
       "comment": "<p>질문 3의 코멘트 2</p>",
       "created": "2023-02-23 21:30"
+    },
+    {
+      "postid": "1",
+      "member_id": "kimcoding",
+      "comment": "<p>테스트 계정으로 댓글 달기</p>",
+      "id": 5
+    },
+    {
+      "postid": "1",
+      "member_id": "테스트",
+      "comment": "<p>테스트 계정으로 댓글 달기22</p>",
+      "id": 6
     }
   ]
 }
