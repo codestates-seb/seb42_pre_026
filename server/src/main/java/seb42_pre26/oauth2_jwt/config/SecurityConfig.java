@@ -36,7 +36,7 @@ public class SecurityConfig {
     private final ObjectMapper objectMapper;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
-    private final CustomOAuth2MemberService customOAuth2UserService;
+    private final CustomOAuth2MemberService customOAuth2MemberService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -64,7 +64,7 @@ public class SecurityConfig {
                 .oauth2Login()
                 .successHandler(oAuth2LoginSuccessHandler)
                 .failureHandler(oAuth2LoginFailureHandler)
-                .userInfoEndpoint().userService(customOAuth2UserService);
+                .userInfoEndpoint().userService(customOAuth2MemberService);
 
 
         http.addFilterAfter(customJsonUsernamePasswordAuthenticationFilter(), LogoutFilter.class);
