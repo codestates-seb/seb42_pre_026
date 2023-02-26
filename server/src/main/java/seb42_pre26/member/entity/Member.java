@@ -1,107 +1,54 @@
 package seb42_pre26.member.entity;
 
-import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import seb42_pre26.comment.entity.Comment;
-import seb42_pre26.member.Role;
-import seb42_pre26.member.SocialType;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import seb42_pre26.audit.Auditable;
+import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.question.entity.Question;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@Setter
 @Entity
-@Builder
-@Table(name = "MEMBER")
-@AllArgsConstructor
-public class Member {
+@Setter
+@Getter
+@NoArgsConstructor
+
+public class Member extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private long memberId;
-    @Column(nullable = false, unique = true)
+    private Long memberId;
+
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
-    @Column(nullable = false)
-    private String name;
-    @Column(length = 13, nullable = false, unique = true)
-    private String phone;
+
+    // 추가
     @Column(length = 100, nullable = false)
     private String password;
-    private String gender;
-    private int age;
+
+    @Column(length = 100, nullable = false)
+    private String name;
+
+    @Column(length = 13, nullable = false, unique = true)
+    private String phone;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Question> comments = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Comment> comment = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
-    private List<Comment> comments = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member")
-    private List<Question> posts = new ArrayList<>();
-
-    @Column(nullable = false)
-    private LocalDateTime created = LocalDateTime.now();
-
-    @Column(nullable = true, name = "MODIFIED")
-    private LocalDateTime modified = LocalDateTime.now();
-
-    @Enumerated(value = EnumType.STRING)
-    @Column(length = 20, nullable = false)
-    private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
-
-    public enum MemberStatus {
-
-        MEMBER_ACTIVE("활동중"),
-        MEMBER_SLEEP("휴면 상태"),
-        MEMBER_QUIT("탈퇴 회원");
-
-        @Getter
-        private String status;
-
-        MemberStatus(String status) {
-            this.status = status;
-        }
-
+    public Member(String email, String name) {
+        this.email = email;
+        this.name = name;
     }
 
-
-    // security
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @Enumerated(EnumType.STRING)
-    private SocialType socialType;
-
-    private String socialId;
-
-    private String refreshToken;
-
-
-    public void authorizeUser() {
-        this.role = Role.USER;
-        Member member = new Member();
-        member.authorizeUser();
-    }
-
-
-    public void passwordEncode(PasswordEncoder passwordEncoder) {
-        this.password = passwordEncoder.encode(this.password);
-    }
-
-    public void updateName(String updateName) {this.name = updateName; }
-    public void updateAge(int updateAge) {this.age = updateAge; }
-    public void updatePassword(String updatePassword, PasswordEncoder passwordEncoder){
-        this.password = passwordEncoder.encode(updatePassword);
-    }
-
-    public void updateRefreshToken(String updateRefreshToken) {
-        this.refreshToken = updateRefreshToken;
-    }
 }
-

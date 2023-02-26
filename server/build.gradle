@@ -31,6 +31,7 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson'
 
+
 	////    JWT
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
