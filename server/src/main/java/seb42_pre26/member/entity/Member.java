@@ -9,6 +9,8 @@ import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.question.entity.Question;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,12 @@ public class Member extends Auditable {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> comments = new ArrayList<>();
+
+    @Column(nullable = true)
+    private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+
+    @Column(nullable = true, name = "MODIFIED")
+    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

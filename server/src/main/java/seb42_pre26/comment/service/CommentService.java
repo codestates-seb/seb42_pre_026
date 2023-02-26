@@ -32,10 +32,9 @@ public class CommentService {
     public Comment createComment(Comment comment) {
         findExistComment(comment.getCommentId());
 
-        //Todo: 멤버 ID 담아서 저장하기
-        // long memberId = memberService.getLoginMember().getMemberId();
-        // Member member = getMemberFromId(memberId);
-
+        long memberId = memberService.getLoginMember().getMemberId();
+        Member member = getMemberFromId(memberId);
+        comment.setMember(member);
         return commentRepository.save(comment);
     }
 
@@ -93,8 +92,7 @@ public class CommentService {
 
     private Comment verifyWriter(long commentId){
         //Test
-        long memberId = 1;
-
+        long memberId = memberService.getLoginMember().getMemberId();
         Comment comment = verifyComment(commentId);
         if (comment.getMember().getMemberId() != memberId){
             throw new BusinessException(ExceptionCode.NOT_AUTHORITY);
