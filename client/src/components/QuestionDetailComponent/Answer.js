@@ -129,7 +129,7 @@ function Answer({ comment }) {
         <UserInfo>
           <div className="userInfoTime">
             <span>answered </span>
-            <span>{comment.created}</span>
+            <span>{comment.created && comment.created.slice(2)}</span>
           </div>
           <div className="userId">{comment.member_id}</div>
         </UserInfo>
