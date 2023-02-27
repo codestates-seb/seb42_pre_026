@@ -59,7 +59,7 @@ public class CommentService {
         Comment verifyComment = verifyWriter(commentId);
         verifyComment.setContent(comment.getContent());
 
-        return commentRepository.save(verifyComment);
+        return commentRepository.save(comment);
     }
 
     // DELETE

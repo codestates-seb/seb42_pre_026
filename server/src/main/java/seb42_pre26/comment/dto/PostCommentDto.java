@@ -11,17 +11,10 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 public class PostCommentDto {
-
-    private long commentId;
-
     private long questionId;
 
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
     private int likeCount;
-
-    private LocalDateTime created;
-
-    private LocalDateTime modified;
 }

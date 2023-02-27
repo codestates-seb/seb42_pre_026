@@ -10,10 +10,8 @@ import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.mapper.CommentMapper;
 import seb42_pre26.comment.service.CommentService;
 import seb42_pre26.exception.BusinessException;
-import seb42_pre26.question.entity.Question;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/comment")
@@ -28,7 +26,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity postComment(@Valid @RequestBody PostCommentDto postCommentDto) {
+    public ResponseEntity createComment(@Valid @RequestBody PostCommentDto postCommentDto) {
         //1. 서비스 사용하기
         //2. dto 파라미터로 받기
         //3. mapper 이용하기
@@ -37,7 +35,7 @@ public class CommentController {
         Comment comment = commentService.createComment(mapper.postCommentDtoToComment(postCommentDto));
         CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
 
-        return new ResponseEntity(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{comment-id}")
@@ -45,9 +43,9 @@ public class CommentController {
         try {
             Comment comment = commentService.readComment(commentId);
             CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
-            return new ResponseEntity(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (BusinessException e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -57,9 +55,9 @@ public class CommentController {
         try {
             Comment comment = commentService.updateComment(commentId, mapper.patchCommentDtoToComment(patchCommentDto));
             CommentResponseDto response = mapper.commentToCommentResponseDto(comment);
-            return new ResponseEntity(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (BusinessException e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -68,22 +66,13 @@ public class CommentController {
     public ResponseEntity deleteComment(@PathVariable("comment-id") long commentId) throws BusinessException {
         try {
             commentService.deleteComment(commentId);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (BusinessException e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
 
     }
 
-    /*@GetMapping
-    public ResponseEntity readComments(Question question) {
-
-        List<Comment> list = commentService.readComments(question);
-        List<CommentResponseDto> response = mapper.commentsToCommentResponseDtos(list);
-
-        return new ResponseEntity(response, HttpStatus.OK);
-    }
-*/
     /*필터 기능 추후에 구현*/
 //    @GetMapping
 //    public ResponseEntity getCommentsBySort() {

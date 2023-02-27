@@ -14,8 +14,8 @@ public class Stubdata {
 
     static {
         stubRequestBody = new HashMap<>();
-        stubRequestBody.put(HttpMethod.PUT, new PostCommentDto(1,1,"안녕하세요 이건 테스트 더미 데이터 입니다!!", 1,1 ));
-        stubRequestBody.put(HttpMethod.PATCH, new PatchCommentDto("안녕하세요 이건 수정하는 더미 데이터입니다아아아아악~!!!!", 1));
+        stubRequestBody.put(HttpMethod.POST, new PostCommentDto(1,"안녕하세요 이건 테스트 더미 데이터 입니다!!", 1));
+        stubRequestBody.put(HttpMethod.PATCH, new PatchCommentDto(1,"안녕하세요 이건 수정하는 더미 데이터입니다아아아아악~!!!!", 1));
 
     }
     public static class MockComment {
@@ -24,7 +24,7 @@ public class Stubdata {
         }
 
         public static CommentResponseDto getSingleResponseBody() {
-            return new CommentResponseDto(1,1,"응답을 받아볼게요~~~", 1);
+            return new CommentResponseDto(1,1,"응답을 받아볼게요~~~", 1, LocalDateTime.now(), null);
         }
     }
 }
