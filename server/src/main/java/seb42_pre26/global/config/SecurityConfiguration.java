@@ -44,7 +44,7 @@ public class SecurityConfiguration {
             .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  // 추가
             .accessDeniedHandler(new MemberAccessDeniedHandler())            // 추가
             .and()
-            .apply(new CustomFilterConfigurer())
+            .apply(new CustomFilterConfigure())
             .and()
             .authorizeHttpRequests(authorize -> authorize
                     .antMatchers(HttpMethod.POST, "/*/members").permitAll()
@@ -72,7 +72,7 @@ public class SecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
+    public class CustomFilterConfigure extends AbstractHttpConfigurer<CustomFilterConfigure, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
