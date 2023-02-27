@@ -230,15 +230,15 @@ function QuestionDetail() {
         <MainBarInfo>
           <SpanContainer>
             <span className="infoTitle">Asked</span>
-            <span>{data.created}</span>
+            <span>{data.created ? data.created.slice(2) : '-'}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Modified</span>
-            <span>{data.modified ? data.modified : '-'}</span>
+            <span>{data.modified ? data.modified.slice(2) : '-'}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Viewed</span>
-            <span>{data.views}</span>
+            <span>{data.views ? data.views : 0}</span>
           </SpanContainer>
         </MainBarInfo>
         <ContentContainer>
@@ -265,7 +265,7 @@ function QuestionDetail() {
               <UserInfo>
                 <div className="userInfoTime">
                   <span>asked </span>
-                  <span>{data.created}</span>
+                  <span>{data.created && data.created.slice(2)}</span>
                 </div>
                 <div className="userId">{data.member_id}</div>
               </UserInfo>

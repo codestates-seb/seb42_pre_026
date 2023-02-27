@@ -112,7 +112,11 @@ function QuestionsList({ list }) {
             : `${list.comments.length} answers`}
         </div>
         <div className="views">
-          {parseInt(list.views) <= 1 ? `${list.views} view` : `${list.views} views`}
+          {list.views === undefined
+            ? '0 view'
+            : list.views <= 1
+            ? `${list.views} view`
+            : `${list.views} views`}
         </div>
       </ListInfo>
       <ListContent onClick={onClick}>
@@ -129,7 +133,7 @@ function QuestionsList({ list }) {
               <div className="userCardLink">{list.member_id}</div>
               <div className="userCardAwards">26</div>
             </UserCardInfo>
-            <div className="userCardTime">{list.created}</div>
+            <div className="userCardTime">{list.created && list.created.slice(2)}</div>
           </Writer>
         </TagWrapper>
       </ListContent>
