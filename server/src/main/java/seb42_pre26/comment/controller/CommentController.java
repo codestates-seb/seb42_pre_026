@@ -10,19 +10,28 @@ import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.mapper.CommentMapper;
 import seb42_pre26.comment.service.CommentService;
 import seb42_pre26.exception.BusinessException;
+import seb42_pre26.member.service.MemberService;
+import seb42_pre26.question.service.QuestionService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/comment")
 public class CommentController {
 
     private final CommentService commentService;
+//    private final QuestionService questionService;
+//    private final MemberService memberService;
     private final CommentMapper mapper;
 
-    public CommentController(CommentService commentService, CommentMapper mapper) {
+    public CommentController(CommentService commentService, QuestionService questionService, MemberService memberService, CommentMapper mapper) {
         this.commentService = commentService;
+//        this.questionService = questionService;
+//        this.memberService = memberService;
         this.mapper = mapper;
+
     }
 
     @PostMapping
