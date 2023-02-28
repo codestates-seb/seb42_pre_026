@@ -4,6 +4,7 @@ import Parser from 'html-react-parser';
 import axios from 'axios';
 import { useConfirm } from 'material-ui-confirm';
 import CommentEditModal from './CommentEditModal';
+import moment from 'moment';
 
 const AnswerContainer = styled.div`
   padding-top: 15px;
@@ -129,7 +130,7 @@ function Answer({ comment }) {
         <UserInfo>
           <div className="userInfoTime">
             <span>answered </span>
-            <span>{comment.created && comment.created.slice(2)}</span>
+            <span>{comment.created && moment(comment.created).fromNow()}</span>
           </div>
           <div className="userId">{comment.member_id}</div>
         </UserInfo>

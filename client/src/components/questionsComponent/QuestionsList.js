@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Parser from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const ListContainer = styled.li`
   display: flex;
@@ -133,7 +134,9 @@ function QuestionsList({ list }) {
               <div className="userCardLink">{list.member_id}</div>
               <div className="userCardAwards">26</div>
             </UserCardInfo>
-            <div className="userCardTime">{list.created && list.created.slice(2)}</div>
+            <div className="userCardTime">
+              {list.created && moment(list.created).format('MMM DD YYYY, HH:MM')}
+            </div>
           </Writer>
         </TagWrapper>
       </ListContent>
