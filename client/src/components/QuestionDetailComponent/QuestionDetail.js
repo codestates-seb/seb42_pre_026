@@ -9,6 +9,7 @@ import Parser from 'html-react-parser';
 import { useConfirm } from 'material-ui-confirm';
 import useFetch from '../../hooks/useFetch';
 import ContentEditModal from './ContentEditModal';
+import moment from 'moment';
 
 const MainArea = styled.div`
   padding: 24px;
@@ -230,11 +231,11 @@ function QuestionDetail() {
         <MainBarInfo>
           <SpanContainer>
             <span className="infoTitle">Asked</span>
-            <span>{data.created ? data.created.slice(2) : '-'}</span>
+            <span>{data.created ? moment(data.created).fromNow() : '-'}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Modified</span>
-            <span>{data.modified ? data.modified.slice(2) : '-'}</span>
+            <span>{data.modified ? moment(data.modified).fromNow() : '-'}</span>
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Viewed</span>
@@ -265,7 +266,7 @@ function QuestionDetail() {
               <UserInfo>
                 <div className="userInfoTime">
                   <span>asked </span>
-                  <span>{data.created && data.created.slice(2)}</span>
+                  <span>{data.created && moment(data.created).format('MMM DD YYYY, HH:MM')}</span>
                 </div>
                 <div className="userId">{data.member_id}</div>
               </UserInfo>
