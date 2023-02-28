@@ -117,7 +117,7 @@ function LoginForm() {
     }
     //* api 주소 받아서 변경할 것
     await axios
-      .post('/members/auth/login', {
+      .post('/auth/login', {
         username: email,
         password,
       })
