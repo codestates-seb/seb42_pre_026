@@ -31,7 +31,8 @@ public class QuestionService {
 
     // CREATE
     public Question createQuestion(Question question){
-        long memberId = memberService.getLoginMember().getMemberId();
+        long memberId = 1;
+//        long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
         question.setMember(member);
         return questionRepository.save(question);

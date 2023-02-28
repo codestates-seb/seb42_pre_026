@@ -7,7 +7,6 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class PatchCommentDto {
 
@@ -17,5 +16,9 @@ public class PatchCommentDto {
     private String content;
 
     private int likeCount;
+
+    public void setCommentId(long commentId) {
+        this.commentId = commentId;
+    }
 
 }

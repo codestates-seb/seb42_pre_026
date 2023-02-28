@@ -32,7 +32,8 @@ public class CommentService {
     public Comment createComment(Comment comment) {
         findExistComment(comment.getCommentId());
 
-        long memberId = memberService.getLoginMember().getMemberId();
+        long memberId = 1;
+//        long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
         comment.setMember(member);
         return commentRepository.save(comment);
