@@ -99,10 +99,11 @@ const CommentEditModal = ({ newComment, commentId, setEditModalOpen, setNewComme
   // Patch
   const onClickSubmitButton = async (commentId) => {
     const editComment = {
-      comment: newComment,
+      commentId,
+      content: newComment,
     };
     await axios
-      .patch(`http://localhost:3001/comments/${commentId}`, editComment)
+      .patch(`/comment/${commentId}`, editComment)
       .then(() => {
         closeEditModalHandler();
         toast.success('Edit Success!');

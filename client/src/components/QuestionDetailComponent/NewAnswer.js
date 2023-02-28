@@ -47,12 +47,11 @@ const SubmitButton = styled.button`
 
 /* eslint-disable */
 function NewAnswer() {
-  const [comment, setComment] = useState({ comment: '' });
+  const [comment, setComment] = useState({ content: '' });
   const blankComment = comment.length;
   const { id } = useParams();
   const navigate = useNavigate();
   const isLogin = localStorage.getItem('accessToken');
-  const member_id = localStorage.getItem('member_id');
   const confirm = useConfirm();
 
   const handleSubmit = (e) => {
@@ -66,10 +65,9 @@ function NewAnswer() {
     }
     e.preventDefault();
     axios
-      .post('http://localhost:3001/comments', {
-        postid: id,
-        member_id,
-        comment,
+      .post('/comment', {
+        questionId: id,
+        content,
       })
       .then(() => {
         location.reload();

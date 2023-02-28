@@ -176,7 +176,7 @@ function QuestionDetail() {
   const confirm = useConfirm();
 
   const data = useFetch(`http://localhost:3001/questions/${id}`);
-  const comments = useFetch(`http://localhost:3001/comments?postid=${id}`);
+  const comments = useFetch(`/comment?questionId=${id}`);
   const blankComment = comments.content !== '';
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -280,7 +280,7 @@ function QuestionDetail() {
             </CommentTitle>
             {blankComment &&
               comments.map((comment) => {
-                return <Answer comment={comment} key={comment.id} />;
+                return <Answer comment={comment} key={comment.commentId} />;
               })}
             <NewAnswer />
           </PostContainer>

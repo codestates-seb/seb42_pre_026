@@ -117,14 +117,14 @@ function LoginForm() {
     }
     //* api 주소 받아서 변경할 것
     await axios
-      .post('http://localhost:8000/login', {
-        email,
+      .post('/members/auth/login', {
+        username: email,
         password,
       })
       .then((res) => {
         toast.success('Login Success!');
         localStorage.setItem('accessToken', res.data.accessToken);
-        localStorage.setItem('member_id', res.data.user.name);
+        localStorage.setItem('username', res.data.username);
       })
       .then(() => {
         navigate('/');
