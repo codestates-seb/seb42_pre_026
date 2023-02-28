@@ -170,29 +170,30 @@ const CommentTitle = styled.h2`
   line-height: 1.35;
 `;
 
+/* eslint-disable */
 function QuestionDetail() {
-  const { id } = useParams();
+  const { questionId } = useParams();
   const navigate = useNavigate();
   const confirm = useConfirm();
 
-  const data = useFetch(`http://localhost:3001/questions/${id}`);
-  const comments = useFetch(`/comment?questionId=${id}`);
+  const data = useFetch(`/questions/${questionId}`);
+  const comments = useFetch(`/comment?questionId=${questionId}`);
   const blankComment = comments.content !== '';
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
 
   const isLogin = localStorage.getItem('accessToken');
-  const isPost = localStorage.getItem('member_id') === data.member_id;
+  const isPost = localStorage.getItem('username') === data.memberEmail;
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete question.' })
       .then(() => {
-        axios.delete(`http://localhost:3001/questions/${id}`).then(() => {
+        axios.delete(`/question/${questionId}`).then(() => {
           navigate('/');
         });
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 
   // 모달 open
@@ -215,7 +216,7 @@ function QuestionDetail() {
         .then(() => {
           navigate('/login');
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   };
 
@@ -239,7 +240,7 @@ function QuestionDetail() {
           </SpanContainer>
           <SpanContainer>
             <span className="infoTitle">Viewed</span>
-            <span>{data.views ? data.views : 0}</span>
+            <span>{data.viewCount ? data.viewCount : 0}</span>
           </SpanContainer>
         </MainBarInfo>
         <ContentContainer>
@@ -255,7 +256,7 @@ function QuestionDetail() {
                       setNewTitle={setNewTitle}
                       newContent={newContent}
                       setNewContent={setNewContent}
-                      contentId={data.id}
+                      contentId={data.questionId}
                       setEditModalOpen={setEditModalOpen}
                     />
                   ) : null}
@@ -268,15 +269,15 @@ function QuestionDetail() {
                   <span>asked </span>
                   <span>{data.created && moment(data.created).format('MMM DD YYYY, HH:MM')}</span>
                 </div>
-                <div className="userId">{data.member_id}</div>
+                <div className="userId">{data.memberName}</div>
               </UserInfo>
             </UserInfoContainer>
             <CommentTitle>
               {comments.length === 1
                 ? '1 Answer'
                 : comments.length > 1
-                ? `${comments.length} Answers`
-                : null}
+                  ? `${comments.length} Answers`
+                  : null}
             </CommentTitle>
             {blankComment &&
               comments.map((comment) => {

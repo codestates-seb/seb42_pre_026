@@ -82,7 +82,7 @@ function Answer({ comment }) {
   const confirm = useConfirm();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newComment, setNewComment] = useState('');
-  const isPost = localStorage.getItem('member_id') === comment.memberEmail;
+  const isPost = localStorage.getItem('username') === comment.memberEmail;
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete answer.' })
