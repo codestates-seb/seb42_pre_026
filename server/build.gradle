@@ -49,12 +49,8 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly    'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	////    OAuth2
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'com.auth0:java-jwt:4.2.0'
 
+	implementation 'com.auth0:java-jwt:4.2.0'
 	implementation 'org.springframework:spring-context-support:5.3.4'
 
 }
