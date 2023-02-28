@@ -12,9 +12,10 @@ import java.time.LocalDateTime;
 public class CommentResponseDto {
     private long commentId;
     private long questionId;
-    private String name;
     private String content;
     private int likeCount;
+    private String memberName;
+    private String memberEmail;
     private LocalDateTime created;
     private LocalDateTime modified;
 }

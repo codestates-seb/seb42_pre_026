@@ -2,7 +2,6 @@ package seb42_pre26.comment.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +12,6 @@ import seb42_pre26.comment.repository.CommentRepository;
 import seb42_pre26.member.entity.Member;
 import seb42_pre26.member.repository.MemberRepository;
 import seb42_pre26.member.service.MemberService;
-import seb42_pre26.question.entity.Question;
-
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -32,8 +28,7 @@ public class CommentService {
     public Comment createComment(Comment comment) {
         findExistComment(comment.getCommentId());
 
-        long memberId = 1;
-//        long memberId = memberService.getLoginMember().getMemberId();
+        long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
         comment.setMember(member);
         return commentRepository.save(comment);
@@ -52,11 +47,6 @@ public class CommentService {
     // UPDATE
     @Transactional(propagation = Propagation.REQUIRED)
     public Comment updateComment(long commentId, Comment comment) {
-        /*Comment findComment = verifyComment(comment.getCommentId());
-        findComment.setContent(comment.getContent());
-
-        Optional.ofNullable(comment.getContent()).ifPresent(content -> findComment.setContent(content));*/
-
         Comment verifyComment = verifyWriter(commentId);
         verifyComment.setContent(comment.getContent());
 
@@ -65,15 +55,10 @@ public class CommentService {
 
     // DELETE
     public void deleteComment(long commentId) {
-        //findExistComment(commentId);
 
         Comment verifyComment = verifyWriter(commentId);
         commentRepository.deleteById(verifyComment.getCommentId());
     }
-
-    /*public List<Comment> readComments(Question question) {
-        return commentRepository.findAllByPostComments(question);
-    }*/
 
 
     //ID 값의 댓글이 없으면 오류 발생.

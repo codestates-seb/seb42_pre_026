@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/question")
+@CrossOrigin
 @Validated
 @AllArgsConstructor
 public class QuestionController {

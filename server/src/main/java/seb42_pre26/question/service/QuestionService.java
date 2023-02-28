@@ -31,8 +31,7 @@ public class QuestionService {
 
     // CREATE
     public Question createQuestion(Question question){
-        long memberId = 1;
-//        long memberId = memberService.getLoginMember().getMemberId();
+        long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
         question.setMember(member);
         return questionRepository.save(question);
@@ -82,7 +81,6 @@ public class QuestionService {
 
     // 게시글 작성자와 사용자가 같은지 확인
     private Question verifyWriter(long questionId){
-        //Test
         long memberId = memberService.getLoginMember().getMemberId();
         Question question = existQuestion(questionId);
         if (question.getMember().getMemberId() != memberId){
