@@ -54,7 +54,7 @@ public class MemberController {
 
     }
 
-//    회원 조회
+//    회원 조회(마이페이지)
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
         Member member = memberService.findMember(memberId);

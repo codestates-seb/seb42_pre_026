@@ -15,9 +15,11 @@ public class MemberDto {
     public static class Post {
 
         @NotBlank(message = "이메일은 공백이 아니어야 합니다.")
+        @Pattern(regexp = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", message = "이메일 형식이 다릅니다.")
         @Email
         private String email;
 
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@!%*#?&])[A-Za-z\\d@!%*#?&]{8,}$")
         @NotBlank(message = "비밀번호는 공백이 아니어야 합니다.")
         private String password;
 
@@ -37,10 +39,11 @@ public class MemberDto {
 
         private long memberId;
 
-        @NotBlank(message = "이메일은 공백이 아니어야 합니다.")
-        @Email
-        private String email;
+//        @NotBlank(message = "이메일은 공백이 아니어야 합니다.")
+//        @Email
+//        private String email;
 
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@!%*#?&])[A-Za-z\\d@!%*#?&]{8,}$")
         @NotBlank(message = "비밀번호는 공백이 아니어야 합니다.")
         private String password;
 
