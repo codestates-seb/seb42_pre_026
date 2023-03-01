@@ -150,6 +150,7 @@ const PerPage = styled.div`
   }
 `;
 
+/* eslint-disable */
 function QuestionsMain() {
   const [questionData, setQuestionData] = useState([]);
   // 페이지 당 표시할 데이터 개수 상태
@@ -163,7 +164,7 @@ function QuestionsMain() {
   const numAllPages = Math.ceil(questionData.length / limit);
 
   const getQuestionData = async () => {
-    const res = await axios.get('http://localhost:3001/questions');
+    const res = await axios.get('/question');
     setQuestionData(res.data);
   };
 
@@ -176,8 +177,6 @@ function QuestionsMain() {
     setPage(page);
   };
 
-  // 질문글이 상단에 추가되도록 하기 위한 임시 변수(실서버 연결 시 사용 안 할 예정)
-  const reverseQuestionData = questionData.slice().reverse();
   const isLogin = localStorage.getItem('accessToken');
   const navigate = useNavigate();
   const confirm = useConfirm();
@@ -190,7 +189,7 @@ function QuestionsMain() {
         .then(() => {
           navigate('/login');
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   };
 
@@ -206,9 +205,9 @@ function QuestionsMain() {
 
         <MainBarFilter>
           <div className="questionsCount">
-            {reverseQuestionData.length <= 1
-              ? `${reverseQuestionData.length} question`
-              : `${reverseQuestionData.length} questions`}
+            {questionData.length <= 1
+              ? `${questionData.length} question`
+              : `${questionData.length} questions`}
           </div>
           <SelectFilter>
             <div className="newest">Newest</div>
@@ -221,8 +220,8 @@ function QuestionsMain() {
         </MainBarFilter>
 
         <QuestionsContainer>
-          {reverseQuestionData.slice(offset, offset + limit).map((value) => {
-            return <QuestionsList list={value} key={value.id} setPage={setPage} />;
+          {questionData.slice(offset, offset + limit).map((value) => {
+            return <QuestionsList list={value} key={value.questionId} />;
           })}
         </QuestionsContainer>
         <PagenationWrapper>

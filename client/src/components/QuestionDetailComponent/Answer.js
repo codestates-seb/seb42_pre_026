@@ -82,12 +82,12 @@ function Answer({ comment }) {
   const confirm = useConfirm();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newComment, setNewComment] = useState('');
-  const isPost = localStorage.getItem('member_id') === comment.member_id;
+  const isPost = localStorage.getItem('username') === comment.memberEmail;
 
   const onDelete = () => {
     confirm({ description: 'This will permanently delete answer.' })
       .then(() => {
-        axios.delete(`http://localhost:3001/comments/${comment.id}`).then(() => {
+        axios.delete(`/comment/${comment.commentId}`).then(() => {
           location.reload();
           window.scrollTo(0, 0);
         });
@@ -100,7 +100,7 @@ function Answer({ comment }) {
   // 모달 open
   const openEditModalHandler = () => {
     setEditModalOpen(true);
-    setNewComment(comment.comment);
+    setNewComment(comment.content);
     document.body.style.cssText = `
     position: fixed;
     top: -${window.scrollY}px;
@@ -110,7 +110,7 @@ function Answer({ comment }) {
 
   return (
     <AnswerContainer>
-      <div className="comment">{Parser(comment.comment)}</div>
+      <div className="comment">{Parser(comment.content)}</div>
       <UserInfoContainer>
         {isPost ? (
           <ButtonContainer>
@@ -119,7 +119,7 @@ function Answer({ comment }) {
               <CommentEditModal
                 newComment={newComment}
                 setNewComment={setNewComment}
-                commentId={comment.id}
+                commentId={comment.commentId}
                 setEditModalOpen={setEditModalOpen}
               />
             ) : null}
@@ -132,7 +132,7 @@ function Answer({ comment }) {
             <span>answered </span>
             <span>{comment.created && moment(comment.created).fromNow()}</span>
           </div>
-          <div className="userId">{comment.member_id}</div>
+          <div className="userId">{comment.memberName}</div>
         </UserInfo>
       </UserInfoContainer>
     </AnswerContainer>

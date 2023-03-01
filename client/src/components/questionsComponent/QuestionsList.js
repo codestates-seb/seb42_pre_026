@@ -94,11 +94,12 @@ const UserCardInfo = styled.div`
   gap: 3px;
 `;
 
+/* eslint-disable */
 function QuestionsList({ list }) {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/question/${list.id}`);
+    navigate(`/question/${list.questionId}`);
   };
 
   return (
@@ -109,15 +110,15 @@ function QuestionsList({ list }) {
           {list.comments === undefined
             ? '0 answer'
             : list.comments.length === 1
-            ? `${list.comments.length} answer`
-            : `${list.comments.length} answers`}
+              ? `${list.comments.length} answer`
+              : `${list.comments.length} answers`}
         </div>
         <div className="views">
-          {list.views === undefined
+          {list.viewCount === undefined
             ? '0 view'
-            : list.views <= 1
-            ? `${list.views} view`
-            : `${list.views} views`}
+            : list.viewCount <= 1
+              ? `${list.viewCount} view`
+              : `${list.viewCount} views`}
         </div>
       </ListInfo>
       <ListContent onClick={onClick}>
@@ -131,7 +132,7 @@ function QuestionsList({ list }) {
           <Writer>
             <div className="polite">★</div>
             <UserCardInfo>
-              <div className="userCardLink">{list.member_id}</div>
+              <div className="userCardLink">{list.questionId}</div>
               <div className="userCardAwards">26</div>
             </UserCardInfo>
             <div className="userCardTime">

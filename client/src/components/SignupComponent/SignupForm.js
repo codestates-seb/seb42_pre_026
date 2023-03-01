@@ -151,12 +151,12 @@ function SignupForm() {
       passwordRef.current.focus();
       return;
     }
-    //* api 주소 받아서 변경할 것
+
     await axios
-      .post('http://localhost:8000/register', {
-        name,
+      .post('/members/sign-up', {
         email,
         password,
+        name,
       })
       .then(() => {
         toast.success('Sign up Success!');
