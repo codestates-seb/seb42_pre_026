@@ -103,7 +103,7 @@ public class CommentControllerTest {
         given(mapper.patchCommentDtoToComment(Mockito.any(PatchCommentDto.class))).willReturn(comment);
         given(commentService.updateComment(Mockito.anyLong(), Mockito.any(Comment.class))).willReturn(comment);
         CommentResponseDto commentResponseDto =
-                new CommentResponseDto(1,1, name,"수정 데이터 입니다아아아", 1, LocalDateTime.now(),LocalDateTime.now());
+                new CommentResponseDto(1,1, "수정 데이터 입니다아아아", 1, name, "123@gmail.com", LocalDateTime.now(),LocalDateTime.now());
         given(mapper.commentToCommentResponseDto(Mockito.any(Comment.class))).willReturn(commentResponseDto);
 
         ResultActions actions =
@@ -153,9 +153,11 @@ public class CommentControllerTest {
         CommentResponseDto response = new CommentResponseDto(
                 commentId,
                 1,
+                "등록된 내용을 가져옵니",
+                1,
                 "김코딩",
-                "등록된 내용을 가져옵니다!",
-                1,LocalDateTime.now(),
+                "123@gamil.com",
+                LocalDateTime.now(),
                 LocalDateTime.now());
         given(commentService.readComment(Mockito.anyLong())).willReturn(new Comment());
         given(mapper.commentToCommentResponseDto(Mockito.any(Comment.class))).willReturn(response);
@@ -167,7 +169,7 @@ public class CommentControllerTest {
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("commentId").value(commentId))
-                .andExpect(jsonPath("name").value(response.getName()))
+                .andExpect(jsonPath("memberName").value(response.getMemberName()))
                 .andDo(document("get-comment",
                                 getRequestPreProcessor(),
                                 getResponsePreProcessor(),
