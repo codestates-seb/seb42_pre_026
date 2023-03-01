@@ -15,6 +15,11 @@ spring:
   sql:
     init:
       data-locations: classpath*:db/h2/data.sql
+  devtools:
+    livereload:
+      enabled: true     # livereload 사용시 활성화
+    restart:
+      enabled: true
 logging:
   level:
     org:
