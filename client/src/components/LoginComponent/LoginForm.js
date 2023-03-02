@@ -123,7 +123,7 @@ function LoginForm() {
       })
       .then((res) => {
         toast.success('Login Success!');
-        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('accessToken', res.headers.authorization);
         localStorage.setItem('username', res.data.username);
       })
       .then(() => {
