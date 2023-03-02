@@ -107,7 +107,7 @@ function QuestionsList({ list }) {
       <ListInfo>
         <div className="votes">0 vote</div>
         <div className="answers">
-          {list.comments === undefined
+          {list.comments.length === 0
             ? '0 answer'
             : list.comments.length === 1
             ? `${list.comments.length} answer`

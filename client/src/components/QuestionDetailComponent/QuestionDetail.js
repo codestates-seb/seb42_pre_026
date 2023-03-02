@@ -177,8 +177,8 @@ function QuestionDetail() {
   const confirm = useConfirm();
 
   const data = useFetch(`http://125.176.52.40:8080/question/${id}`);
-  const comments = useFetch(`http://125.176.52.40:8080/comment?questionId=${id}`);
-  const blankComment = comments.content !== '';
+  const comments = data.comments;
+  const blankComment = comments === undefined || comments.length === 0;
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
@@ -280,13 +280,13 @@ function QuestionDetail() {
               </UserInfo>
             </UserInfoContainer>
             <CommentTitle>
-              {comments.length === 1
+              {blankComment
+                ? null
+                : comments.length === 1
                 ? '1 Answer'
-                : comments.length > 1
-                ? `${comments.length} Answers`
-                : null}
+                : `${comments.length} Answers`}
             </CommentTitle>
-            {blankComment &&
+            {comments &&
               comments.map((comment) => {
                 return <Answer comment={comment} key={comment.commentId} />;
               })}

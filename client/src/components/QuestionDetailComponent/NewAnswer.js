@@ -78,13 +78,11 @@ function NewAnswer() {
           },
         },
       )
-      .then((res) => {
-        // location.reload();
-        // window.scrollTo(0, 0);
-        console.log(res);
+      .then(() => {
+        location.reload();
+        window.scrollTo(0, 0);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         toast.error('Post Failed!');
       });
   };
