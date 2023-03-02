@@ -12,6 +12,8 @@ import seb42_pre26.comment.repository.CommentRepository;
 import seb42_pre26.member.entity.Member;
 import seb42_pre26.member.repository.MemberRepository;
 import seb42_pre26.member.service.MemberService;
+
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -43,6 +45,11 @@ public class CommentService {
     public Comment readComment(long commentId) {
         return verifyComment(commentId);
     }
+
+    public List<Comment> readComments() {
+        return commentRepository.findAll();
+    }
+
 
     // UPDATE
     @Transactional(propagation = Propagation.REQUIRED)

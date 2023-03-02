@@ -10,8 +10,12 @@ import seb42_pre26.comment.entity.Comment;
 import seb42_pre26.comment.mapper.CommentMapper;
 import seb42_pre26.comment.service.CommentService;
 import seb42_pre26.exception.BusinessException;
+import seb42_pre26.question.dto.QuestionDto;
+import seb42_pre26.question.entity.Question;
 
+import javax.persistence.PreUpdate;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -50,7 +54,12 @@ public class CommentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
-
+    @GetMapping
+    public ResponseEntity getComments(){
+        List<Comment> comments = commentService.readComments();
+        List<CommentResponseDto> responses = mapper.commentsToResponses(comments);
+        return new ResponseEntity(responses,  HttpStatus.OK);
+    }
     @PatchMapping("/{comment-id}")
     public ResponseEntity patchComment(@PathVariable("comment-id") long commentId,
                                        @Valid @RequestBody PatchCommentDto patchCommentDto) throws BusinessException {
@@ -61,9 +70,7 @@ public class CommentController {
         }catch (BusinessException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
-
     @DeleteMapping("/{comment-id}")
     public ResponseEntity deleteComment(@PathVariable("comment-id") long commentId) throws BusinessException {
         try {
@@ -72,14 +79,5 @@ public class CommentController {
         }catch (BusinessException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
     }
-
-    /*필터 기능 추후에 구현*/
-//    @GetMapping
-//    public ResponseEntity getCommentsBySort() {
-//
-//        return new ResponseEntity();
-//    }
-
 }

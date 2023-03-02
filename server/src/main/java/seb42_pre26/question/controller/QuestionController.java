@@ -50,9 +50,8 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@RequestParam int page,@RequestParam int size){
-        Page<Question> questionPage = questionService.readQuestions(page -1, size);
-        List<Question> questions = questionPage.getContent();
+    public ResponseEntity getQuestions(){
+        List<Question> questions = questionService.readQuestions();
 
         List<QuestionDto.Response> responses = questionMapper.questionsToResponses(questions);
 

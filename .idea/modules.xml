@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Desktop/prototype/server/src/test/java/.idea/seb42_pre_026.iml" filepath="$PROJECT_DIR$/../Desktop/prototype/server/src/test/java/.idea/seb42_pre_026.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/seb42_pre_026_plz.iml" filepath="$PROJECT_DIR$/.idea/seb42_pre_026_plz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stack-over-flow-clone.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stack-over-flow-clone.main.iml" />
     </modules>
   </component>
 </project>

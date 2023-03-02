@@ -16,6 +16,7 @@ import seb42_pre26.member.service.MemberService;
 import seb42_pre26.question.entity.Question;
 import seb42_pre26.question.repository.QuestionRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,11 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    // ReadAll
+    public List<Question> readQuestions(){
+        return questionRepository.findAll();
+    }
+
     // UPDATE
     public Question updateQuestion(long questionId, Question question){
         Question verifyQuestion = verifyWriter(questionId);
@@ -66,12 +72,8 @@ public class QuestionService {
         questionRepository.deleteById(verifyQuestion.getQuestionId());
     }
 
-    // PAGINATION
-    public Page<Question> readQuestions(int page, int size){
-        return questionRepository.findAll(
-                PageRequest.of(page, size, Sort.by("questionId").descending())
-        );
-    }
+
+
 
     // 존재하는 게시글인지 확인하기
     private Question existQuestion(long questionId){

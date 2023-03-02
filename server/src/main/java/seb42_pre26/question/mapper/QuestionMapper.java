@@ -20,9 +20,12 @@ public interface QuestionMapper {
     @Mapping(source = "member.email", target = "memberEmail")
     @Mapping(source = "comments", target = "comments", qualifiedByName = "commentToCommentResponseDto")
     QuestionDto.Response questionToResponse(Question question);
+    @Mapping(source = "comments", target = "comments", qualifiedByName = "commentToCommentResponseDto")
     List<QuestionDto.Response> questionsToResponses(List<Question> questions);
 
     @Named("commentToCommentResponseDto")
+    @Mapping(source = "member.name", target = "memberName")
+    @Mapping(source = "member.email", target = "memberEmail")
     @Mapping(source = "question.questionId", target = "questionId")
     CommentResponseDto commentToCommentResponseDto(Comment comment);
 

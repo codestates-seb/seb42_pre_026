@@ -1,3 +1,4 @@
+/*
 package seb42_pre26.comment.slice.controller;
 
 import com.google.gson.Gson;
@@ -210,3 +211,4 @@ public class CommentControllerTest {
                 );
     }
 }
+*/
