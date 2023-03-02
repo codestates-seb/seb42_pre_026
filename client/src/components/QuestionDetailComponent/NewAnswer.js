@@ -55,6 +55,7 @@ function NewAnswer() {
   const confirm = useConfirm();
 
   const handleSubmit = (e) => {
+    const token = localStorage.getItem('accessToken');
     if (!isLogin) {
       confirm({ title: 'Login required.' })
         .then(() => {
@@ -65,13 +66,22 @@ function NewAnswer() {
     }
     e.preventDefault();
     axios
-      .post('http://125.176.52.40:8080/comment', {
-        questionId: id,
-        content,
-      })
-      .then(() => {
-        location.reload();
-        window.scrollTo(0, 0);
+      .post(
+        'http://125.176.52.40:8080/comment',
+        {
+          questionId: id,
+          content: comment,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+      .then((res) => {
+        // location.reload();
+        // window.scrollTo(0, 0);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);

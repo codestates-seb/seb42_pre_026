@@ -85,12 +85,19 @@ function Answer({ comment }) {
   const isPost = localStorage.getItem('username') === comment.memberEmail;
 
   const onDelete = () => {
+    const token = localStorage.getItem('accessToken');
     confirm({ description: 'This will permanently delete answer.' })
       .then(() => {
-        axios.delete(`http://125.176.52.40:8080/comment/${comment.commentId}`).then(() => {
-          location.reload();
-          window.scrollTo(0, 0);
-        });
+        axios
+          .delete(`http://125.176.52.40:8080/comment/${comment.commentId}`, {
+            headers: {
+              Authorization: token,
+            },
+          })
+          .then(() => {
+            location.reload();
+            window.scrollTo(0, 0);
+          });
       })
       .catch((err) => {
         console.log(err);

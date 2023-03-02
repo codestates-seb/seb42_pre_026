@@ -187,11 +187,18 @@ function QuestionDetail() {
   const isPost = localStorage.getItem('username') === data.memberEmail;
 
   const onDelete = () => {
+    const token = localStorage.getItem('accessToken');
     confirm({ description: 'This will permanently delete question.' })
       .then(() => {
-        axios.delete(`http://125.176.52.40:8080/questions/${id}`).then(() => {
-          navigate('/');
-        });
+        axios
+          .delete(`http://125.176.52.40:8080/question/${id}`, {
+            headers: {
+              Authorization: token,
+            },
+          })
+          .then(() => {
+            navigate('/');
+          });
       })
       .catch(() => {});
   };

@@ -132,12 +132,17 @@ const CommentEditModal = ({
 
   // Patch
   const onClickSubmitButton = async (contentId) => {
+    const token = localStorage.getItem('accessToken');
     const editContent = {
       title: newTitle,
       content: newContent,
     };
     await axios
-      .patch(`http://125.176.52.40:8080/questions/${contentId}`, editContent)
+      .patch(`http://125.176.52.40:8080/question/${contentId}`, editContent, {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then(() => {
         closeEditModalHandler();
         toast.success('Edit Success!');

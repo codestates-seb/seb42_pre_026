@@ -117,6 +117,7 @@ function NewForm() {
   }, []);
 
   const handleSubmit = (e) => {
+    const token = localStorage.getItem('accessToken');
     e.preventDefault();
     if (blankContent) {
       const contentLength = Parser(content.content).props.children.length;
@@ -126,10 +127,18 @@ function NewForm() {
       }
     }
     axios
-      .post('http://125.176.52.40:8080/question', {
-        title: content.title,
-        content: content.content,
-      })
+      .post(
+        'http://125.176.52.40:8080/question',
+        {
+          title: content.title,
+          content: content.content,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
       .then(() => {
         toast.success('Post Success!');
       })
