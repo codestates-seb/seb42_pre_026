@@ -41,6 +41,11 @@ jwt:
   access-token-expiration-minutes: 40
   refresh-token-expiration-minutes: 420
 
+jackson:
+  serialization:
+    WRITE_DATES_AS_TIMESTAMPS: false
+  date-format: "yyyy-MM-dd HH:mm"
+
 #
 #  secretKey: dalkfj123DASKf43kj4adsDKj
 #
