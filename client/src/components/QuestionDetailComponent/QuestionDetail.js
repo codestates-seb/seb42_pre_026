@@ -172,12 +172,12 @@ const CommentTitle = styled.h2`
 
 /* eslint-disable */
 function QuestionDetail() {
-  const { questionId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const confirm = useConfirm();
 
-  const data = useFetch(`/questions/${questionId}`);
-  const comments = useFetch(`/comment?questionId=${questionId}`);
+  const data = useFetch(`http://125.176.52.40:8080/question/${id}`);
+  const comments = useFetch(`http://125.176.52.40:8080/comment?questionId=${id}`);
   const blankComment = comments.content !== '';
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -189,11 +189,11 @@ function QuestionDetail() {
   const onDelete = () => {
     confirm({ description: 'This will permanently delete question.' })
       .then(() => {
-        axios.delete(`/question/${questionId}`).then(() => {
+        axios.delete(`http://125.176.52.40:8080/questions/${id}`).then(() => {
           navigate('/');
         });
       })
-      .catch(() => { });
+      .catch(() => {});
   };
 
   // 모달 open
@@ -216,7 +216,7 @@ function QuestionDetail() {
         .then(() => {
           navigate('/login');
         })
-        .catch(() => { });
+        .catch(() => {});
     }
   };
 
@@ -276,8 +276,8 @@ function QuestionDetail() {
               {comments.length === 1
                 ? '1 Answer'
                 : comments.length > 1
-                  ? `${comments.length} Answers`
-                  : null}
+                ? `${comments.length} Answers`
+                : null}
             </CommentTitle>
             {blankComment &&
               comments.map((comment) => {

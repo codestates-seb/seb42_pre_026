@@ -87,7 +87,7 @@ function Answer({ comment }) {
   const onDelete = () => {
     confirm({ description: 'This will permanently delete answer.' })
       .then(() => {
-        axios.delete(`/comment/${comment.commentId}`).then(() => {
+        axios.delete(`http://125.176.52.40:8080/comment/${comment.commentId}`).then(() => {
           location.reload();
           window.scrollTo(0, 0);
         });

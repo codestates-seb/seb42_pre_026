@@ -116,7 +116,6 @@ function NewForm() {
     });
   }, []);
 
-  //* api 주소 받아서 변경할 것
   const handleSubmit = (e) => {
     e.preventDefault();
     if (blankContent) {
@@ -127,7 +126,7 @@ function NewForm() {
       }
     }
     axios
-      .post('/question', {
+      .post('http://125.176.52.40:8080/question', {
         title: content.title,
         content: content.content,
       })

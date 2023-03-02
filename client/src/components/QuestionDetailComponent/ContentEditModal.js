@@ -137,7 +137,7 @@ const CommentEditModal = ({
       content: newContent,
     };
     await axios
-      .patch(`/questions/${contentId}`, editContent)
+      .patch(`http://125.176.52.40:8080/questions/${contentId}`, editContent)
       .then(() => {
         closeEditModalHandler();
         toast.success('Edit Success!');
@@ -169,13 +169,13 @@ const CommentEditModal = ({
           <CKEditor
             editor={ClassicEditor}
             data={newContent}
-            onReady={(editor) => { }}
+            onReady={(editor) => {}}
             onChange={(event, editor) => {
               const data = editor.getData();
               setNewContent(data);
             }}
-            onBlur={(event, editor) => { }}
-            onFocus={(event, editor) => { }}
+            onBlur={(event, editor) => {}}
+            onFocus={(event, editor) => {}}
           />
         </EditModalContentArea>
         <EditModalButtonArea>

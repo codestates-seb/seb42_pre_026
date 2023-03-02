@@ -103,7 +103,7 @@ const CommentEditModal = ({ newComment, commentId, setEditModalOpen, setNewComme
       content: newComment,
     };
     await axios
-      .patch(`/comment/${commentId}`, editComment)
+      .patch(`http://125.176.52.40:8080/comment/${commentId}`, editComment)
       .then(() => {
         closeEditModalHandler();
         toast.success('Edit Success!');

@@ -115,9 +115,9 @@ function LoginForm() {
       passwordRef.current.focus();
       return;
     }
-    //* api 주소 받아서 변경할 것
+
     await axios
-      .post('/auth/login', {
+      .post('http://125.176.52.40:8080/auth/login', {
         username: email,
         password,
       })
