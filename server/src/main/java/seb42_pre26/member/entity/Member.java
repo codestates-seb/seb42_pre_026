@@ -35,17 +35,20 @@ public class Member extends Auditable {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @Column(length = 13, nullable = false, unique = true)
-    private String phone;
+//    @Column(length = 13, nullable = false, unique = true)
+//    private String phone;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> comments = new ArrayList<>();
 
-    @Column(nullable = true)
-    private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+//    @Column(nullable = true)
+//    private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+//
+//    @Column(nullable = true, name = "MODIFIED")
+//    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
-    @Column(nullable = true, name = "MODIFIED")
-    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+    @Column(name = "created", insertable = false, updatable = false)
+    private LocalDateTime created;
 
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
