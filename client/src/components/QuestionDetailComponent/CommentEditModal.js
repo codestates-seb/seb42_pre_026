@@ -100,7 +100,6 @@ const CommentEditModal = ({ newComment, commentId, setEditModalOpen, setNewComme
   const onClickSubmitButton = async (commentId) => {
     const token = localStorage.getItem('accessToken');
     const editComment = {
-      commentId,
       content: newComment,
     };
     await axios
@@ -109,17 +108,16 @@ const CommentEditModal = ({ newComment, commentId, setEditModalOpen, setNewComme
           Authorization: token,
         },
       })
-      .then((res) => {
+      .then(() => {
         closeEditModalHandler();
         toast.success('Edit Success!');
-        console.log(res);
       })
-      // .then(() => {
-      //   setTimeout(() => {
-      //     location.reload();
-      //   }, '3000');
-      //   window.scrollTo(0, 0);
-      // })
+      .then(() => {
+        setTimeout(() => {
+          location.reload();
+        }, '3000');
+        window.scrollTo(0, 0);
+      })
       .catch(() => {
         toast.error('Edit Failed!');
       });
