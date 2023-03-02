@@ -37,6 +37,14 @@ public class Question extends Auditable {
 //
 //    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
+    @Column(name = "created", insertable = false, updatable = false)
+    private LocalDateTime created;
+
+    @Column(name = "modified", insertable = false, updatable = false)
+    private LocalDateTime modified;
+
+
+
     @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;

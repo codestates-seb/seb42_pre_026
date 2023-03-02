@@ -33,6 +33,13 @@ public class Comment extends Auditable {
 //    @LastModifiedDate
 //    private LocalDateTime modified = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
+    @Column(name = "created", insertable = false, updatable = false)
+    private LocalDateTime created;
+
+    @Column(name = "modified", insertable = false, updatable = false)
+    private LocalDateTime modified;
+
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
