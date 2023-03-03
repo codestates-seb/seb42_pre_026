@@ -7,8 +7,86 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: true
+      ddl-auto: create  # (1) 스키마 자동 생성
+    show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:
-        format_sql: true
+        format_sql: true  # (3) SQL pretty print
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
+  devtools:
+    livereload:
+      enabled: true     # livereload 사용시 활성화
+    restart:
+      enabled: true
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+
+mail:
+  address:
+    admin: admin@example.com
+
+
+jwt:
+  key: "j4nsK69sMIw67xksgHJoLXNwcmluZy1ib290LWp3dC10dXRvcmladsjkhz76HJFGukiy1209VHrKIOy7TDjr7420fgGFWnNO472CHhzbzZWNyZXQK"
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
+
+jackson:
+  serialization:
+    WRITE_DATES_AS_TIMESTAMPS: false
+  date-format: "yyyy-MM-dd HH:mm"
+
+#
+#  secretKey: dalkfj123DASKf43kj4adsDKj
+#
+#  access:
+#    expiration: 3600000 # 1시간(60분) (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h))
+#    header: Authorization
+#
+#  refresh:
+#    expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
+#    header: Authorization-refresh
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          kakao:
+#            client-id: 카카오 클라이언트 ID
+#            client-secret: 카카오 클라이언트 Secret
+#            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            client-authentication-method: POST
+#            authorization-grant-type: authorization_code
+#            scope: name
+#            client-name: Kakao
+#          naver:
+#            client-id: 네이버 클라이언트 ID
+#            client-secret: 네이버 클라이언트 Secret
+#            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+#            authorization-grant-type: authorization_code
+#            scope: name, email
+#            client-name: Naver
+#
+#
+#        provider:
+#          kakao:
+#            authorization-uri: https://kauth.kakao.com/oauth/authorize
+#            token-uri: https://kauth.kakao.com/oauth/token
+#            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-name-attribute: id
+#
+#          naver:
+#            authorization_uri: https://nid.naver.com/oauth2.0/authorize
+#            token_uri: https://nid.naver.com/oauth2.0/token
+#            user-info-uri: https://openapi.naver.com/v1/nid/me
+#            user_name_attribute: response

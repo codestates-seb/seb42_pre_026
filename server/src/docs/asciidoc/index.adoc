@@ -1,0 +1,84 @@
+= stack-over-flow-clone
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Minso Kim <bella.minsokim@gmail.com>
+
+v1.0.0, 2023.02.28
+
+***
+API 문서 개요
+
+ 이 문서는 42기 pre_project Spring MVC 기반의 REST API 기반 스택오버플로어 클론코딩 입니다.
+
+CAUTION: 이 문서는 학습용으로 일부 기능에 제한이 있습니다.
+
+***
+
+== CommentController
+=== 댓글 등록
+.curl-request
+include::{snippets}/post-comment/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-comment/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-comment/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-comment/http-response.adoc[]
+
+.response-headers
+include::{snippets}/post-comment/response-headers.adoc[]
+
+=== 댓글 수정
+.curl-request
+include::{snippets}/patch-comment/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-comment/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/patch-comment/path-parameters.adoc[]
+
+.request-fields
+include::{snippets}/patch-comment/request-fields.adoc[]
+
+.http-response
+include::{snippets}/patch-comment/http-response.adoc[]
+
+.response-fields
+include::{snippets}/patch-comment/response-fields.adoc[]
+
+=== 댓글 조회
+.curl-request
+include::{snippets}/get-comment/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-comment/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/get-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/get-comment/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-comment/response-fields.adoc[]
+
+=== 댓글 삭제
+.curl-request
+include::{snippets}/delete-comment/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-comment/http-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-comment/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/delete-comment/http-response.adoc[]

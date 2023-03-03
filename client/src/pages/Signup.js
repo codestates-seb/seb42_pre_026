@@ -1,16 +1,8 @@
 import styled from 'styled-components';
-import SnsButtons from '../components/SnsButtons';
-import SignupInfo from '../components/SignupInfo';
-import SignupForm from '../components/SignupForm';
-
-const DeleteHeader = styled.header`
-  background-color: cornflowerblue;
-  color: white;
-  width: 100%;
-  height: 48px;
-  font-size: 22px;
-  text-align: center;
-`;
+import SnsButtons from '../components/LoginComponent/SnsButtons';
+import SignupInfo from '../components/SignupComponent/SignupInfo';
+import SignupForm from '../components/SignupComponent/SignupForm';
+import Header from '../components/Header';
 
 const Container = styled.div`
   display: flex;
@@ -30,11 +22,11 @@ const FormContainer = styled.div`
 function Signup() {
   return (
     <>
-      <DeleteHeader>헤더</DeleteHeader>
+      <Header />
       <Container>
         <SignupInfo />
         <FormContainer>
-          <SnsButtons />
+          <SnsButtons text={'Sign up'} />
           <SignupForm />
         </FormContainer>
       </Container>

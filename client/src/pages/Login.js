@@ -1,21 +1,17 @@
 import styled from 'styled-components';
-import LoginForm from '../components/LoginForm';
-import SnsButtons from '../components/SnsButtons';
-
-const DeleteHeader = styled.header`
-  background-color: cornflowerblue;
-  color: white;
-  width: 100%;
-  height: 48px;
-  font-size: 22px;
-  text-align: center;
-`;
+import LoginForm from '../components/LoginComponent/LoginForm';
+import SnsButtons from '../components/LoginComponent/SnsButtons';
+import Header from '../components/Header';
 
 const Container = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const LogoContainer = styled.div`
@@ -29,7 +25,7 @@ const LogoContainer = styled.div`
 function Login() {
   return (
     <>
-      <DeleteHeader>헤더</DeleteHeader>
+      <Header />
       <Container>
         <LogoContainer>
           <svg aria-hidden="true" width="32" height="37" viewBox="0 0 32 37">
@@ -40,7 +36,7 @@ function Login() {
             />
           </svg>
         </LogoContainer>
-        <SnsButtons />
+        <SnsButtons text={'Log in'} />
         <LoginForm />
       </Container>
     </>

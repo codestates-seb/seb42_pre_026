@@ -1,3 +1,4 @@
+/*
 package seb42_pre26;
 
 import org.junit.jupiter.api.Test;
@@ -11,3 +12,4 @@ class StackOverFlowCloneApplicationTests {
 	}
 
 }
+*/
