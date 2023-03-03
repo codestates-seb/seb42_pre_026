@@ -31,4 +31,12 @@ Stack Over Flow Clone Coding
 
 <br />
 
-**SPRINGBOOT/ JPA / H2 / NGROK / HIBERNATE**<br />
+**SPRINGBOOT/ JPA / H2 / NGROK / HIBERNATE**<br/>
+
+<br/>
+
+## 커밋 메세지 컨벤션
+<br/>
+<br/>
+<img src ="https://user-images.githubusercontent.com/88031716/219533397-4c1144b2-8343-4164-881e-6eef6966f5ff.png" style="height : auto; width:50%">
+
