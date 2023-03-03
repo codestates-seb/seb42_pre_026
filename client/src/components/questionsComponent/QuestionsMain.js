@@ -164,7 +164,7 @@ function QuestionsMain() {
   const numAllPages = Math.ceil(questionData.length / limit);
 
   const getQuestionData = async () => {
-    const res = await axios.get('http://125.176.52.40:8080/question');
+    const res = await axios.get('/question');
     setQuestionData(res.data);
   };
 

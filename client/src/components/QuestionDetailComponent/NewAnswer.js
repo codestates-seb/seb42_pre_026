@@ -67,7 +67,7 @@ function NewAnswer() {
     e.preventDefault();
     axios
       .post(
-        'http://125.176.52.40:8080/comment',
+        '/comment',
         {
           questionId: id,
           content: comment,

@@ -56,5 +56,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "json-server-auth": "^2.1.0"
-  }
+  },
+  "proxy": "http://125.176.52.40:8080"
 }
