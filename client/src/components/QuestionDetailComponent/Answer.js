@@ -89,7 +89,7 @@ function Answer({ comment }) {
     confirm({ description: 'This will permanently delete answer.' })
       .then(() => {
         axios
-          .delete(`http://125.176.52.40:8080/comment/${comment.commentId}`, {
+          .delete(`/comment/${comment.commentId}`, {
             headers: {
               Authorization: token,
             },

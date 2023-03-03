@@ -176,7 +176,7 @@ function QuestionDetail() {
   const navigate = useNavigate();
   const confirm = useConfirm();
 
-  const data = useFetch(`http://125.176.52.40:8080/question/${id}`);
+  const data = useFetch(`/question/${id}`);
   const comments = data.comments;
   const blankComment = comments === undefined || comments.length === 0;
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -191,7 +191,7 @@ function QuestionDetail() {
     confirm({ description: 'This will permanently delete question.' })
       .then(() => {
         axios
-          .delete(`http://125.176.52.40:8080/question/${id}`, {
+          .delete(`/question/${id}`, {
             headers: {
               Authorization: token,
             },

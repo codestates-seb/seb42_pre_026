@@ -128,7 +128,7 @@ function NewForm() {
     }
     axios
       .post(
-        'http://125.176.52.40:8080/question',
+        '/question',
         {
           title: content.title,
           content: content.content,

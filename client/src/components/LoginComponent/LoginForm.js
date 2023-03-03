@@ -117,7 +117,7 @@ function LoginForm() {
     }
 
     await axios
-      .post('http://125.176.52.40:8080/auth/login', {
+      .post('/auth/login', {
         username: email,
         password,
       })

@@ -103,7 +103,7 @@ const CommentEditModal = ({ newComment, commentId, setEditModalOpen, setNewComme
       content: newComment,
     };
     await axios
-      .patch(`http://125.176.52.40:8080/comment/${commentId}`, editComment, {
+      .patch(`/comment/${commentId}`, editComment, {
         headers: {
           Authorization: token,
         },

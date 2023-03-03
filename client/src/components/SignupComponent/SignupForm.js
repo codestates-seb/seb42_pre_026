@@ -153,20 +153,11 @@ function SignupForm() {
     }
 
     await axios
-      .post(
-        'http://125.176.52.40:8080/members/sign-up',
-        {
-          email,
-          password,
-          name,
-        },
-        {
-          // headers: {
-          //   'Access-Control-Allow-Origin': 'http://localhost:3000',
-          // },
-          withCredentials: true,
-        },
-      )
+      .post('/members/sign-up', {
+        email,
+        password,
+        name,
+      })
       .then(() => {
         toast.success('Sign up Success!');
       })
